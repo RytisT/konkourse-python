@@ -1,0 +1,82 @@
+[
+  {
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "jxs", 
+      "first_name": "Joe", 
+      "last_name": "Schmoe", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2012-07-15T17:32:43.858Z", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "pbkdf2_sha256$10000$ybX9AWjiVRPN$0Yb/q9QdiEW2jleYevCNp21mpXvs9gQPGlpEUE8ev8o=", 
+      "email": "schmoejx@jmu.edu", 
+      "date_joined": "2012-07-15T00:02:41.688Z"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "eeb", 
+      "first_name": "Emily", 
+      "last_name": "Burgess", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2012-07-15T02:42:11.047Z", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "pbkdf2_sha256$10000$ey0dfNuwRYvk$/uFGcWunf7X7W1HgWaiNY3calHzMGVENSv85l8P4CKo=", 
+      "email": "burgesee@dukes.jmu.edu", 
+      "date_joined": "2012-07-15T00:26:54.786Z"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "courses.course", 
+    "fields": {
+      "files": [], 
+      "name": "SHIT 301: Intro to Shit", 
+      "end_date": "2012-12-01", 
+      "institution": "James Madison University", 
+      "start_date": "2012-06-01", 
+      "events": [], 
+      "description": "This is a fucking class about shit."
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "courses.courseuser", 
+    "fields": {
+      "status": "A", 
+      "course": 1, 
+      "role": "S", 
+      "user": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "courses.courseuser", 
+    "fields": {
+      "status": "A", 
+      "course": 1, 
+      "role": "I", 
+      "user": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "courses.courseuser", 
+    "fields": {
+      "status": "P", 
+      "course": 1, 
+      "role": "S", 
+      "user": 3
+    }
+  }
+]
+

@@ -1,0 +1,97 @@
+{% extends "base.html" %}{% block script %}
+{% load static %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="application/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script>
+        $(function(){
+            $('#bdpicker').datepicker();
+        });
+    </script>
+{% endblock script %}{% block style %}
+  <style type="text/css">
+    body {
+		background: url("{% static 'img/body_noise.png' %}") repeat 0 0;
+		}
+  </style>
+  <style>
+        footer[role="contentinfo"] {
+            color: #FFFFFF;
+            background: #444444;
+            padding: 18px 0;
+        }
+        footer[role="contentinfo"] p {
+            margin: 0;
+        }
+		footer[role="contentinfo"] p a:visited {
+			color:#FFFFFF;
+        }
+		footer[role="contentinfo"] p a:active {
+			color:#FFFFFF;
+        }
+		footer[role="contentinfo"] p a:link {
+			color:#FFFFFF;
+        }
+		footer[role="contentinfo"] p a:hover {
+			color:#FFFFFF;
+        }
+        /* Sticky Footer styles begin */
+        html, body {
+            height: 100%;
+        }
+        #push {
+            height: 54px;
+        }
+        footer[role="contentinfo"] {
+            height: 18px; /* accounts for padding */
+        }
+        body > .container {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%;
+            margin: 0 auto -54px;
+        }
+    </style>
+{% endblock style %}
+{% block content %}
+  <div class="container" style="margin-bottom:15px;">
+    <div class="row" style="margin-top:40px;">
+      <div class="span4 offset4 masthead-splash" style="background-color:#444444;">
+        <img src="{% static "img/ctlogo.png" %}" style="display:block; margin-left:auto; margin-right:auto; max-width:120px; margin-top:7px; margin-bottom:7px;" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4 offset4" style="background-color:#ffffff; padding-top:25px;">
+        <div class="alert alert-info" style="margin-right:10px; margin-left:10px;"><strong>Forget your info?</strong> No problem, just enter the email you signed up with.</div>
+        <form class="form-horizontal">
+          <div class="control-group">
+            <label class="control-label" style="width:50px;">Email:</label>
+            <div class="controls" style="margin-left:70px;">
+              <input type="text" id="inputEmail" placeholder="" />
+            </div>
+          </div>
+          <button class="btn btn-inverse" style="float:right; margin-right:10px; margin-bottom:20px;">Retrieve</button>
+        </form>
+        <div class="alert alert-error" style="margin-right:10px; margin-left:10px; clear:both;"><button type="button" class="close" data-dismiss="alert">×</button><strong>Oops!</strong> We don't have that email on record.</div>
+        <div class="alert alert-success" style="margin-right:10px; margin-left:10px; clear:both;"><button type="button" class="close" data-dismiss="alert">×</button><strong>Perfect.</strong> Please check your email for instructions.</div>
+      </div>
+    </div>
+  </div>
+  <footer role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+            <p>Coursetab 2012</p>
+          </div>
+          <div class="span6">
+            <p style="text-align:center;"><a href="/teach/">Teach</a> | <a href="/learn/">Learn</a> | <a href="/about/">About</a></p>
+          </div>
+          <div class="span3">
+          </div>
+        </div>
+      </div>
+    </footer>
+{% endblock content %}

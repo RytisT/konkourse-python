@@ -1,0 +1,143 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block script %}
+<script type="text/javascript">
+  $('.dropdown-toggle').dropdown()
+</script>
+<script type="application/javascript">
+  $(".collapse").collapse();
+</script>
+<script>
+function accept( id ) {
+  var postData = {'id': id};
+  $.post( "/accept/", postData, function ( json ) {
+  $('#requests').load(' #requests', function(){$(this).children().unwrap()})
+  } );
+}
+function hide( id ) {
+  var postData = {'id': id};
+  $.post( "/hide/", postData, function ( json ) {
+  $('#requests').load(' #requests', function(){$(this).children().unwrap()})
+  } );
+}
+</script>
+{% endblock script %}
+{% block style %}
+{% load widget_tweaks %}
+{% endblock style %}
+{% block content %}
+ <div class="container">  
+    <div class="row">
+      <div class="span3">
+          <div class="well" id="toolBar" style="padding:8px 0; margin-top:0px; border-right: 1px solid #E3E3E3; border-bottom:none; border-top:none; border-left:none; -webkit-border-radius: 0px; -moz-border-radius:0px; border-radius:0px; position:fixed; height:100%; width:217px;">
+            <h5 class="coursesHeader" style="display:inline-block">Courses</h5>
+            <ul class="nav nav-list" style="padding-bottom:30px;"> 
+              <li class="divider"></li>
+              {% if courses|length != 0 %}
+                {% for course in courses %}
+                  <li style="font-size:12px; font-weight:500; text-transform:uppercase;"><a href="/course/{{ course.id }}/">{{ course.number }}</a></li>
+                {% endfor %}
+              {% else %}
+                <h5 class="placeholderAlt">NO COURSES YET.</h5>
+              {% endif %}
+              <li class="divider"></li>
+              <a href="#addCourse" data-toggle="modal" class="btn btn-small" style="width:163px;"> <i class="icon-plus-sign" style="vertical-align:baseline;"></i> Add Course</a>
+            </ul>            
+          </div> <!-- /well -->
+      </div>
+      <div class="span6">
+      		<div class="row">
+            	<div class="span6">
+                	<h4 style="margin-top:15px; margin-left:20px;"><img src="{% static "img/favicon.png" %}" style="float:left; margin-top:3px; margin-right:2px;"/> Activity</h4>
+                    <hr style="margin-bottom:15px; margin-top:13px;" />
+                </div>
+            </div>
+        <div id="paginate" class="endless_page_template" style="margin-top:15px;">
+         {% include page_template %}
+         {% block js %}
+         {{ block.super }}
+            <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+            <script>
+             $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollChunkSize: 15
+              });
+            </script>
+         {% endblock %}
+         </div>
+      </div>
+      <div id="requests" class="span3" style="background-color: #FFF;">
+      <table class="table table-condensed" style="margin-top:10px;">
+      	<tbody>
+          {% for request in conReqs %}
+          {% if not request.hidden %}
+          <tr>
+            <td>
+              <a href="#">
+                <img src="{{ request.creator.get_profile.getImage }}" style="float:left; margin-right:5px; width:20px; height:20px;" />
+              </a><p style="margin:0;"><a href="/{{ request.creator.username }}">{{ request.creator.first_name }} {{request.creator.last_name }}</a> has requested to connect.</p><p style="float:right;"><i class="icon-thumbs-up"></i> <a href="javascript:void(0)" id="req{{ request.id }}" onclick="accept({{request.id}})" class="accept">Accept</a> &middot; <i class="icon-thumbs-down"></i> <a href="javascript:void(0)" id="req{{request.id}}" onclick="hide({{request.id}})" class="Hide">Hide</a></p>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+            <div class="row">
+              <div class="span3 actionsfeed_cal" style="text-align:center;">
+              	<p class="upcomingEvents">Upcoming Events</p>
+              </div>
+              <div class="span3">
+              {% if events|length != 0 %}
+                {% for event in events %}
+                    {% with event.course_set.all|first as course %}
+                    	<p><span class="label label-info">{{event.start_date|date:"m/d"}}</span> <a href="/course/{{course.id}}/events">{{event.name}}</a></p>
+                    {% endwith %}
+                {% endfor %}
+              {% else %}
+                <h5 class="placeholderAlt">NO EVENTS YET.</h5>
+              {% endif %}
+              </div>
+            </div>
+            <div class="row">
+              <div class="span3 actionsfeed_cal" style="text-align:center; margin-top:40px;">
+                <p class="upcomingEvents">Invite Friends</p>
+              </div>
+              <div class="span3">
+                <input type="text" placeholder="Email address" class="input-block-level" style="margin-bottom:5px; margin-top:4px;">
+                <span class="help-block" style="font-size:12px; margin-left:2px; display:inline-block; float:left;">Enter a <strong>JMU</strong> email address</span>
+                <button type="submit" class="btn btn-mini" style="float:right; display:inline-block;">Send</button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
+  <div id="addCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addCourseLabel" aria-hidden="true">
+  <form enctype="multipart/form-data" class="form-horizontal" method="post" action="/course/create/">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="addCourseLabel">Add one of your courses</h3>
+    </div>
+    <div class="modal-body">
+      {% csrf_token %}
+      <div class="control-group">
+        <label class="control-label" for="id_course_number">Course Number</label>
+        <div class="controls">
+        {{form.course_number|attr:"autocomplete:off"|add_class:"addCourseAttr"}}
+        <span class="help-block">Example: BIO201</span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="id_course_id">Section Number</label>
+        <div class="controls">
+        {{form.course_id|attr:"autocomplete:off"|attr:"data-mask:9999"|add_class:"addCourseAttr"}}
+        <span class="help-block">Example: 1000</span>
+        </div>
+      </div>             
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-inverse">Complete</button>
+    </div>
+  </form>
+</div>
+  {% endblock content %}

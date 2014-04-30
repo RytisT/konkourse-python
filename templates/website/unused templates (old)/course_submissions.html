@@ -1,0 +1,179 @@
+{% extends "website/courses_base.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+    <script type="text/javascript">
+        $('.dropdown-toggle').dropdown()
+    </script>
+    <script type="text/javascript">
+        $(".collapse").collapse()
+    </script>
+    <script type="text/javascript">
+        $('#removeModal').modal(options)
+    </script>
+    <script type="text/javascript">
+        $('.tooltip-win').tooltip()
+    </script>
+    <script type="text/javascript">
+        $('#myTab').tab('show')
+    </script>
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script>
+        $(function () {
+            $('.tabs a:last').tab('show')
+        })
+    </script>
+{% endblock script %}
+{% block course_content %}
+    <div class="span9">
+        <div class="row">
+            <div class="span9 ">
+                <div class="actions_cal">
+                    <div class="" style="float:left; margin-left:20px;">
+                        <h3 style="line-height:25px;">{{ course_name }}</h3>
+                        {# TODO: add search logic for institution #}
+                        {% if institution %}<p><a href="#">{{ institution }}</a></p>{% endif %}
+                    </div>
+                    <div style="float:right;">{% if is_instructor %}<button class="btn btn-primary">New Submission</button>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span9">
+                <div class="row">
+                    <div class="span9">
+                        <table class="table">
+                            <tr>
+                                <th><p style="float:left;">Open</p></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <p style="margin-left:10px;">Tue, Dec 27</p>
+                    </div>
+                    <div class="span7">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="span4">
+                                    <a href="#"><img src="{% static "http://placehold.it/32x32" %}"style="float:left; margin-right:5px;" /></a>
+                                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Submission Number One</a></h5>
+                                    <p>Due by 3 PM</p>
+                                </td>
+                                <td class="span2"><button class="btn btn-inverse" style="margin-top:5px;">Upload</button></td>
+                                <td class="span1">
+                                    <li class="dropdown" id="menu1" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1"><b class="icon-cog"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#">Edit Submission</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Delete Submission</a></li>
+                                        </ul>
+                                    </li>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <p style="margin-left:10px;">Thu, Dec 29</p>
+                    </div>
+                    <div class="span7">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="span4">
+                                    <a href="#"><img src="{% static "http://placehold.it/32x32" %}"style="float:left; margin-right:5px;" /></a>
+                                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Submission Number Two</a></h5>
+                                    <p>Due by 12 AM</p>
+                                </td>
+                                <td class="span2"><button class="btn btn-inverse" style="margin-top:5px;">Upload</button></td>
+                                <td class="span1">
+                                    <li class="dropdown" id="menu3" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                                        <a class="dropdown-toggle3" data-toggle="dropdown" href="#menu3"><b class="icon-cog"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#">Edit Event</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Delete Event</a></li>
+                                        </ul>
+                                    </li>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span9">
+                        <table class="table">
+                            <tr>
+                                <th><p style="float:left;">Closed</p></th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <p style="margin-left:10px;">Tue, Dec 31</p>
+                    </div>
+                    <div class="span7">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="span4">
+                                    <a href="#"><img src="{% static "http://placehold.it/32x32" %}"style="float:left; margin-right:5px;" /></a>
+                                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Submission Number Three</a></h5>
+                                    <p>Due by 3 PM</p>
+                                </td>
+                                <td class="span2"></td>
+                                <td class="span1">
+                                    <li class="dropdown" id="menu1" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1"><b class="icon-cog"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#">Edit Submission</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Delete Submission</a></li>
+                                        </ul>
+                                    </li>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <p style="margin-left:10px;">Thu, Dec 33</p>
+                    </div>
+                    <div class="span7">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="span4">
+                                    <a href="#"><img src="{% static "http://placehold.it/32x32" %}"style="float:left; margin-right:5px;" /></a>
+                                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Submission Number Four</a></h5>
+                                    <p>Due by 12 AM</p>
+                                </td>
+                                <td class="span2"></td>
+                                <td class="span1">
+                                    <li class="dropdown" id="menu3" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                                        <a class="dropdown-toggle3" data-toggle="dropdown" href="#menu3"><b class="icon-cog"></b>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="#">Edit Event</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Delete Event</a></li>
+                                        </ul>
+                                    </li>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock course_content %}
+{% block right_side %}{% endblock right_side %}

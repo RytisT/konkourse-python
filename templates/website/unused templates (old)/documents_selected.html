@@ -1,0 +1,327 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+<script type="text/javascript">
+  $('.dropdown-toggle').dropdown()
+</script>
+<script type="text/javascript">
+  $(".collapse").collapse()
+</script>
+<script type="text/javascript">
+  $('#myModal').modal(options)
+</script>
+<script type="text/javascript">
+  $('.tooltip-win').tooltip()
+</script>
+<script type="text/javascript">
+  $('#menu1').dropdown()
+  $('#menu2').dropdown()
+  $('#menu3').dropdown()
+  $('#menu4').dropdown()
+  $('#menu5').dropdown()
+</script>
+{% endblock script %}
+{% block content %}
+ <div class="container">  
+    <div class="row">
+      <div class="span9">
+        <div class="row">
+          <div class="span9">
+               <hr />
+                 <h3 style="float:left; margin-bottom:20px;" >  <span style="color:#da4f49;">Docs /</span>&nbsp;Economics</h3>
+                 <div class="btn-group " style="float:right;">
+                              <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+                                Create New
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu pull-right">
+                                <li><a href="#"><i class="icon-upload"></i> File Upload</a></li>
+                              </ul>
+                            </div>
+                 
+               <hr style="clear:both;" />
+            </div>
+
+        </div>
+        <div class="row">
+          
+          <div class="span2">
+                <ul class="nav nav-list">
+                  <li class="nav-header">Course Docs</li>
+                  <li><a href="#">Psychology</a></li>
+                  <li><a href="#">Philosopy</a></li>
+                  <li><a href="#">Economics</a></li>
+                  <li class="nav-header">Group Docs</li>
+                  <li><a href="#">SGA</a></li>
+                  <li><a href="#">Student Senate</a></li>
+                  <li><a href="#">FROGS 2012</a></li>
+                </ul>
+              <hr />
+              <h4>Recently Contacted</h4>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+              </div>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+              </div>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p></div>
+              </div>
+              <p><a href="#">View All Connections</a></p>
+          </div>
+          <div class="span7">
+            <div class="row">
+                <div class="span5">
+                 <ul class="nav nav-pills">
+                  <li class="active">
+                    <a href="#">All</a>
+                  </li>
+                  <li><a href="#">Shared</a></li>
+                 </ul>
+                </div>
+              </div>
+            <div class="row">
+                <div class="span7 actionsfeeddoc">
+                    <div class="row ">
+                        <div class="span3">
+                        <div  style="margin-left:5px; margin-top:5px;">
+                        <p><a href="#">Get_me_out_of_here.xls</a></p>
+                        </div>
+                        </div>
+                        <div class="span1">
+                         <div style="margin-top:6px;">
+                            <p>2.3 MB</p>
+                         </div>
+                        </div>
+                        <div class="span2">
+                            <div style="margin-top:6px;">
+                                <a href="#" class="tooltip-win" title="Document Owner">Andrew Elgert</a>
+                            </div>
+                        </div>
+                        <div class="span1">
+                          <li class="dropdown" id="menu1" style="list-style:none; float:right; margin-top:8px; margin-right:8px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1"><img src="{% static "img/downv2.png" %}" />
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Download</a></li>
+                              <li><a href="#">Delete</a></li>
+                              <li><a data-toggle="modal" href="#myModal">Rename</a></li>
+                              <li><a href="documents_selected_share.html">Share</a></li>
+                              <li><a data-toggle="modal" href="#myModal2">File Info</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Tag</a></li>
+                            </ul>
+                           </li>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span7 actionsfeeddoc">
+                    <div class="row ">
+                        <div class="span3">
+                        <div  style="margin-left:5px; margin-top:5px;">
+                        <p><span class="label">Tag</span> <a href="#">Get_me_out_of_here.xls</a></p>
+                        </div>
+                        </div>
+                        <div class="span1">
+                         <div style="margin-top:6px;">
+                            <p>2.3 MB</p>
+                         </div>
+                        </div>
+                        <div class="span2">
+                            <div style="margin-top:6px;">
+                                <p><a href="#">Andrew Elgert</a></p>
+                            </div>
+                        </div>
+                        <div class="span1">
+                          <li class="dropdown" id="menu2" style="list-style:none; float:right; margin-top:8px; margin-right:8px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu2"><img src="{% static "img/downv2.png" %}" />
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Download</a></li>
+                              <li><a href="#">Delete</a></li>
+                              <li><a data-toggle="modal" href="#myModal">Rename</a></li>
+                              <li><a href="documents_selected_share.html">Share</a></li>
+                              <li><a data-toggle="modal" href="#myModal2">File Info</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Tag</a></li>
+                            </ul>
+                           </li>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span7 actionsfeeddoc">
+                    <div class="row ">
+                        <div class="span3">
+                        <div  style="margin-left:5px; margin-top:5px;">
+                        <p><span class="label">Tag</span> <a href="#">Get_me_out_of_here.xls</a></p>
+                        </div>
+                        </div>
+                        <div class="span1">
+                         <div style="margin-top:6px;">
+                            <p>2.3 MB</p>
+                         </div>
+                        </div>
+                        <div class="span2">
+                            <div style="margin-top:6px;">
+                                <p><a href="#">Me</a></p>
+                            </div>
+                        </div>
+                        <div class="span1">
+                          <li class="dropdown" id="menu3" style="list-style:none; float:right; margin-top:8px; margin-right:8px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu3"><img src="{% static "img/downv2.png" %}" />
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Download</a></li>
+                              <li><a href="#">Delete</a></li>
+                              <li><a data-toggle="modal" href="#myModal">Rename</a></li>
+                              <li><a href="documents_selected_share.html">Share</a></li>
+                              <li><a data-toggle="modal" href="#myModal2">File Info</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Tag</a></li>
+                            </ul>
+                           </li>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span7 actionsfeeddoc">
+                    <div class="row ">
+                        <div class="span3">
+                        <div  style="margin-left:5px; margin-top:5px;">
+                        <p><a href="#">Get_me_out_of_here.xls</a></p>
+                        </div>
+                        </div>
+                        <div class="span1">
+                         <div style="margin-top:6px;">
+                            <p>2.3 MB</p>
+                         </div>
+                        </div>
+                        <div class="span2">
+                            <div style="margin-top:6px;">
+                                <p><a href="#">Andrew Elgert</a></p>
+                            </div>
+                        </div>
+                        <div class="span1">
+                          <li class="dropdown" id="menu4" style="list-style:none; float:right; margin-top:8px; margin-right:8px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu4"><img src="{% static "img/downv2.png" %}" />
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Download</a></li>
+                              <li><a href="#">Delete</a></li>
+                              <li><a data-toggle="modal" href="#myModal">Rename</a></li>
+                              <li><a href="documents_selected_share.html">Share</a></li>
+                              <li><a data-toggle="modal" href="#myModal2">File Info</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Tag</a></li>
+                            </ul>
+                           </li>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span7 actionsfeeddoc">
+                    <div class="row ">
+                        <div class="span3">
+                        <div  style="margin-left:5px; margin-top:5px;">
+                        <p><a href="#">Get_me_out_of_here.xls</a></p>
+                        </div>
+                        </div>
+                        <div class="span1">
+                         <div style="margin-top:6px;">
+                            <p>2.3 MB</p>
+                         </div>
+                        </div>
+                        <div class="span2">
+                            <div style="margin-top:6px;">
+                                <p><a href="#">Andrew Elgert</a></p>
+                            </div>
+                        </div>
+                        <div class="span1">
+                          <li class="dropdown" id="menu5" style="list-style:none; float:right; margin-top:8px; margin-right:8px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu5"><img src="{% static "img/downv2.png" %}" />
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Download</a></li>
+                              <li><a href="#">Delete</a></li>
+                              <li><a data-toggle="modal" href="#myModal">Rename</a></li>
+                              <li><a href="documents_selected_share.html">Share</a></li>
+                              <li><a data-toggle="modal" href="#myModal2">File Info</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Tag</a></li>
+                            </ul>
+                           </li>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span3" style="margin-top:17px;">
+      
+
+      <ul class="nav nav-list">
+              <li class="nav-header">Tags</li>
+              <li><a href="#"><i class="icon-tag"></i> Personal Documents</a></li>
+              <li><a href="#"><i class="icon-tag"></i> Interview Materials</a></li>
+              <li><a href="#"><i class="icon-tag"></i> Misc</a></li>
+              <li><a href="#"><i class="icon-tag"></i> Happenstance</a></li>
+
+              
+      </ul>
+      <hr />
+            <p>To tag a document, click "tag" on the document dropdown menu.</p>
+      <hr />
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form class="form-inline">
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span><input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="uploadModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Upload a File</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span1">
+                <div class="row">
+                <p style=" margin-top:5px; text-align:right; margin-right:4px;">Choose File:</p>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="row" style="">
+                   <input class="input-file" id="fileInput" type="file" style="margin-top:5px;">
+                </div>
+            </div>
+            
+            
+        </div><p>Note: The only file formats supported are .doc, .xls, .pdf, etc...</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Upload</a>
+        <a href="#" class="btn">Cancel</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+{% endblock content %}

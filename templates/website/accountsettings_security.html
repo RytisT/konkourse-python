@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static%}
+{% block includes %}{{ block.super }}
+{% endblock includes %}
+{% block style %}
+<style type="text/css">
+.form-horizontal .control-label {
+	width:150px;
+	}
+.form-horizontal .controls {
+	margin-left:170px;
+	}
+.checkbox_class {
+    float:left;
+}
+</style>
+{% endblock style %}
+{% block script %}
+<script>
+$(function(){
+	$('#dp1').datepicker();
+});
+</script>
+{% endblock script %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+	<div class="row">
+    	<div class="span12">
+        	<h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-cogs"></i> Settings</h4>
+        	<hr style="margin-bottom:40px;" />
+        </div>
+    </div>
+	<div class="row">
+    	<div class="span12">
+        	<div class="row">
+            	<div class="span3">
+                	<ul class="nav nav-tabs nav-stacked">
+              		<li><a href="/settings/">Edit Profile</a></li>
+              		<li class="active"><a href="/settings/security/">Edit Account</a></li>
+            		</ul>
+                </div>
+                <div class="span9">
+                          <p><a href="/settings/password_change/">Click here to change your password</a></p>
+                            <hr/>
+                          <h5><i class="icon-envelope"></i> Manage your email preferences</h5>
+                          <form action="/settings/security/" method="post">
+                            {% csrf_token %}
+                            <div class="checkbox">
+                              <label for="id_connection_request_email">
+                                {{ form.connection_request_email }}
+                                {{ form.connection_request_email.errors }}
+                                Connection request email
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label for="id_endorsement_email">
+                                {{ form.endorsement_email }}
+                                {{ form.endorsement_email.errors }}
+                                Endorsement email
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label for="id_profile_post_email">
+                                {{ form.profile_post_email }}
+                                {{ form.profile_post_email.errors }}
+                                Profile post email
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label for="id_course_post_email">
+                                {{ form.course_post_email }}
+                                {{ form.course_post_email.errors }}
+                                Course post email
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label for="id_new_course_member_email">
+                                {{ form.new_course_member_email }}
+                                {{ form.new_course_member_email.errors }}
+                                New course member email
+                              </label>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" class="btn" value="Save Changes" />
+                            </div>
+                          </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>          
+{% endblock content %}

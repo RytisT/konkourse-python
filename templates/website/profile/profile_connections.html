@@ -1,0 +1,39 @@
+{% extends "website/base_profile.html" %}
+{% load static%}
+{% block style %}
+<style type="text/css">
+	body {
+    background: #e3e8ec url('{% static "img/body_noise_media.png" %}') repeat 50% 0;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+{% endblock script %}
+  {% block selected %}
+    <div class="span4 offset1 well_profile_sec">
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="/{{ username }}">Conversation</a></li>
+        <li ><a href="/{{ username }}/info">Info</a></li>
+        <li><a href="/{{ username }}/courses">Courses</a></li>
+        <li class="active"><a href="/{{ username }}/connections">Connections</a></li>
+      </ul>
+    </div>
+  {% endblock selected %}  
+  {% block selection %}
+    <div class="span6 well_profile_sec">
+      <h4>Connections</h4>
+      <hr />
+      {% for connection in connections %}
+        <div class="row" style="margin-bottom:5px;">
+        	<div class="span1">
+              <img src="{{ connection.get_profile.getImage }}" style="width:70px;" class="img-rounded" />
+            </div>
+            <div class="span5">
+              <p style="margin-bottom:0px;"><strong><a href="/{{connection}}">{{connection.first_name}} {{connection.last_name}}</a></strong></p>
+              <p style="font-size:12.5px; margin-bottom:5px;">{{connection.get_profile.education}}</p>
+              <button class="btn btn-primary btn-mini disabled">Connected</button>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endblock selection %}  

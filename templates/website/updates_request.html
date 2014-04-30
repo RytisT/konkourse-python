@@ -1,0 +1,84 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+    .actionsfeed {
+    }
+    body { padding-top:45px;}
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+{% endblock script %}
+{% block content %}
+    <div class="container">  
+    <div class="row">
+      <div class="span2">
+          <ul class="nav nav-pills nav-stacked">
+              <li><a href="#">Social</a></li>
+              <li><a href="#">Courses</a></li>
+              <li class="active"><a href="#">Connect Requests</a></li>
+          </ul>
+                      
+      </div>
+      <div class="span7">
+            <div class="row">
+                <div class="span6 actionsfeed">
+                    <div class="row">
+                      <div class="span4">
+                        <img src="http://placehold.it/50x50&text=Icon" style="float:left; margin-right:5px;"/><p>
+                        <a href="#">Name of Person</a></p>
+                        <ul>James Madison University</ul>
+                        </div>
+              <div class="span2">
+                            <div class="btn-group" style="float:right; margin-top:13px; margin-right:10px;">
+                                  <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+                                    Connect
+                                    <span class="caret"></span>
+                                  </a>
+                                  <ul class="dropdown-menu">
+                                    <!-- dropdown menu links -->
+                                    <li><a href="#">Friend</a></li>
+                                    <li><a href="#">Teacher</a></li>
+                                    <li><a href="#">Colleague</a></li>
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+      </div>
+      <div class="span3">
+      <h4>Mini Calendar</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">This Week</p></div>
+            </div>
+            <p>1/4 -<a href="#"> Lecture G001</a></p>
+            <p>1/6 -<a href="#"> Test G001</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Next Week</p></div>
+            </div>
+            <p>1/9 -<a href="#"> In class homework assignment</a></p>
+            <p>1/11 -<a href="#"> Lecture G001</a></p>
+      <p>1/13 -<a href="#"> Lecture G001</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

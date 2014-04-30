@@ -1,0 +1,11 @@
+[{% for file in files %}
+  {
+    "name": "{{ file.name }}",
+    "size": "{{ file.size }}",
+    "foo": "bar"{% comment %},
+    "url":  "\/\/localhost\/media\/{{ file.name }}",
+    "thumbnail_url":"\/\/example.org\/thumbnails\/picture1.jpg",
+    "delete_url":"\/\/example.org\/upload-handler?file=picture1.jpg",
+    "delete_type":"DELETE"{% endcomment %}
+  }
+{% endfor %}]

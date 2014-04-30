@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block includes %}{{ block.super }}
+    <script type="text/javascript" src="{% static "js/bday-picker.js" %}" ></script>
+{% endblock includes %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+    $(".collapse").collapse()
+    $(document).ready(function(){
+        $("#picker1").birthdaypicker({});
+    });
+  </script>
+  {% endblock script %}{% block style %}
+  <style type="text/css">
+    body { padding-top:45px; background:#444444; }
+  </style>
+  {% endblock style %}{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="span4 offset4">
+        <h2 style="color:white; text-align:center; ">Create Profile</h2>
+        <hr />
+      </div>
+    </div>
+    <div class="row">
+      <div class="span4 offset4">
+        <form class="well" method="post" action="/register/">
+          {% csrf_token %}
+          <label><h5>First Name:</h5></label>
+          <input type="text" name="first_name" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;"  placeholder="">
+          <br />
+          <label><h5>Last Name:</h5></label>
+          <input type="text" name="last_name" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;"  placeholder="">
+          <br />
+          <label><h5>Your JMU Email Address:</h5></label>
+          <input type="text" name="email_address" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;"  placeholder="">
+          <p class="help-block">Use real JMU email.</p>
+          <br />
+          <label><h5>Desired Username:</h5></label>
+          <input type="text" name="username" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;"  placeholder="">
+          <p class="help-block">Choose wisely.</p>
+          <br />
+          <label><h5>Desired Password:</h5></label>
+          <input type="password" name="password" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;" placeholder="">
+          <input type="password" name="password_repeat" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;" placeholder="">
+          <p class="help-block">Please enter twice. Must contain letters and numbers.</p>
+          <br />
+          <label><h5>Birthday:</h5></label>
+          <div class="picker" id="picker1"></div>
+          <br />
+          <input type="submit" class="btn btn-primary" style="float:right;">Create Profile</a>
+          <br />
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

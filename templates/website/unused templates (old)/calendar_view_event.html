@@ -1,0 +1,161 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#myModal').modal(options)
+  </script>
+  <script type="text/javascript">
+    $('.tooltip-win').tooltip()
+  </script>
+  <script type="text/javascript">
+    $('#myTab').tab('show')
+  </script>
+  <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+{% endblock script %}
+{% block content %}
+    <div class="container">  
+    <div class="row">
+      <div class="span3">
+        <h3 style="margin-top:10px;">Event Creator</h3>
+        <div class="row" style="margin-top:5px;">
+          <div class="span3"><a href="#"><img src="{% static "img/andrew-small.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+        </div>
+        <hr />
+        <h3>Invite Others</h3><br />
+        <input class="span3" id="xlInput3" name="xlInput3" type="text" placeholder="Type someone's name">
+      </div>
+      <div class="span9">
+        <div class="row">
+                <div class="span9 ">
+                  <div class="actions_cal">
+                  <button class="btn" style="float:left; margin-left:17px;"><i class="icon-arrow-left"></i> Back</button>
+                  <button class="btn" style="margin-left:17px; float:left;"><i class="icon-pencil"></i> Edit</button>
+                  <button class="btn btn-danger" style="margin-left:17px; float:left;"><i class="icon-remove icon-white"></i> Delete Event</button>
+                  </div>
+                </div>
+        </div>
+        <div class="row">
+          <div class="span9">
+            <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#1" data-toggle="tab">Info</a>
+                      </li>
+                      <li><a href="#2" data-toggle="tab">Attending</a></li>
+                      <li><a href="#3" data-toggle="tab">Invited</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="1">
+                        <div class="row">
+                          <div class="span2">
+                            <img src="http://placehold.it/180x240&amp;text=Event Icon">
+                          </div>
+                          <div class="span7">
+                            <h3>Event Name Goes Here</h3>
+                            <br />
+                            <p><span style="font-weight:bold;">Time:</span> January 20 at 3pm <span style="font-weight:bold;">until</span> January 21 at 3pm</p>
+                            <p><span style="font-weight:bold;">Location:</span> Showker Hall</p>
+                            <p><span style="font-weight:bold;">Description:</span></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eleifend tincidunt pretium. Maecenas sodales justo ut metus vestibulum vehicula. Fusce eget eros venenatis justo scelerisque aliquam faucibus nec magna. Sed auctor feugiat dui ac feugiat. Pellentesque tellus eros, lacinia a commodo at, auctor at augue. Vivamus ornare massa at tellus congue pharetra. Duis feugiat, metus vel sodales consequat, quam ipsum dictum magna, in blandit massa magna non nunc.</p>
+                          </div>
+                        </div>
+                        <hr />
+                          <div class="row"><div class="span7 offset1">
+                            <div class="row" style="margin-top:10px;">
+                    <div class="span7">
+                    <form class="convoContain">
+                    <div class="convoReplace">
+                    <textarea class="input-xlarge inputConvo" id="textarea" rows="2" style="width:98%; min-width:98%; max-width:98%;" placeholder="Share something interesting."></textarea>
+                    </div>
+                    <p style="float:left; clear:left;"><con_opt><a href="#" onclick="commentClicked();"><i class="icon-list-alt"></i> Status</a> | <a href="#" onclick="linkClicked();"><i class="conversation-link"></i> Link</a> | <a href"#" onclick="uploadClicked();"><i class="icon-picture"></i> Upload</a></con_opt></p>
+                    <a href="#" class="btn btn-primary btnConvo" style="float:right; margin-bottom:20px; margin-right:3px;">Share</a>
+                    </form>
+                    </div>
+                </div>
+                            <!--below is html for an update that contains a youtube embed element. comment ability removed.-->
+                            <div class="row">
+                              <div class="span7 ">
+                                <table style="max-width:inherit;">
+                                  <tr>
+                                    <td style="min-width:55px; margin:0; padding:0; vertical-align:top;">
+                                      <img src="{% static "img/andrew.png" %}" style="margin-right:5px; float:left;"/>
+                                    </td>
+                                    <td style="margin:0; padding:0; vertical-align:top; width:100%;">
+                                      <p style="margin: 1px 0 0px;"><a href="#">Andrew Elgert</a> <span style="color:#999;">shared a link</span></p>
+                                      <iframe width="300" height="225" src="http://www.youtube.com/embed/cFEarBzelBs" frameborder="0" allowfullscreen style="margin-right:5px; margin-left:5px; margin-bottom:5px;"></iframe>
+                                      <div class="	actionsfeed_com">
+                                        <p style="float:right; margin:0px 5px 0px 0px; clear:both;"><a href="#idontexist">&middot;&nbsp;Delete</a><p style="float:right; margin:0px 5px 0px 0px; "><a href="#idontexist">Comment</a></p><p style="margin:0px 0px 0px 0px; float:right; font-size:12px; color:#999;">4:32 pm &middot;&nbsp;</p>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                            <hr class="span7" style="margin-top:9px; margin-bottom:9px;" />
+                            <!--end youtube embed update-->
+                            <div class="row">
+                              <div class="span7 ">
+                                <table style="max-width:inherit;">
+                                  <tr>
+                                    <td style="min-width:55px; margin:0; padding:0; vertical-align:top;">
+                                      <img src="{% static "img/twain.png" %}" style="margin-right:5px; float:left;"/>
+                                    </td>
+                                    <td style="margin:0; padding:0; vertical-align:top;">
+                                      <p style="margin: 1px 0 0px;"><a href="#">Mark Twain</a></p>
+                                      <p style="margin:0px 0px 0px 0px;">"What are your plans for the conference? We should talk to Tim about the schedule, I think he would have some insight."</p>
+                                      <div class="	actionsfeed_com">
+                                        <p style="float:right; margin:0px 5px 0px 0px; clear:both;"><a href="#idontexist">&middot;&nbsp;Delete</a><p style="float:right; margin:0px 5px 0px 0px; "><a href="#idontexist" onclick="clickComment3();">Comment</a></p><p style="margin:0px 0px 0px 0px; float:right; font-size:12px; color:#999;">3:21 pm &middot;&nbsp;</p>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <div class="commentReplace3"></div>
+                              </div>
+                            </div>
+                            <hr class="span7" style="margin-top:9px; margin-bottom:9px;"/>
+                          </div></div>
+                      </div>
+                      <div class="tab-pane" id="2">
+                      </div>
+                      <div class="tab-pane" id="3">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>People Who Are Attending</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span2">
+                <p><a href="#">Name 1</a></p>
+                <p><a href="#">Name 2</a></p>
+                <p><a href="#">Name 3</a></p>
+            </div>
+        </div><p>Note: names are links to profiles</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Okay</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+{% endblock content %}

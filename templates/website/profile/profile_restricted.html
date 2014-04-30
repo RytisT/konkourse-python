@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+<style type="text/css">
+	body {
+    background: #e3e8ec url('{% static "img/body_noise_media.png" %}') repeat 50% 0;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#connect-btn').on('click', function () {
+		$(this).button('loading')
+	})
+	$('#endorse-btn').on('click', function () {
+		$(this).button('loading')
+	})
+})
+</script>
+{% endblock script %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="span8 offset2 well_profile" style="margin-top:40px;">
+      <div class="row">
+          <div class="span2" >
+            <img src="{{ image }}" class="img-polaroid img-rounded" style="width:130px;"/><br />
+          </div>
+          <div class="span4">
+            <h3 style="margin-top:5px; margin-bottom:5px;">{{ name }}</h3>
+                <div style="clear:left;">
+                    {% if not has_endorsed %}
+                      <button class="btn btn-small btn-info" id="endorse-btn" data-loading-text="Endorsed" style="margin-top:0px;" onclick="endorse({{id}})"><i class="icon-ok" style="color:#fff;"></i> Endorse</button>
+                    {% else %}
+                      <button class="btn btn-small btn-info disabled" disabled="disabled" style="margin-top:0px;"><i class="icon-ok" style="color:#fff;"></i> Endorsed</button>
+                    {% endif %}
+                </div>
+            <p style="margin-top:8px; margin-bottom:0px; display:inline-block;"><img src="{% static "img/icon_cert.png" %}" style="max-width:26px; margin-bottom:4px; margin-right:4px; display:inline-block;" /> <a href="#">{{ education }}</a>, {{ major }}<p>
+            {% if tagline == "" %}
+              <p style="margin-top:8px; margin-bottom:0px;">I don't have a tagline yet.</p>
+            {% else %}
+           	<p style="margin-top:8px; margin-bottom:0px;">{{ tagline }}</p>
+            {% endif %}
+          </div>
+          <div class="span2">
+            <div class="profileBadge">
+                <div class="profileBadge-inner" style="width:126px;">
+                    <div>
+                        <p class="badgeNumber"><a href="/{{ username }}/courses">{{courses|length}}</a></p>
+                        <p class="badgeLabel">courses</p>
+                    </div>
+                    <hr />
+                    <div>
+                        <p class="badgeNumber">{{endorsements|length}}</p>
+                        <p class="badgeLabel">endorsements</p>
+                    </div>
+                    <hr />
+                    <div>
+                        <p class="badgeNumber"><a href="/{{ username }}/connections">{{connections|length}}</a></p>
+                        <p class="badgeLabel">connections</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+     </div>
+  </div>
+  <div class="row">
+     <div class="span8 offset2 well_profile">
+       <div class="row">
+         <div class="span6">
+         <p class="lead" style="margin-bottom:0px; text-align:center; margin-top:0px;">Request to connect and start sharing new ideas.</p>
+         </div>
+         <div class="span2"> 
+             {% if requestS %}
+                <button  class="btn btn-inverse disabled" style="display:block; margin:auto; margin-top:0px; margin-bottom:0px;">Request Sent</button>
+              {% elif requestR %}
+                <button id="connect-btn" data-loading-text="Request Sent" type="submit" onclick="accept({{requestR.id}})"class="btn btn-inverse disabled" style="display:block; margin:auto; margin-top:0px; margin-bottom:0px;">Request Pending</button>
+             {% else%}
+              <form  method="post" action="/{{ username }}/connect/" style="margin-bottom:0px;">
+                {% csrf_token %} 
+                <button id="connect-btn" data-loading-text="Request Sent" type="submit" class="btn btn-inverse" style="display:block; margin:auto; margin-top:0px; margin-bottom:0px;">Connect</button>
+              </form>
+             {% endif %}
+         </div>
+       </div>
+     </div>
+  </div>
+</div>
+
+<div class="modal hide fade" id="newMsg" tabindex="-1" role="dialog" aria-labelledby="sendMsgLabel">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="sendMsgLabel">Send a message</h3>
+  </div>
+  <div class="modal-body" style="overflow:hidden;">
+    <textarea style="width:98%; max-width:98%; height:125px; max-height:125px; overflow:scroll;" placeholder="Type your message to {{name}}."></textarea>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary">Send</a>
+    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+  </div>
+</div>
+
+{% endblock content %}

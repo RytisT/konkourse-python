@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}This page is not available.{% endblock title %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+{% block includes %}
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="{% static "img/favicon.png" %}">
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/csrf.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/placeholder.js" %}"></script>
+<script src="{% static "js/modernizr.js" %}"></script>
+<script src="{% static "js/conversations.js" %}"></script>
+<script src="{% static "js/coursedash.js" %}"></script>
+<script src="{% static "js/datepicker/bootstrap-datepicker.js" %}"></script>
+<script src="{% static "js/jasny/bootstrap-button.js" %}"></script>
+<script src="{% static "js/jasny/bootstrap-fileupload.js" %}"></script>
+<script src="{% static "js/jasny/jasny-bootstrap.js" %}"></script>
+<script src="{% static "js/timepicker/bootstrap-timepicker.min.js" %}"></script>
+
+
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/datepicker/datepicker.css" %}"> 
+<link rel="stylesheet" href="{% static "css/jasny/jasny-bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome-ie7.min.css" %}">
+<!-- <link rel="stylesheet" href="{% static "css/fileupload/jquery.fileupload-ui.css" %}"> -->
+<link rel="stylesheet" href="{% static "css/app.css" %}">
+<link rel="stylesheet" href="{% static "css/timepicker/bootstrap-timepicker.min.css" %}">
+  {% endblock includes %}
+  {% block script %}
+  {% endblock script %}
+  {% block style %}
+<style type="text/css">
+	body {
+		background: #3399CC;
+		background: -moz-radial-gradient(center, ellipse cover, #3399CC 0%, #2e5673 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#3399CC), color-stop(100%,#2e5673));
+		background: -webkit-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -o-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399CC', endColorstr='#2e5673',GradientType=1 );
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+</style>
+  {% endblock style %}
+  {% load widget_tweaks %}
+</head>
+<body>
+<div class="container">
+	<div class="row">
+    	<div class="span5 offset1">
+        	<h1 style="color:#FFF; margin-top:150px;">500 error.</h1>
+        	<h1 style="color:#FFF;">Well this is embarrassing!</h1>
+        	<p style="color:#FFF;">There's a problem with our server. A sleep deprived college student is now looking into it.</p>
+        </div>
+        <div class="span5">
+        	<img src="{% static "img/logo.png" %}" style="" />
+        </div>
+    </div>
+</div>
+</body>
+</html>

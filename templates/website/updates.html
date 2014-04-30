@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+{% endblock script %}
+{% block content %}
+<div class="container">
+	<div class="row">
+    	<div class="span12">
+        	<h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-lightbulb"></i> All Updates</h4>
+        	<hr style="margin-bottom:20px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+        {% if notifications|length != 0 %}
+            {% for notification in notifications %}
+            <div class="row">
+                <div class="span12">
+                    <!-- TODO: Change this to look at action verb !-->
+                    {% if notification.action_object.getObjectType == "ConversationPost" %}
+                        {% if notification.verb == "posted on course" %}
+                            <p style="margin-left:25px; float:left;"><i class="icon-comments"></i> <a href="/{{notification.actor.username}}">{{notification.actor.get_full_name}} </a> has posted to <a href="/course/{{notification.target.id}}#post{{notification.action_object.id}}"> {{ notification.target.number}}</a>.</p>
+                        {% else %}
+                            <p style="margin-left:25px; float:left;"><i class="icon-comments"></i> <a href="/{{notification.actor.username}}">{{notification.actor.get_full_name}} </a> has posted <a href="/{{notification.recipient.username}}#post{{notification.action_object.id}}"> something</a> to your profile.</p>
+                        {% endif %}
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                        <div class="span12"><p style="margin-left:25px;"><i>{{notification.description|slice:"50"}}</i></p></div>
+                    {% elif notification.action_object.getObjectType == "ConversationComment" %}
+                        <p style="margin-left:25px; float:left;"><i class="icon-comments"></i> <a href="/{{notification.actor.username}}">{{notification.actor.get_full_name}} </a> commented on 
+                            {% if notification.target.creator == notification.actor %}
+                            his
+                            {% elif notification.target.creator == notification.recipient %}
+                            your
+                            {% else %}
+                            <a href="/{{notification.target.creator.username}}"> {{notification.target.creator.get_full_name}}</a>'s 
+                            {% endif %}
+			    {% if notification.target.wall.getParent.getObjectType == "Course" %}
+                            <a href="/course/{{notification.target.wall.getParent.id}}#c{{notification.action_object.id}}"> wallpost.</a></p> 
+			    {% else %}
+                            <a href="/{{notification.target.wall.getParent.user.username}}#c{{notification.action_object.id}}"> wallpost.</a></p> 
+			    {% endif %}
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                        <div class="span12"><p style="margin-left:25px;"><i>{{notification.description|slice:"50"}}</i></p></div>
+                    {% elif notification.action_object.getObjectType == "Connection"%}
+                        <p style="margin-left:25px; float:left;"><i class="icon-user" style="color:#3B5998;"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> has accepted your connection request.</p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% elif notification.action_object.getObjectType == "ConnectionRequest"%}
+                        <p style="margin-left:25px; float:left;"><i class="icon-user" style="color:#3B5998;"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> has sent you a connection request.</p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% elif notification.action_object.getObjectType == "Course" %}
+                        <p style="margin-left:25px; float:left;"><i class="icon-group" style="color:#3B5998;"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> has joined the course <a href="/course/{{notification.action_object.id}}">{{notification.action_object.number}}.</a></p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% elif notification.action_object.getObjectType == "Endorsement" %}
+                        <p style="margin-left:25px; float:left;"><i class="icon-ok"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> has endorsed you.</p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% elif notification.action_object.getObjectType == "Event" %}
+                        <p style="margin-left:25px; float:left;"><i class="icon-calendar"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> created an event in the course <a href="/course/{{notification.target.id}}">{{notification.target.number}}</a>.</p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% elif notification.action_object.getObjectType == "Document" %}
+                        <p style="margin-left:25px; float:left;"><i class="icon-file-alt"></i> <a href="/{{notification.actor}}">{{notification.actor.get_full_name}}</a> shared a document with the course <a href="/course/{{notification.target.id}}">{{notification.target.number}}</a>.</p>
+                        <p style="float:right; margin-right:70px; color:#999;">{{notification.timestamp}}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h4 style="margin-top:10px; text-align:center;">No notifications yet!</h4>
+        {% endif %}
+        </div>
+    </div>
+    </div>
+    <!--
+    <div class="row">
+    	<div class="span12">s
+        	<p style="margin-left:20px; margin-top:25px;"><strong>Updates from Monday, January 1</strong></p>
+            <hr />
+            <div class="row">
+            	<div class="span12">
+                	<p style="margin-left:25px; float:left;"><i class="icon-envelope-alt"></i> <a href="#">Evan Botello</a> has sent you a message.</p>
+                	<p style="float:right; margin-right:70px; color:#999;">3:01 pm</p>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="span12">
+                	<p style="margin-left:25px; float:left;"><i class="icon-file-alt"></i> <a href="#">Evan Botello</a> has shared a document with you.</p>
+                	<p style="float:right; margin-right:70px; color:#999;">3:01 pm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="span12" style="text-align:center; vertical-align:middle;">
+        	<div class="form-actions"><a href="" style="width:200px;" class="btn btn-primary">See More Updates</a></div>
+       	</div>
+    </div>
+</div> !-->
+
+  {% endblock content %}

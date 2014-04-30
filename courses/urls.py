@@ -1,0 +1,33 @@
+from django.conf.urls import patterns, include, url
+
+# All urls are subject to change once the course identification system is up.
+# joinEvent and leaveEvent HAVE to come before (?P<course_id>\w+) so they do not get interpreted as integers.
+urlpatterns = patterns('',
+    url(r'^$', 'courses.views.course'),
+    url(r'^joinEvent/$', 'events.views.join_event'), 
+    url(r'^leaveEvent/$', 'events.views.leave_event'),   
+    url(r'^deleteEvent/$', 'events.views.delete_event'), 
+    url(r'^create/$','courses.views.create'),
+    url(r'^addCourse/$','courses.views.add_course'),
+    url(r'^(?P<course_id>\w+)/$', 'courses.views.course'),
+    url(r'^(?P<course_id>\w+)/upload/$', 'courses.views.course_upload'),
+    url(r'^(?P<course_id>\w+)/create_event/$', 'courses.views.create_event'),
+    # url(r'^(?P<course_id>\w+)/approve/(?P<student_id>\w+)$', 'courses.views.approve_student'),
+    # url(r'^(?P<course_id>\w+)/calendar$', 'courses.views.course_calendar'),
+    # url(r'^(?P<course_id>\w+)/calendar/new_event$', 'courses.views.course_calendar_new_event'),
+    # url(r'^(?P<course_id>\w+)/calendar/new_task$', 'courses.views.course_calendar_new_task'),
+    # url(r'^(?P<course_id>\w+)/calendar/event$', 'courses.views.course_calendar_view_event'),
+    # url(r'^(?P<course_id>\w+)/calendar/task$', 'courses.views.course_calendar_view_task'),
+    # url(r'^(?P<course_id>\w+)/deny/(?P<student_id>\w+)$', 'courses.views.deny_student'),
+    url(r'^(?P<course_id>\w+)/documents$', 'courses.views.course_documents'),
+    url(r'^(?P<course_id>\w+)/gradebook$', 'courses.views.course_gradebook'),
+    url(r'^(?P<course_id>\w+)/members$', 'courses.views.course_members'),
+    url(r'^(?P<course_id>\w+)/events$', 'courses.views.course_events'),   
+    url(r'^(?P<course_id>\w+)/info$', 'courses.views.course_info'),   
+    url(r'^(?P<course_id>\w+)/edit$', 'courses.views.course_info_edit'),   
+    url(r'^(?P<course_id>\w+)/leave$', 'courses.views.course_leave'),   
+    url(r'^(?P<course_id>\w+)/update/$', 'courses.views.course_update'),  
+    # url(r'^(?P<course_id>\w+)/submissions$', 'courses.views.course_submissions'),
+    # url(r'^(?P<course_id>\w+)/submissions/new$', 'courses.views.course_submissions_new_sub'),
+    # url(r'^(?P<course_id>\w+)/submissions/view$', 'courses.views.course_submissions_view_sub'),
+)

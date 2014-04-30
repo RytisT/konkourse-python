@@ -1,0 +1,8 @@
+{% block subject %}You've received a new konkourse endorsement.{% endblock %}
+{% block plain %}
+Hey {{ endorsee_name }},
+
+Looks like somone is popular. You've been endorsed by {{ endorser_name }} on your konkourse profile. Endorsements increase your relevance in the konkourse network. Sending endorsements in simple, just navigate to a connection's profile, and click endorse!
+
+-The konkourse team. 
+{% endblock %}

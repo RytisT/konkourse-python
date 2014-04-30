@@ -1,0 +1,301 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="application/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#my-modal').modal(options)
+  </script>
+  <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>
+      /* Update datepicker plugin so that MM/DD/YYYY format is used. */
+      $.extend($.fn.datepicker.defaults, {
+        parse: function (string) {
+          var matches;
+          if ((matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/))) {
+            return new Date(matches[3], matches[1] - 1, matches[2]);
+          } else {
+            return null;
+          }
+        },
+        format: function (date) {
+          var
+            month = (date.getMonth() + 1).toString(),
+            dom = date.getDate().toString();
+          if (month.length === 1) {
+            month = "0" + month;
+          }
+          if (dom.length === 1) {
+            dom = "0" + dom;
+          }
+          return month + "/" + dom + "/" + date.getFullYear();
+        }
+      });  
+    </script>
+{% endblock script %}
+{% block content %}
+ <div class="container">
+    <h3>Account Settings</h3>
+    <hr />
+    <div class="row">
+      <div class="span3">
+      <ul class="nav nav-pills nav-stacked actionsfeedmsg">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Security</a></li>
+          <li class="active"><a href="#">Courses</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      <div class="span9">
+        <div class="row">
+          <div class="span9 ">
+            <a href="#" class="btn" style="float:left; margin-right:20px;"><i class="icon-arrow-left"></i> Back</a>
+            <h3>Psychology 101 - 0001</h3>
+            <br /><br />
+            <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#1" data-toggle="tab">General</a>
+                      </li>
+                      <li>
+                        <a href="#2" data-toggle="tab">Meetings</a>
+                      </li>
+                      <li>
+                        <a href="#3" data-toggle="tab">Privacy</a>
+                      </li>
+                      <li>
+                        <a href="#4" data-toggle="tab">Admins</a>
+                      </li>
+                      <li>
+                        <a href="#5" data-toggle="tab">Members</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="1">
+                        <form class="">
+                          <div class="row">
+                            <div class="span8">
+                              <label>Upload Picture (.jpg, .png, .gif)</label>
+                                <input class="input-file" id="fileInput" type="file" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="span4">
+                                
+                                  <label>Group Name</label>
+                                  <input type="text" class="span4" value="Psychology 101" />
+                                  <p class="help-block">Type Name of Course</p>
+                            </div>
+                            
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="span4">
+                                  <label>University</label>
+                                  <input type="text" class="span4" value="James Madison University" />
+                                  <p class="help-block">Type University</p>
+                            </div>
+                            
+                          </div>
+                          <hr />
+                          
+                          <br />
+                          <div class="row">
+                            <div class="span8">
+                              <label>Group Description</label>
+                                <textarea class="input-xxlarge" rows="7" style="width:80%; max-width:80%; min-width:80%;"></textarea>
+                            </div>
+                          </div>
+                          <hr />
+                          <a href="#" class="btn btn-primary" style="float:right;">Save Changes</a>
+                        </form>
+                        </div>
+                        <div class="tab-pane" id="2">
+                          <form>
+                            
+                          <h5><a href="#">+ Add a Meeting Time</a></h5>
+                          <br />
+                          <div class="row">
+                            <div class="span2">
+                              <label>Day</label>
+                                <select class="span2">
+                                  <option>Monday</option>
+                                    <option>Tuesday</option>
+                                    <option>Wednesday</option>
+                                    <option>Thursday</option>
+                                    <option>Friday</option>
+                                    <option>Saturday</option>
+                                    <option>Sunday</option>
+                                </select>
+                                <p class="help-block">Click to Select</p>
+
+                            </div>
+                            <div class="span3">
+                              <label>Start Time</label>
+                              <input type="number" class="span1" name="timehour" min="1" max="12" placeholder="Hour" />
+                              <input type="number" class="span1" name="timemin" min="1" max="60" placeholder="Minute" />
+                              <select class="span1"><option>AM</option><option>PM</option></select>
+                            </div>
+                            <div class="span2">
+                                <label>Type</label>
+                                  <select class="span2">
+                                    <option>Lecture</option>
+                                    <option>Recitation</option>
+                                    <option>Studio</option>
+                                    <option>Lab</option>
+                                    <option>Seminar</option>
+                                    <option>Exam Review</option>
+                                    <option>Office Hours</option>
+                                    <option>Other</option>
+                                  </select>
+                                  <p class="help-block">Click to Select</p>
+
+                            </div>
+                            <div class="span2">
+                                <label>Location</label>
+                                  <input type="text" class="span2" value="" />
+                                  <p class="help-block">Type Location</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="span3 offset2">
+                              <label>End Time</label>
+                              <input type="number" class="span1" name="timehour" min="1" max="12" placeholder="Hour" />
+                              <input type="number" class="span1" name="timemin" min="1" max="60" placeholder="Minute" />
+                              <select class="span1"><option>AM</option><option>PM</option></select>
+                            </div>
+                          </div>
+                          <hr />
+                          <a href="#" class="btn btn-primary" style="float:right;">Save Changes</a>
+                          </form>
+                          <div class="row">
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="3">
+                          <form>
+                          <div class="row">
+                            <div class="span8">
+                              <div class="well">
+                              <label>Public Access Rights</label>
+                                <div class="controls">
+                                  <label class="radio"><input type="radio" name="optionsPriv" checked="checked" value="option1" />Private (Must request to join the group or be added)</label>
+                                    <label class="radio"><input type="radio" name="optionsPriv"  value="option2" />Public (Anyone can join the group)</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <hr />
+                          <a href="#" class="btn btn-primary" style="float:right;">Save Changes</a>
+                          </form>
+                        </div>
+                        <div class="tab-pane" id="4">
+                        <h5>Note: To add an additional admin, they must be one of your personal connections or a member of the group.</h5>
+                        <br />
+                          <form>
+                            <div class="row"> 
+                                <div class="span4">   
+                                    
+                                        <label>Add Additional Admin</label>
+                                        <input class="span3" id="xlInput3" name=""  type="text"  placeholder="Type Someone's Name">
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                              <div class="span4">
+                                  <a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Evan Botello</a></p>
+                                </div>
+                                <div class="span4">
+                                </div>
+                            </div> 
+                            <hr />
+                          <a href="#" class="btn btn-primary" style="float:right;">Save Changes</a>
+                            </form>
+                            
+                        </div>
+                        <div class="tab-pane" id="5">
+                          <form>
+                                <div class="row"> 
+                                    <div class="span9">   
+                                            <label>Invite Friends to Group</label>
+                                            <input class="span5" id="xlInput3" name="xlInput3" size="30" type="text"  placeholder="Type Someone's Name" style="float:left; margin-right:10px;"><a href="#" class="btn btn-primary" style="">Send Invites</a>
+                                            <p class="help-block" style="clear:both;">Enter names of your connections to add</p>
+                                    </div>
+                                </div>
+                                <br />
+                                <hr />
+                                <h4>Current Members</h4>
+                                <hr />
+                                
+                              <div style="height:400px; overflow:auto;">
+                                    
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                        <div class="span1" >
+                                              <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                                        </div>
+                                    </div> 
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                        <div class="span1" >
+                                            <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                                        <div class="span1" >
+                                            <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                        <div class="span1" >
+                                              <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                                        </div>
+                                    </div> 
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                        <div class="span1" >
+                                            <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                        
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:5px;">
+                                        <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                        <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                                        <div class="span1" >
+                                            <button class="btn btn-danger" data-toggle="button" style="margin-top:10px; float:right;">Remove</button>
+                        
+                                        </div>
+                                    </div> 
+                                
+                              </div>
+                            <hr />
+                          </form>
+                          
+                        </div>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

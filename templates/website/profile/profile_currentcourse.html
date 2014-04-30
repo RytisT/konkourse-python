@@ -1,0 +1,40 @@
+{% extends "website/base_profile.html" %}
+{% load static%}
+{% block style %}
+<style type="text/css">
+	body {
+    background: #e3e8ec url('{% static "img/body_noise_media.png" %}') repeat 50% 0;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+{% endblock script %}
+{% block selected %}
+  <div class="span4 offset1 well_profile_sec">
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="/{{ username }}">Conversation</a></li>
+      <li><a href="/{{ username }}/info">Info</a></li>
+      <li class="active"><a href="/{{ username }}/courses">Courses</a></li>
+      <li><a href="/{{ username }}/connections">Connections</a></li>
+    </ul>
+  </div>
+{% endblock selected%}
+{% block selection%}
+  <div class="span6 well_profile_sec">
+    <h4>Courses</h4>
+    <hr />
+    {% for course in courses %}
+    <div class="row" style="margin-bottom:5px;">
+      {% if not course.image %}
+          <div class="span1"><img src="{% static "http://placehold.it/100x100" %}" style="width:100px" class="img-rounded"/></div>
+      {% else %}
+          <div class="span1"><img src="{{course.image.url}}" style="width:100px" class="img-rounded"/></div>
+      {% endif %}
+      <div class="span5">
+        <h5 style="line-height:1em; margin-top:3px; text-transform:uppercase;"><a href="/course/{{course.id}}/">{{ course.number }}</a></h5>
+        <p style="line-height:normal;">{{ course.name }}</p>
+      </div>
+    </div> 
+    {% endfor %}
+  </div>
+{% endblock selection %}

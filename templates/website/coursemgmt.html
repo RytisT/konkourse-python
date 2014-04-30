@@ -1,0 +1,114 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block content %}
+{% load widget_tweaks %}
+    <div class="container">
+    	<div class="row">
+            <div class="span12"><!-- course container -->
+            	<div class="row">
+                	<div class="span3">
+                    	<!-- course dash -->
+                    	<div class="well" id="toolBar" style="padding:8px 0; margin-top:0px; border-right: 1px solid #E3E3E3; border-bottom:none; border-top:none; border-left:none; -webkit-border-radius: 0px; -moz-border-radius:0px; border-radius:0px; position:fixed; height:100%; width:217px;">
+                        	<h5 class="coursesHeader" style="display:inline-block">Courses</h5><h5 class="coursesHeaderAlt" id="more"><a href="/coursemgmt/">MORE</a></h5>
+                            	<ul class="nav nav-list" style="padding-bottom:30px;">
+                                	<li class="divider"></li>
+                              		{% for c in courses %}
+                              		<li style="font-size:12px;"><a href="/course/{{ course.id }}/">{{ c.number }}</a></li>
+                              		{% endfor %}
+                                    <span class="label label-info">Add a course to get started</span>
+                                    <li class="divider"></li>
+                                    <li style="font-size:12px;"><a href="#addCourse" data-toggle="modal"><i class="icon-plus-sign"></i> Add Course</a></li>
+                                </ul>
+                        </div>
+                        <!-- /course dash -->
+                    </div>
+                  	<div class="span6">
+                    	<h4 style="margin-top:15px; margin-left:20px;"><i class="icon-archive"></i> Past Courses</h4>
+                        <hr style="margin-bottom:40px; margin-top:13px;" />
+                        <div class="alert alert-info">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                          Any courses that you leave will be listed here.
+                        </div>
+                        
+                        <p>Added in 2013</p>
+                        <table class="table table-hover">
+                            <tbody>
+                            	<tr>
+                                	<td class="span1">
+                                    <div class="dropdown">
+                                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-pencil"></i></a>
+                                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                      	<li><a href="#">Rejoin</a></li>
+                                        <li><a href="#remove" data-toggle="modal">Remove</a></li>
+                                      </ul>
+                                    </div>
+                                    </td>
+                                    <td class="span3">Course Name</td>
+                                    <td class="span2">Semester</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Added in 2012</p>
+                        <table class="table table-hover">
+                            <tbody>
+                            	<tr>
+                                	<td class="span1">
+                                    <div class="dropdown">
+                                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-pencil"></i></a>
+                                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                      	<li><a href="#">Rejoin</a></li>
+                                        <li><a href="#remove" data-toggle="modal">Remove</a></li>
+                                      </ul>
+                                    </div>
+                                    </td>
+                                    <td class="span3">Course Name</td>
+                                    <td class="span2">Semester</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span3">
+                        <div class="row">
+                          <div class="span3 actionsfeed_cal" style="text-align:center; margin-top:11px;"><p class="upcomingEvents">Upcoming Events</p></div>
+                        </div>
+                        <p><span class="label label-info">2/3</span> <a href="#">Psych study group</a></p>
+                        <p><span class="label label-info">4/13</span> <a href="#">Econ project at the library</a></p>
+                        <p><span class="label label-info">4/15</span> <a href="#">Psychology Lecture</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Remove course confirmation -->
+    <div id="remove" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel">Remove course</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove this course? This will remove the course records from your dashboard.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Nevermind</button>
+        <button class="btn btn-primary">Remove</button>
+      </div>
+      <!--add course modal-->
+    </div>
+        <div id="addCourse" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <form enctype="multipart/form-data" class="form-horizontal" method="post" action="/course/create/">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add one of your courses</h3>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          {{form.course_number|attr:"autocomplete:off"|add_class:"addCourseFieldWidth"}}
+          {{form.course_id|attr:"autocomplete:off"|add_class:"addCourseFieldWidth"}}         
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-inverse">Complete</button>
+        </div>
+      </form>
+    </div>
+{% endblock content %}

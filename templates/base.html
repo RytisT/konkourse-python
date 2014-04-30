@@ -1,0 +1,161 @@
+{% load static %}
+{% load notifications_tags %} 
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}konkourse{% endblock title %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta property="og:image" content="{% static "img/logo-white.png" %}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="200">
+<meta property="og:image:height" content="200">
+<meta name="description" content="Konkourse is a social network that connects people and ideas. Now open for public consumption to students at select universities.">
+<meta property="og:description" content="Konkourse is a social network that connects people and ideas. Now open for public consumption to students at select universities.">
+{% block includes %}
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="{% static "img/favicon.png" %}">
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/jquery-ui.js" %}"></script>
+<script src="{% static "js/csrf.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/placeholder.js" %}"></script>
+<script src="{% static "js/modernizr.js" %}"></script>
+<script src="{% static "js/coursedash.js" %}"></script>
+<script src="{% static "js/datepicker/bootstrap-datepicker.js" %}"></script>
+<script src="{% static "js/jasny/bootstrap-fileupload.js" %}"></script>
+<script src="{% static "js/jasny/jasny-bootstrap.js" %}"></script>
+<script src="{% static "js/timepicker/bootstrap-timepicker.min.js" %}"></script>
+<script src="{% static "js/conversations.js" %}"></script>
+
+
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/datepicker/datepicker.css" %}"> 
+<link rel="stylesheet" href="{% static "css/jasny/jasny-bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome-ie7.min.css" %}">
+<!-- <link rel="stylesheet" href="{% static "css/fileupload/jquery.fileupload-ui.css" %}"> -->
+<link rel="stylesheet" href="{% static "css/app.css" %}">
+<link rel="stylesheet" href="{% static "css/timepicker/bootstrap-timepicker.min.css" %}">
+<link rel="stylesheet" href="{% static "css/jquery-ui-smoothness/jquery-ui.css" %}">
+  {% endblock includes %}
+  {% block script %}
+  {% endblock script %}{% block style %}
+  {% endblock style %}
+  {% load widget_tweaks %}
+</head>
+<body>
+{% block menubar %}
+ {% if user.is_authenticated and user.is_active %}
+  <div class="navbar navbar-inverse navbar-fixed-top" style="z-index:5;">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/" style="margin-left:1px; margin-right:38px;"><img src="{% static "img/konkourse_logotype.png" %}" style="height:21px;" /></a>
+          <ul class="nav pull-left" style="margin-left:28px; margin-top:4px; margin-bottom:1px;">
+            <li style="font-weight:700; font-size:1.33em;">
+              <a href="/updates/"><i class="icon-lightbulb" style="color:#fff;"></i> 
+	          {% if user.notifications.unread.count > 0 %}
+                <span class="badge badge-info" style="font-size:.8em;">{{user.notifications.unread.count}}</span>
+              {% endif %}
+	          </a>
+            </li>
+            <li style="font-weight:700; font-size:1.33em;"><a href="/documents/" style="padding-top:11px;"><i class="icon-folder-open" style="color:#fff;"></i></a></li>
+          </ul>
+          <form id="searchform" class="navbar-search pull-left" action="/search/?q=">
+            <input name="q" id="id_q" type="text" placeholder="Search for people" autocomplete="off" style="width:310px; margin-top:4px; margin-bottom:1px;">
+          </form>
+          <ul class="nav pull-right" style="margin-top:4px; margin-bottom:1px;">
+              <li style="font-weight:700;"><a href="/{{ user.username }}"> {{ user.first_name }} {{user.last_name}} </a></li>
+              <li class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight:500; padding-top:12px;"><i class="icon-cogs" style="color:#fff; font-size:1.3em;"></i></a>
+                  <ul class="dropdown-menu" >
+                  	  <li><a href="/{{ user.username }}">View Profile</a></li>
+                      <li><a href="/settings/">Edit Profile</a></li>
+                      <li class="divider"></li>
+                      <li><a href="/settings/security/">Settings</a></li>
+                      <li><a href="/logout/">Logout</a></li>
+                  </ul>
+                </li>
+          </ul>
+        </div>
+    </div><!-- /navbar-inner -->
+  </div>
+    {% if error_message %}
+    <div class="nav pull-center alert alert-error" style="margin-left:5px;margin-right:5px;margin-bottom:0px;">  
+        <a class="close" data-dismiss="alert">×</a>  
+        <strong>Error!</strong> {{error_message}}  
+    </div>
+  {% endif %}
+        {% else %}
+  <div class="navbar navbar-inverse navbar-fixed-top" style="z-index:5;">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        
+        <a class="brand" href="/" style="margin-left:1px;margin-right:105px;"><img src="{% static "img/konkourse_logotype.png" %}" style="height:21px;" /></a>
+        <div class="nav-collapse">
+          <ul class="nav pull-right" >
+            <form class="form-inline" method="post" action="/account/login/" autocomplete="off" style="margin-bottom:0px;">
+              {% csrf_token %}
+              <input type="text" class="span3" name="username" placeholder="Email or Username" style="margin-top:6px;">
+              <input type="password" class="span3" name="password" placeholder="Password" style="margin-top:6px;">
+              <button type="submit" class="btn">Login</button>  
+            </form>
+          </ul>
+        </div><!-- /collapsed content -->
+      </div><!-- /container -->
+    </div><!-- /navbar-inner -->
+  </div>
+  {% if error_message %}
+    <div class="nav pull-center alert alert-error" style="margin-left:5px;margin-right:5px;">  
+        <a class="close" data-dismiss="alert">×</a>  
+        <strong>Error!</strong> {{error_message}}  
+    </div>
+  {% endif %}
+{% endif %}
+{% endblock menubar %}
+{% block content %}
+{% endblock content %}
+</body>
+</html>
+<script type="text/javascript">
+//code to omit spaces in course number field.
+function typedSpace(e)
+{
+    var e = e || event;
+    
+    if (e.keyCode == 32) return false;
+        
+}
+function pastedSpace(e)
+{
+    var e = e || event;
+    
+    this.value = this.value.replace(/\s/g,'');
+        
+}
+window.onload = function(){
+    var inp = document.getElementById("id_course_number");
+    if(inp) {
+    	inp.onkeydown = typedSpace;
+    	inp.oninput = pastedSpace;
+    }
+    var wtf = document.getElementById("id_course_id");
+    if(wtf){
+    	wtf.onkeydown = typedSpace;
+    	wtf.oninput = pastedSpace;
+    }
+};
+</script>

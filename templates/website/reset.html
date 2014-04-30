@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+    body {background: #444444}
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="application/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $("#picker1").birthdaypicker({});
+    });
+</script>
+{% endblock script %}
+{% block content %}
+ <div class="container">
+    <div class="row">
+      <div class="span4 offset4">
+        <h2 style="color:white; text-align:center; ">Retrieve Password</h2>
+        <hr />
+        </div>
+    </div>
+    <div class="row">
+      <div class="span4 offset4">
+          <form class="well">
+              <label>Email:</label>
+                <input type="text" class="input-small span3" style="width:95%; min-width:95%; max-width:95%;"  placeholder="">
+                <p class="help-block">We'll send your password to your JMU email address.</p>
+                <br />
+                
+                
+                <a href="#" class="btn btn-primary" style="float:right;">Send Password</a>
+                <br />
+            </form>
+        </div>
+    </div>
+  </div>
+  {% endblock content %}

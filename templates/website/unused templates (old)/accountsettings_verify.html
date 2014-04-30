@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="application/javascript">
+    $(".collapse").collapse()
+  </script>
+{% endblock script %}
+{% block content %}
+  <div class="container">
+    <h3>Account Settings</h3>
+    <hr />
+    <div class="row">
+      <div class="span3">
+      <ul class="nav nav-pills nav-stacked actionsfeedmsg">
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Courses</a></li>
+          <li><a href="#">Groups</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
+      <div class="span9">
+        <div class="row">
+          <div class="span9">
+          <a href="#" class="btn" style="float:left; margin-right:20px;"><i class="icon-arrow-left"></i> Back</a>
+          <h3>Verify Credentials</h3>
+          <hr />
+          <div class="row">
+            <div class="span2">
+              <p style="margin-top:5px; text-align:right;">Enter Password:</p>
+            </div>
+            <div class="span7" style="min-height:50px;">
+              <form style="float:left; margin-right:10px;">
+                      <input class="span3" id="xlInput3" name="xlInput3" size="30" type="text">
+                </form>
+                <a href="#" class="btn btn-primary">Continue</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

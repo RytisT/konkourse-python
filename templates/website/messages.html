@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+{% endblock script %}
+{% block content %}
+<div class="container">  
+	<div class="row">
+    	<div class="span9">
+        	<div class="row">
+            	<div class="span9">
+                	<h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-envelope-alt"></i> Messages</h4>
+                    <hr style="margin-bottom:40px;" />
+                </div>
+            </div>
+        	<div class="row">
+      	  		<div class="span9">
+                    <div class="row">
+                    	<div class="span9">
+                        	<div class="alert alert-info">
+                              <button type="button" class="close" data-dismiss="alert">&times;</button>
+                              <h4>Well then!</h4>
+                              It doesn't look like you have any messages yet.
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover">
+                    	<tr>
+                        	<td style="width:50px;"><img src="{% static "http://placehold.it/50x50" %}" style="" class="img-rounded" /></td>
+                            <td>
+                            	<p style="margin:0px; font-weight:500; font-size:15px;"><a href="#">Evan Botello</a></p>
+                            	<p style="margin:0px; font-size:12.5px;"><a href="#">Cras quam magna, iaculis sed consectetur vel, tincidunt sed justo. Aliquam erat volutpat. Sed semper odio quis lectus elementum gravida.</a></p>
+                            </td>
+                            <td style="width:100px;"><p style="vertical-align:middle; text-align:center;">Last Active Date</p></td>
+                        </tr>
+                        <tr>
+                        	<td style="width:50px;"><img src="{% static "http://placehold.it/50x50" %}" style="" class="img-rounded" /></td>
+                            <td>
+                            	<p style="margin:0px; font-weight:500; font-size:15px;"><a href="#">Mohammed Davoodi</a></p>
+                            	<p style="margin:0px; font-size:12.5px;"><a href="#">This message preview has a max character limit of 140 characters.</a></p>
+                            </td>
+                            <td style="width:100px;"><p style="vertical-align:middle; text-align:center;">Last Active Date</p></td>
+                        </tr>
+                        <tr>
+                        	<td style="width:50px;"><img src="{% static "http://placehold.it/50x50" %}" style="" class="img-rounded" /></td>
+                            <td>
+                            	<p style="margin:0px; font-weight:500; font-size:15px;"><a href="#">Mark Twain</a></p>
+                            	<p style="margin:0px; font-size:12.5px;"><a href="#">Cras quam magna, iaculis sed consectetur vel, tincidunt sed justo. Aliquam erat volutpat. Sed semper odio quis lectus elementum gravida.</a></p>
+                            </td>
+                            <td style="width:100px;"><p style="vertical-align:middle; text-align:center;">Last Active Date</p></td>
+                        </tr>
+                    </table>
+            	</div>        	
+          	</div>
+        </div>
+        <!-- right side bar -->
+        <div class="span3">
+        	<div class="actionsfeed_cal" style="text-align:center; margin-top:10px;"><p class="upcomingEvents">Upcoming Events</p></div>
+                <p><span class="label label-info">2/3</span> <a href="#">Psych study group</a></p>
+                <p><span class="label label-info">4/13</span> <a href="#">Econ project at the library</a></p>
+                <p><span class="label label-info">4/15</span> <a href="#">Psychology Lecture</a></p>
+        	</div>
+    	</div>
+</div>
+{% for message in messages reversed %}           
+        
+{% endfor %}
+{% endblock content %}

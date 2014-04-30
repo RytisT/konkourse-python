@@ -1,0 +1,124 @@
+{% extends "website/base_course.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+<script type="text/javascript">
+	$('.dropdown-toggle').dropdown();
+	$(document).ready(function(){
+	$('#docs').addClass('active');
+	$('.dropdown-toggle').dropdown();
+});
+</script>
+{% endblock script %}
+{% block course_content %}
+<div class="span9">
+	<div class="row">
+    	<div class="span9">
+        	<table class="table table-condensed" style="background-color: #f5f5f5;">
+            	<tr>
+                	<td class="span5"><p>Name</p></td>
+                    <td class="span3"><p>Owner</p></td>
+                    <td class="span1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id ="docslist" class="row">
+    	<div class="span9">
+        	<table class="table table-hover table-condensed">
+                {% if documents|length != 0 %}
+            	{% for document in documents reversed %}
+            	{% if not document.deleted %}
+                <tr>
+                    <td class="span5" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;"><p><a href="/documents/{{document.id}}">{{document.filename}}</a></p></td>
+                    <td class="span3" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;"><p><a href="/{{ document.owner.username }}">{{document.owner.first_name}} {{document.owner.last_name}}</a></td>
+                	<td class="span1" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+                    <div class="btn-group">
+                     	<a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="#menu1">
+                        	More&nbsp; 
+                            <span class="caret"></span>
+                        </a>
+                        	<ul class="dropdown-menu">
+                            	<li><a href="{{document.id}}"><i class="icon-download"></i> Download</a></li>
+                                {% if document.owner == user %}
+                                <li><a data-toggle="modal" href="#delete{{document.id}}"><i class="icon-trash"></i> Delete</a></li>
+                                <li><a data-toggle="modal" href="#rename{{document.id}}"><i class="icon-edit"></i> Rename</a></li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li><a data-toggle="modal" href="#doc{{document.id}}"><i class="icon-info-sign"></i> Document Info</a></li>
+                             </ul>
+                     </div>
+                     </td>
+                 </tr>    
+                        {% if document.owner == user %}
+  
+                            <!-- delete document modal-->
+                            
+                            <div class="modal hide fade" id="delete{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Delete Document</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete the Document: {{document.filename}}?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" data-dismiss="modal" onclick="deleteDocument({{document.id}})">Delete</a>
+                                </div>
+                            </div>
+                            
+                            <!--rename document modal-->
+                            
+                            <div class="modal hide fade" id="rename{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Rename Document</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Current Name: {{document.filename}}</p>
+                                    <div class="input-prepend">
+                                        <span class="add-on">New Name</span><input type="text" class="span3" id="renameInput" size="16">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" data-dismiss="modal" onclick="renameDocument({{document.id}})">Okay</a>
+                                </div>
+                            </div>
+
+                            {% endif %}
+
+                            <!--Document Info modal-->
+                            
+                            <div class="modal hide fade" id="doc{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Document Info</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p><span style="font-weight:bold;">Name:</span>{{document.filename}}</p>
+                                    <p><span style="font-weight:bold;">Size:</span> [{{document.getFileSize}}]</p>
+                                    <p><span style="font-weight:bold;">Owner:</span> {{document.owner}}</p>
+                                    <p><span style="font-weight:bold;">Upload Date:</span> {{document.created}}</p>
+                                    <p><span style="font-weight:bold;">Last Modified:</span> {{document.modified}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+                                </div>
+                            </div>
+                 {% endif %}
+                 {% endfor %}
+                 {% else %}
+                    <h5 style="margin-top:10px; text-align:center;">This class currently has no documents.</h5>
+                {% endif %}
+             </table>
+        </div>
+    </div>
+</div>
+{% endblock course_content %}{% block right_side %}{% endblock right_side %}
+{% block modal %}
+{% endblock modal %}

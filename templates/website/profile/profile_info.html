@@ -1,0 +1,54 @@
+{% extends "website/base_profile.html" %}
+{% load static%}
+{% block style %}
+<style type="text/css">
+	body {
+    background: #e3e8ec url('{% static "img/body_noise_media.png" %}') repeat 50% 0;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+{% endblock script %}
+  {% block selected %}
+    <div class="span4 offset1 well_profile_sec">
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="/{{ username }}">Conversation</a></li>
+        <li class="active"><a href="/{{ username }}/info">Info</a></li>
+        <li><a href="/{{ username }}/courses">Courses</a></li>
+        <li><a href="/{{ username }}/connections">Connections</a></li>
+      </ul>
+    </div>
+  {% endblock selected %}  
+  {% block selection %}
+    <div class="span6 well_profile_sec">
+      <h4>Info</h4>
+      <hr />
+      <h5>Birthday:</h5>
+      {{ birthday }}
+      <h5>Gender:</h5>
+      <p>{% ifequal sex 'M' %}
+          Male
+         {% endifequal %}
+         {% ifequal sex 'F' %}
+          Female
+         {% endifequal %}
+         {% ifequal sex 'T' %}
+          Transgender
+         {% endifequal %}
+         {% ifequal sex 'E' %}
+          Extraterrestrial
+         {% endifequal %}
+         {% ifequal sex 'O' %}
+          Other
+         {% endifequal %}
+      </p>
+      <h5>About:</h5>
+      <p>{{ about }}</p>
+      <h5>Interests:</h5>
+      <p>{{ interests }}</p>
+      <h5>Email:</h5>
+      <p>{{ email }}</p>
+      <h5>Phone:</h5> 
+      <p>{{ number }}</p>      
+    </div>
+  {% endblock selection %}  

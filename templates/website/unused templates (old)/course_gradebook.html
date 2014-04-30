@@ -1,0 +1,341 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+    body { padding-top:45px;}
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript"><!--//--><![CDATA[//><!--
+
+    sfHover = function() {
+      var sfEls = document.getElementById("nav1").getElementsByTagName("LI");
+      for (var i=0; i<sfEls.length; i++) {
+        sfEls[i].onmouseover=function() {
+          this.className+=" sfhover";
+        }
+        sfEls[i].onmouseout=function() {
+          this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+        }
+      }
+    }
+    if (window.attachEvent) window.attachEvent("onload", sfHover);
+    
+    //--><!]]></script>
+      
+      <!--might want to add something to this script ^ to delay mouse over activity by one or two seconds-->
+      
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#myModal').modal(options)
+  </script>
+  <script type="text/javascript">
+    $('.tooltip-win').tooltip()
+  </script>
+  <script type="text/javascript">
+    $('#myTab').tab('show')
+  </script>
+  <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>
+      /* Update datepicker plugin so that MM/DD/YYYY format is used. */
+      $.extend($.fn.datepicker.defaults, {
+        parse: function (string) {
+          var matches;
+          if ((matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/))) {
+            return new Date(matches[3], matches[1] - 1, matches[2]);
+          } else {
+            return null;
+          }
+        },
+        format: function (date) {
+          var
+            month = (date.getMonth() + 1).toString(),
+            dom = date.getDate().toString();
+          if (month.length === 1) {
+            month = "0" + month;
+          }
+          if (dom.length === 1) {
+            dom = "0" + dom;
+          }
+          return month + "/" + dom + "/" + date.getFullYear();
+        }
+      });  
+    </script>
+    
+    
+    <script>
+  $(function () {
+    $('.tabs a:last').tab('show')
+  })
+</script>
+{% endblock script %}
+{% block content %}
+   <div class="container">  
+    <div class="row">
+      <div class="span2">
+        <div class="row" style="margin-top:18px;">
+          <div class="span3">
+                <a href="#"><img src="{% static "img/prof.png" %}" style="float:left; margin-left:5px;"  /></a>
+                <h4 style=" margin-left:5px; float:left;"><a href="#">Instructor Name</a></h4>
+            </div>
+        </div>
+      <hr />
+      <h4>About Course</h4>
+          <p>Ad sanctus nusquam ius, his prompta alterum ullamcorper cu, ad eros homero vix. His ex unum definitiones. Vix te quem oportere, graeco sensibus hendrerit ius id, id munere accusam eligendi nam.</p>
+      <hr />
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href="#">Course Home</a></li>
+          <li><a href="#">Download Syllabus</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li><a href="#">Submissions</a></li>
+          <li class="active"><a href="#">Documents</a></li>
+          <li><a href="#">Gradebook</a></li>
+        </ul>
+        <h4>Enrolled</h4>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p></div>
+          </div>
+          <button class="btn" style="margin-top:5px;">View All</button>
+      </div>
+      <div class="span8">
+      
+        <div class="row">
+          <div class="span8">
+                <hr />
+                    <h3 style="float:left;">Psychology 101  </h3>
+                        <i class="icon-chevron-right" style="float:left; margin-top:6px;"></i>
+                    <h3 style="color:#da4f49;">  Gradebook</h3>
+                <hr />
+            </div>
+        </div>
+        
+     
+        <div class="row">
+          <div class="span3 gb_all">
+                <div class="row">
+                    <div class="span2">
+                        <p>Name</p>
+                    </div>
+                    <div class="span1">
+                        <p>Grade</p>
+                    </div>
+                </div>
+              <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Botello, Evan</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>A</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Bezos, Jeff</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>B</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Elgert, Andrew</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>A</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Whitman, Walt</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>D</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Sheen, Charlie</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>A</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="row gb_name">
+                  <div class="span2">
+                      <img src="http://placehold.it/45x45" style="float:left; margin-top:2.5px; margin-right:4px; margin-left:2px;">
+                    <h4><a href="#">Twain, Mark</a></h4>
+                    </div>
+                    <div class="span1 gb_letter">
+                      <h2>B</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="span5" style=" overflow:scroll; overflow-y:hidden;" >
+              <div style="width:600px; float:left;">
+                  <div style="width:140px; float:left;">
+                       <p>Assignment 1</p>
+                    </div>
+                    <div style="width:140px; float:left;">
+                       <p>Assignement 2</p>
+                    </div>
+                    <div style="width:140px; float:left;">
+                       <p>Exam 1</p>
+                    </div>
+                    <div style="width:140px; float:left;">
+                       <p>Exam 2</p>
+                    </div>
+                </div>
+                <div style="width:600px; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px;" />
+                </div>
+                <div style="width:600px; height:; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px; color:#000;" />
+                </div>
+                <div style="width:600px; height:; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px; color:#000;" />
+                </div>
+                <div style="width:600px; height:; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px; color:#000;" />
+                </div>
+                <div style="width:600px; height:; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px; color:#000;" />
+                </div>
+                <div style="width:600px; height:; clear:left; float:left;">
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <div style="width:140px; float:left; background:#CCC; height:50px;">
+                                <p>Hello, mate.</p>
+                            </div>
+                            <hr style="clear:both; padding:0; margin:1px 0px; color:#000;" />
+                </div>
+                
+                
+                
+                
+                
+            </div>
+        </div>
+        
+      </div>
+      
+      <div class="span2">
+        <div class="row">
+          <div class="span2 actionsfeed"><h4>Rubric</h4></div>
+        </div>
+      </div>     
+      
+    </div>
+  </div>
+  <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>People Who Are Attending</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span2">
+                <p><a href="#">Name 1</a></p>
+                <p><a href="#">Name 2</a></p>
+                <p><a href="#">Name 3</a></p>
+            </div>
+        </div><p>Note: names are links to profiles</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Okay</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+
+  {% endblock content %}

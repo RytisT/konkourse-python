@@ -1,0 +1,392 @@
+<!-- I didnt know what <body onLoad="modalHideInput();"> did so I left it out. Page seemed the same without it -Mohammed -->
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+{% block title %}
+  Coursetab - Search Results
+{% endblock title %}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="application/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="application/javascript">
+    $('#confirmConnection').modal({
+      keyboard: true,
+    })
+    $('#inviteCourse').modal({
+      keyboard: true,
+    })
+    $('#joinCourse').modal({
+      keyboard: true,
+    })
+    $('#flagCourse').modal({
+      keyboard: true,
+    })
+    $('#joinCourseWood').modal({
+      keyboard: true,
+    })
+    $('#flagCourseWood').modal({
+      keyboard: true,
+    })
+    $('#joinGroup').modal({
+      keyboard: true,
+    })
+    $('#flagGroup').modal({
+      keyboard: true,
+    })
+  </script>
+{% endblock script %}
+{% block content %}
+ <div class="container">  
+    <div class="row">
+      <div class="span2">
+            <ul class="nav nav-list">
+              <li class="nav-header">Filter</li>
+              <li class="active"><a href="#">All</a></li>
+              <li><a href="#">People</a></li>
+              <li><a href="#">Courses</a></li>
+              <li><a href="#">Groups</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Research</a></li>
+            </ul>
+      </div>
+      <div class="span6">
+        <div class="row">
+        <div class="span6"><h3>Search Results</h3> <hr /></div>
+        </div>
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/andrew.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary" data-toggle="modal" href="#confirmConnection">Connect</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#inviteCourse" data-toggle="modal">Invite to Course</a></li>
+                    <li><a href="#">Invite to Group</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Flag User</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Andrew Elgert</a></p>
+            <p style="">James Madison University</p>
+                
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/emily.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary">Connect</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Invite to Course</a></li>
+                    <li><a href="#">Invite to Group</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Flag User</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Emily Ramser</a></p>
+            <p style="">James Madison University</p>
+                
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/twain.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary">Connect</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Invite to Course</a></li>
+                    <li><a href="#">Invite to Group</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Flag User</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Mark Twain</a></p>
+            <p style="">Society for Psychical Research</p>
+                
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/kimberly.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary" data-toggle="modal" href="#joinCourse">Join</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" href="#flagCourse">This Looks Suspicious</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Foundations of Psychology (GPYCH160 - 1001)</a></p>
+            <p style="margin-bottom:0px;">James Madison University</p>
+            <p style="margin-bottom:0px;">Kimberly Duvall-Early</p>
+                
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/wood.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary" data-toggle="modal" href="#joinCourseWood">Join</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" href="#flagCourseWood">This Looks Suspicious</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Industrial Organization (ECON345 - 1001)</a></p>
+            <p style="margin-bottom:0px;">James Madison University</p>
+            <p style="margin-bottom:0px;">William Wood</p>
+                
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/upb.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary" data-toggle="modal" href="#joinGroup">Join</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" href="#flagGroup">This Looks Suspicious</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">JMU OPA 2012</a></p>
+            <p style="margin-bottom:0px;">James Madison University</p>
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/event.png" %}" style="float:left; margin-right:10px;"/>
+              <div class="btn-group" style="float:right; margin-top:10px;">
+                  <button class="btn btn-primary" data-toggle="modal" href="#joinGroup">Join</button>
+                  <button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a data-toggle="modal" href="#flagGroup">This Looks Suspicious</a></li>
+                  </ul>
+                </div>
+            <p style="margin-bottom:0px;"><a href="#">Mike and John's Coffee Study</a></p>
+            <p style="margin-bottom:0px;">James Madison University</p>
+            <p style="margin-bottom:0px;"><a href="#">(3) People are Attending</a></p>
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+        <div class="row">
+          <div class="span6 searchResult">
+            <img src="{% static "img/moleskine/Red/moleskine_red_128.png" %}" style="float:left; max-width:50px; margin-right:10px;"/>
+            <p style="margin-bottom:0px;"><a href="#">Public Choice Economics and Antitrust Policy</a></p>
+            <p style="margin-bottom:0px;"><a href="#">Robert Tollison</a></p>
+            <p style="margin-bottom:0px;"><a href="#">(45) People have read this.</a></p>
+          </div>
+        </div>
+        <hr style="margin: 1px 0;" />
+      </div>
+      <div class="span3 offset1 visible-desktop">
+      <h4>Mini Calendar</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">This Week</p></div>
+            </div>
+            <p><span class="badge badge-success">1/4</span><a href="#"> Psychology Lecture</a></p>
+            <p><span class="badge badge-success">1/5</span><a href="#"> Economics Workshop</a></p>
+            <p><span class="badge badge-success">1/6</span><a href="#"> Psychology Lecture</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Next Week</p></div>
+            </div>
+            <p><span class="badge badge-success">1/10</span><a href="#"> Psychology Test</a></p>
+            <p><span class="badge badge-success">1/11</span><a href="#"> Economics Lecture</a></p>
+            <p><span class="badge badge-success">1/12</span><a href="#"> Psychology Review</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form class="form-inline">
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span><input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!--Begin Confirm Connection Modal-->
+  <div class="modal hide" id="confirmConnection">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal" onClick="resetForm();">×</button>
+    <img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;">
+    <h3>Connect with Andrew Elgert</h3>
+  </div>
+  <div class="modal-body">
+    <p>Choose your relationship with Andrew:</p>
+      <form id="selectRel">
+          <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked onclick="toggle('hide');">
+                Friends
+              </label>
+              <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="toggle('hide');">
+                Teachers
+              </label>
+              <label class="radio">
+                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" onclick="toggle('show');">
+                New
+              </label>
+              <div class="input-prepend" id="newLabel">
+                <span class="add-on">New Type</span><input class="span2" size="16" type="text">
+              </div>
+              
+        </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal" onClick="resetForm();">Close</a>
+    <a href="#" class="btn btn-primary">Send Request</a>
+  </div>
+  </div>
+  <!--End Confirm Connection Modal-->
+  <!--Begin Invite Course Modal-->
+  <div class="modal hide" id="inviteCourse">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/andrew-small.png" %}"style="float:left; margin-right:5px;">
+    <h3>Invite Andrew Elgert</h3>
+  </div>
+  <div class="modal-body">
+    <p>Which course do you mean?</p>
+      <input type="text" id="tags"  />
+        <br>
+        <div class="alert alert-block">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <h4 class="alert-heading">Sorry!</h4>
+          You are not currently teaching any courses...
+        </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Send Request</a>
+  </div>
+  </div>
+  <!--End Invite Course Modal-->
+  <!--Begin Join Course Modal-->
+  <div class="modal hide" id="joinCourse">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/kimberly-small.png" %}" style="float:left; margin-right:5px;">
+    <h3>Join Foundations of Psychology</h3>
+  </div>
+  <div class="modal-body">
+    <p>Your request to join Foundations of Psychology has been submitted.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Finished</a>
+  </div>
+  </div>
+  <!--End Join Course Modal-->
+  <!--Begin Flag Course Modal-->
+  <div class="modal hide" id="flagCourse">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/kimberly-small.png" %}" style="float:left; margin-right:5px;">
+    <h3>Flag this Course</h3>
+  </div>
+  <div class="modal-body">
+    <p>Your concerns have been submitted to Coursetab for review. Thanks for your help!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Finished</a>
+  </div>
+  </div>
+  <!--End Flag Course Modal-->
+  <!--Begin Join Course Modal-->
+  <div class="modal hide" id="joinCourseWood">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/wood-small.png" %}"  style="float:left; margin-right:5px;">
+    <h3>Join Industrial Organization</h3>
+  </div>
+  <form style="margin:0;">
+  <div class="modal-body">
+    <p>This Course is Protected.</p>
+    <div class="input-prepend" id="newLabel">
+     <span class="add-on">Enter Course Code</span><input class="span2" size="16" type="text">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Submit</a>
+  </div>
+  </form>
+  </div>
+  <!--End Join Course Modal-->
+  <!--Begin Flag Course Modal-->
+  <div class="modal hide" id="flagCourseWood">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/wood-small.png" %}"  style="float:left; margin-right:5px;">
+    <h3>Flag this Course</h3>
+  </div>
+  <div class="modal-body">
+    <p>Your concerns have been submitted to Coursetab for review. Thanks for your help!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Finished</a>
+  </div>
+  </div>
+  <!--End Flag Course Modal-->
+  <!--Begin Join Group Modal-->
+  <div class="modal hide" id="joinGroup">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/ubp-small.png" %}" style="float:left; margin-right:5px;">
+    <h3>JMU OPA 2012</h3>
+  </div>
+  <div class="modal-body">
+    <p>Your request to join JMU 2012 OPA has been submitted.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Finished</a>
+  </div>
+  </div>
+  <!--End Join Group Modal-->
+  <!--Begin Flag Group Modal-->
+  <div class="modal hide" id="flagGroup">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">×</button>
+    <img src="{% static "img/ubp-small.png" %}" style="float:left; margin-right:5px;">
+    <h3>Flag this Group</h3>
+  </div>
+  <div class="modal-body">
+    <p>Your concerns have been submitted to Coursetab for review. Thanks for your help!</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Finished</a>
+  </div>
+  </div>
+  <!--End Flag Group Modal-->
+  {% endblock content %}

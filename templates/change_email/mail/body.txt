@@ -1,0 +1,3 @@
+To change your email, click on the link below.
+
+{{ protocol }}://konkourse.com{% url 'change_email_confirm' signature=signature %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static%}
+{% block includes %}{{ block.super }}
+<script src="{% static "js/jquery-ui.js" %}"></script>
+<link rel="stylesheet" href="{% static "css/jquery-ui-smoothness/jquery-ui.css" %}">
+
+{% endblock includes %}
+{% block style%}
+<style type="text/css">
+.form-horizontal .control-label {
+	width:150px;
+	}
+.form-horizontal .controls {
+	margin-left:170px;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+<script>
+$(function(){
+	$('#id_birthday').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: "yy-mm-dd",
+      yearRange: "1900:2013",
+  });
+});
+</script>
+{% endblock script %}
+{% block content %}
+<div class="container">
+	<div class="row">
+    	<div class="span12">
+        	<h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-cogs"></i> Settings</h4>
+        	<hr style="margin-bottom:40px;" />
+        </div>
+    </div>
+	<div class="row">
+    	<div class="span12">
+        	<div class="row">
+            	<div class="span3">
+                	<ul class="nav nav-tabs nav-stacked">
+              		<li class="active"><a href="/settings/">Edit Profile</a></li>
+              		<li><a href="/settings/security/">Edit Account</a></li>
+            		</ul>
+                </div>
+                <div class="span9">
+                	<form method="post" enctype="multipart/form-data" action="/settings/">
+                          {% csrf_token %}
+                          <fieldset class="form-horizontal">
+                            <div class="control-group">
+                              <label class="control-label" for="">Profile Picture</label>
+                              <div class="controls">
+                                {{ account_form.image }}
+                                {{ account_form.image.errors }}
+                                <img src="{{ user.get_profile.getImage }}"  class="img-polaroid img-rounded" style="width:100px;"/>
+                              </div>
+                            </div>
+                            <div class="control-group">
+                              <label class="control-label" for="input01">First Name</label>
+                              <div class="controls">
+                                {{ name_form.first_name }}
+                                {{ name_form.first_name.errors }}
+                              </div>
+                          	</div>
+                            <div class="control-group">
+                              <label class="control-label" for="input01">Last Name</label>
+                              <div class="controls">
+                                {{ name_form.last_name }}
+                                {{ name_form.last_name.errors }}
+                              </div>
+                          	</div>
+                            <div class="control-group">
+                              <label class="control-label" for="input01">Major</label>
+                              <div class="controls">
+                                {{ account_form.major }}
+                                {{ account_form.major.errors }}
+                              </div>
+                          	</div>
+                            <div class="control-group">
+                              <label class="control-label" for="input01">Tagline</label>
+                              <div class="controls">
+                                {{ account_form.tagline }}
+                                {{ account_form.tagline.errors }}
+                              </div>
+                          	</div>
+                            <div class="control-group">
+                              <label class="control-label" for="">Gender</label>
+                              <div class="controls">
+                                {{ account_form.sex }}
+                                {{ account_form.sex.errors }}
+                              </div>
+                            </div>
+                            <div class="control-group">
+                              <label class="control-label" for="">Birthday</label>
+                              <div class="controls">
+                                {{ account_form.birthday }}
+                                {{ account_form.birthday.errors }}
+                              </div>
+                            </div>
+                            <div class="control-group">
+                              <label class="control-label" for="input01">Phone Number</label>
+                              <div class="controls">
+                                  {{ account_form.phone_number }}
+                                  {{ account_form.phone_number.errors }}
+                              </div>
+                          	</div>
+                            <div class="control-group">
+                              <label class="control-label" for="textarea">About</label>
+                              <div class="controls">
+                                {{ account_form.about }}
+                                {{ account_form.about.errors }}
+                              </div>
+                            </div>
+                            <div class="control-group">
+                              <label class="control-label" for="textarea">Interests</label>
+                              <div class="controls">
+                                {{ account_form.interests }}
+                                {{ account_form.interests.errors}}
+                              </div>
+                            </div>
+                          </fieldset>
+                          <div class="form-actions">
+                            <button type="submit" class="btn">Save Changes</button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>          
+{% endblock content %}

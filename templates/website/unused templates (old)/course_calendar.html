@@ -1,0 +1,357 @@
+{% extends "website/courses_base.html" %}
+{% load static%}
+{% block style%}
+    <style type="text/css">
+        body { padding-top:45px;}
+    </style>
+{% endblock style %}
+{% block script %}
+    <script type="text/javascript">
+        $('.dropdown-toggle').dropdown();
+        $('.dropdown-toggle2').dropdown();
+        $('.dropdown-toggle3').dropdown();
+        $('.dropdown-toggle4').dropdown();
+        $('.dropdown-toggle5').dropdown();
+        $('.dropdown-toggle6').dropdown();
+        $('.dropdown-toggle7').dropdown();
+        $('.dropdown-toggle8').dropdown();
+    </script>
+    <script type="text/javascript">
+        $(".collapse").collapse()
+    </script>
+    <script type="text/javascript">
+        $('#myModal').modal(options)
+    </script>
+    <script type="text/javascript">
+        $('.tooltip-win').tooltip()
+    </script>
+    <script type="text/javascript">
+        $('#myTab').tab('show')
+    </script>
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script>
+        $(function () {
+            $('.tabs a:last').tab('show')
+        })
+    </script>
+{% endblock script %}
+{% comment %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+    <div class="span3">
+        <div class="row" style="margin-top:18px;">
+            {% for instructor in instructors %}
+                <div class="span3">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><a href="#"><img src="{% static "img/prof.png" %}"/></a></td>
+                            <td><h4 style="margin-left:3px;"><a href="/{{ instructor.username }}">{{ instructor.first_name }} {{ instructor.last_name }}</a></h4><p style="font-style:italic; margin-left:5px;">Instructor</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+        <hr />
+        <h4>About Course</h4>
+        <p>{{ description }}</p>
+        <hr />
+        <ul class="nav nav-tabs nav-stacked">
+            <li><a href="#">{{ course_name }}</a></li>
+            <li><a href="#">Download Syllabus</a></li>
+            <li class="active"><a href="#">Calendar</a></li>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Submissions</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+        <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th>
+                    <a href="#"><h5 style="text-align:center;">Enrolled</h5></a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in active_students|slice:":5" %}
+                <tr>
+                    <td>
+                        <a href="/{{ student.username }}"><img src="{% static "img/andrew-small.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="/{{ student.username }}">{{ student.first_name }} {{ student.last_name }}</a></p>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endcomment %}
+{% block course_content %}
+<div class="span9">
+<div class="row">
+    <div class="span9 ">
+        <div class="actions_cal">
+            <div class="" style="float:left; margin-left:20px;">
+                <h3 style="line-height:25px;">{{ course_name }}</h3>
+                {# TODO: add search logic for institution #}
+                {% if institution %}<p><a href="#">{{ institution }}</a></p>{% endif %}
+            </div>
+            <div style="float:right;">{% if is_instructor %}<button class="btn btn-primary">New Event</button>{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a href="#">Course Events</a>
+            </li>
+            <li><a href="#">All Shared</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">×</button>
+            <strong>Oops!</strong> There are no events on the course calendar yet.
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <th><p style="float:left;">This Week</p><p style="float:right;"><a href="#">Past Events</a></p></th>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span2">
+        <p style="margin-left:10px;">Tue, Dec 27</p>
+    </div>
+    <div class="span7">
+        <table class="table table-condensed">
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lecture</a></h5>
+                    <p>Moody Hall <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>1:15 - 2:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu1" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lab</a></h5>
+                    <p>ISAT <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>3:00 - 4:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu2" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle2" data-toggle="dropdown" href="#menu2"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span2">
+        <p style="margin-left:10px;">Thu, Dec 29</p>
+    </div>
+    <div class="span7">
+        <table class="table table-condensed">
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lecture</a></h5>
+                    <p>Moody Hall <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>1:15 - 2:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu3" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle3" data-toggle="dropdown" href="#menu3"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lab</a></h5>
+                    <p>ISAT <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>3:00 - 4:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu4" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle4" data-toggle="dropdown" href="#menu4"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        <table class="table">
+            <tr>
+                <th><p>Next Week</p></th>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span2">
+        <p style="margin-left:10px;">Tue, Jan 2</p>
+    </div>
+    <div class="span7">
+        <table class="table table-condensed">
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lecture</a></h5>
+                    <p>Moody Hall <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>1:15 - 2:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu5" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle5" data-toggle="dropdown" href="#menu5"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lab</a></h5>
+                    <p>ISAT <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>3:00 - 4:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu6" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle6" data-toggle="dropdown" href="#menu6"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="span2">
+        <p style="margin-left:10px;">Thu, Jan 4 </p>
+    </div>
+    <div class="span7">
+        <table class="table table-condensed">
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lecture</a></h5>
+                    <p>Moody Hall <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>1:15 - 2:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu7" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle7" data-toggle="dropdown" href="#menu7"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+            <tr>
+                <td class="span4">
+                    <a href="#"><img src="{% static "img/upb-small.png" %}"style="float:left; margin-right:5px;" /></a>
+                    <h5 style="line-height:normal; margin-bottom:0px;"><a href="#">Lab</a></h5>
+                    <p>ISAT <a data-toggle="modal" href="#myModal">with (30) others</a></p>
+                </td>
+                <td class="span2"><p>3:00 - 4:45 PM</p></td>
+                <td class="span1">
+                    <li class="dropdown" id="menu8" style="list-style:none; float:right; margin-top:0px; margin-right:0px;">
+                        <a class="dropdown-toggle8" data-toggle="dropdown" href="#menu8"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="#">Edit Event</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Delete Event</a></li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock course_content %}{% block right_side %}{% endblock right_side %}
+{% comment %}
+    </div>
+    </div>
+
+    <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>People Who Are Attending</h3>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="span2">
+                    <p><a href="#">Name 1</a></p>
+                    <p><a href="#">Name 2</a></p>
+                    <p><a href="#">Name 3</a></p>
+                </div>
+            </div><p>Note: names are links to profiles</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary">Okay</a>
+        </div>
+    </div>
+    <!--END FIRST MODAL-->
+
+{% endblock content %}
+{% endcomment %}

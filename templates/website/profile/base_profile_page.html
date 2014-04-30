@@ -1,0 +1,81 @@
+
+{% load endless %}
+{% load static %}
+{% show_current_number as page_number %}
+{% paginate posts %}
+<div id = "wall">
+ {% for wallPost in posts %}
+                <div id = "post{{wallPost.id}}" class="post">
+                  <div class="span6">
+                    <table style="width:100%;">
+                      <tr>
+                        <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                          <img src="{{ wallPost.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                        	<table style="min-height:55px; width:100%;">
+                            	<tr>
+                                	<td style="vertical-align:top;">
+                        			<p style="margin:0px 0px 3px 0px; padding:0px; line-height:12px;"><a href="/{{ wallPost.creator.username }}">{{ wallPost.creator.first_name }} {{ wallPost.creator.last_name }}</a> <span style="color:#999; font-size:12.5px;">on {{ wallPost.created }}</span></p>
+                        			<p style="margin:0px 0px 0px 0px;">{{ wallPost.message|linebreaks }}</p>
+                                    </td>
+                                </tr>
+                             </table>
+                             <table style="height:22px;">
+                            	<tr>
+                                	<td>
+                           			<div>
+                            		<p style="display:inline-block; margin:0px; font-size:12.5px;"><a id="cc{{wallPost.id}}" href="javascript:void(0)" onclick="clickCommentProf({{wallPost.id}}, {{ page_number }});">Comment</a></p>
+                                		{% if username == user.username or wallPost.creator == user %}
+                                		<p style="display:inline-block; margin:0px; font-size:12.5px;">&middot;&nbsp;<a class="deletePost" id="d{{wallPost.id}}" href="javascript:void(0)" onclick="deletePost({{wallPost.id}})">Delete</a></p>
+                                		{% endif %}
+                            		</div>
+                                    </td>
+                                 </tr>
+                              </table>
+                          {% if wallPost.comments.all.count != 0 %}
+                           {% for comment in wallPost.comments.all %}
+                           {% if not comment.deleted %}
+                            <div id="c{{comment.id}}">
+                            <table style="width:100%;">
+                                <tr>
+                                  <td style="min-width:50px; margin:0; padding:0; vertical-align:top;">
+                                      <img src="{{ comment.creator.get_profile.getImage }}" style="margin-right:5px; max-width:45px; float:left;" class="img-rounded"/>
+                                  </td>
+                                  <td style="margin:0; padding:0; vertical-align:top; width:100%;">
+                                     <table style="min-height:40px; width:100%;">
+                                     	<tr>
+                                           <td style="vertical-align:top;">
+                                           <p style="margin:0px 0px 3px 0px; padding:0px; line-height:12px; font-size:13.5px;"><a href="/{{ comment.creator.username }}">{{ comment.creator.first_name }} {{ comment.creator.last_name }}</a> <span style="color:#999; font-size:12.5px;">replied on {{comment.created}}</span></p>
+                                           <p style="margin: 0px; font-size:13.5px;">{{ comment.message|linebreaks }}</p>
+                                           </td>
+                                        </tr>
+                                     </table>
+                                     <table style="height:22px;">
+                                        <tr>
+                                           <td>
+                                      	   <div>
+                                           {% if username == user.username or comment.creator == user or wallPost.creator == user %}
+                                           <p style="margin: 0px; font-size:12.5px;"><a class="deleteComment" id="c{{comment.id}}" href="javascript:void(0)" onclick="deleteComment({{comment.id}})">Delete</a></p>
+                                           {% endif %}
+                                      	   </div>
+                                           </td>
+                                        </tr>
+                                     </table>
+                                  </td>
+                                </tr>
+                            </table>
+                            </div>
+                          {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="commentReplace{{wallPost.id}}"></div>
+                    <hr />
+                  </div>
+                </div>
+          {% endfor %}
+          </div>
+          {% show_more %}

@@ -1,0 +1,270 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#myModal').modal(options)
+  </script>
+  <script type="text/javascript">
+    $('.tooltip-win').tooltip()
+  </script>
+  <script type="text/javascript">
+    $('#myTab').tab('show')
+  </script>
+  <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script>
+    /* Update datepicker plugin so that MM/DD/YYYY format is used. */
+    $.extend($.fn.datepicker.defaults, {
+      parse: function (string) {
+        var matches;
+        if ((matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/))) {
+          return new Date(matches[3], matches[1] - 1, matches[2]);
+        } else {
+          return null;
+        }
+      },
+      format: function (date) {
+        var
+          month = (date.getMonth() + 1).toString(),
+          dom = date.getDate().toString();
+        if (month.length === 1) {
+          month = "0" + month;
+        }
+        if (dom.length === 1) {
+          dom = "0" + dom;
+        }
+        return month + "/" + dom + "/" + date.getFullYear();
+      }
+    });  
+  </script>
+  <script>
+    $(function () {
+    $('.tabs a:last').tab('show')
+    })
+  </script>
+{% endblock script %}
+{% block content %}
+   <div class="container">  
+    <div class="row">
+      <div class="span3">
+      <h3>Assign Others</h3><br />
+      <input class="" id="xlInput3" name="xlInput3" size="30" type="text" style="width:80%;" placeholder="Type a connection, class, or group">
+      <hr />
+      <h3>Task Owner</h3>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+          </div>
+          
+      </div>
+      <div class="span6">
+        <div class="row">
+                <div class="span6 ">
+                  <div class="actions_cal">
+                <a class="btn" style="float:left; margin-left:17px;"><i class="icon-arrow-left"></i> Back</a>
+                        <div class="btn-group" style="margin-left:17px; float:left;">
+                          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                            Options
+                            <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Edit</a></li>
+                            <li><a href="#">Mark as Complete</a></li>
+                          </ul>
+                        </div>
+                  </div>
+                </div>
+        </div>
+        <div class="row">
+          
+          <div class="span6">
+                
+              
+              <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a href="#1" data-toggle="tab">Task Info</a>
+                      </li>
+                      <li><a href="#2" data-toggle="tab">Assigned</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="1">
+                          
+                            <div style="margin-left:10px; float:left;" >
+                                <h3>Get Homework Done Before Hammond's Class</h3>
+                                <br />
+                                <p>Due: December 31st @ 8:00PM</p>
+                                <p>Type: Urgent</p>
+                                <p><a href="#">(883) People are Assigned.</a></p>
+                                <div class="row">
+                                  <div class="span1">
+                                      <p>Description:</p>
+                                    </div>
+                                    <div class="span4">
+                                      <p>Phasellus tristique ultricies magna eget consectetur. Nam elit metus, convallis a suscipit et, consectetur eget lacus. In et pretium lectus. Aliquam eros odio, viverra vitae interdum facilisis, tincidunt non nibh. Integer nec erat risus. Integer vitae massa tellus. Nunc in eros in odio accumsan mollis.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="clear:left; margin-top:50px;"/>
+                            <div class="well" style="clear:both;">
+                                <form>
+                                <h4>Conversation</h4>
+                                <textarea class="input-xlarge" id="textarea" rows="3" style="width:98%; min-width:98%; max-width:98%;"></textarea>
+                                <a href="#" class="btn" style="float:right; margin-bottom:20px;">Share</a>
+                                </form>
+                            </div>
+                                <div class="row">
+                                    <div class="span6 actionsfeed">
+                                      <div style="margin-top:5px; margin-left:5px;">
+                                          <img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" />
+                                            <p><a href="#">Andrew Elgert</a></p>
+                                            <p>What are you doing this weekend?</p>
+                                            <p style="float:right; margin-right:5px;"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span6 actionsfeed">
+                                      <div style="margin-top:5px; margin-left:5px;">
+                                          <img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" />
+                                            <p><a href="#">Chelsea Lobelin</a></p>
+                                            <p>So when are we meeting again?</p>
+                                            <p style="float:right; margin-right:5px;"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span5 offset1 actionsfeed_reply">
+                                      <div style="margin-top:5px; margin-left:5px;">
+                                          <img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" />
+                                            <p><a href="#">Albert E</a> in reply to <a href="#">Chelsea Lobelin</a></p>
+                                            <p>Yup.</p>
+                                            <p style="float:right; margin-right:5px;"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span6 actionsfeed">
+                                      <div style="margin-top:5px; margin-left:5px;">
+                                          <img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" />
+                                            <p><a href="#">Mark Twain</a></p>
+                                            <p>Hello! Read my books.</p>
+                                            <p style="float:right; margin-right:5px;"><a href="#">Reply</a> | <a href="#">Delete</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="span2 offset2">
+                                        <a href="#">More Conversations</a>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="tab-pane" id="2">
+                        
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                <div class="span1" >
+                                      <button class="btn btn-danger"  style="margin-top:10px; float:right;">Remove</button>
+                                </div>
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                <div class="span1" >
+                                    <button class="btn btn-danger" style="margin-top:10px; float:right;">Remove</button>
+                
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                                <div class="span1" >
+                                    <button class="btn btn-danger" style="margin-top:10px; float:right;">Remove</button>
+                
+                                </div>
+                            </div> 
+                            
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                <div class="span1" >
+                                      <button class="btn btn-danger"  style="margin-top:10px; float:right;">Remove</button>
+                                </div>
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                <div class="span1" >
+                                    <button class="btn btn-danger" style="margin-top:10px; float:right;">Remove</button>
+                
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="span3">
+      <h4>Mini Calendar</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">This Week</p></div>
+            </div>
+            <p>1/4 -<a href="#"> Lecture G001</a></p>
+            <p>1/6 -<a href="#"> Test G001</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Next Week</p></div>
+            </div>
+            <p>1/9 -<a href="#"> In class homework assignment</a></p>
+            <p>1/11 -<a href="#"> Lecture G001</a></p>
+      <p>1/13 -<a href="#"> Lecture G001</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form class="form-inline">
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span><input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>People Who Are Attending</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span2">
+                <p><a href="#">Name 1</a></p>
+                <p><a href="#">Name 2</a></p>
+                <p><a href="#">Name 3</a></p>
+            </div>
+        </div><p>Note: names are links to profiles</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Okay</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+{% endblock content %}

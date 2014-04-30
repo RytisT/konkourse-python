@@ -1,0 +1,297 @@
+{% load static %}
+{% load endless %}
+{% block script %}
+<script>
+jQuery(function($){
+    //all jQuery code which uses $ needs to be inside here
+
+	$(function(){
+		var myDate = new Date();
+		var prettyDate =(myDate.getMonth()+1) + '/' + myDate.getDate() + '/' +
+        myDate.getFullYear();
+
+		$(".eventDatepicker").val(prettyDate);
+	});
+	$(function(){
+    	$('.eventDatepicker').datepicker({
+        	format: "mm/dd/yyyy",
+        	startDate: "d"
+    	});
+	});
+    
+	$(document).ready(function(){
+
+   		 $('#convo').addClass('active');
+    	$('.selectTimepicker').timepicker({
+                minuteStep: 5,
+   		});
+
+	});
+
+});
+
+</script>
+{% endblock script %}
+{% show_current_number as page_number %}
+{% paginate posts %}
+<div id="wall">
+      {% for post in posts %}
+        <!--event element-->
+        {% if post.post_type == 'E'%}
+        <div class="row">
+          <div class="span9">
+            <div id="post{{post.id}}">
+            <table>
+                <tr>
+                    <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                            <img src="{{ post.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                    </td>
+                    <td style="margin:0; padding:0; width:100%; height:100%;">
+                    <table style="min-height:55px; width:100%;">
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <p style="margin: 1px 0 0px;"><a href="/{{ post.creator.username }}">{{post.creator.first_name}} {{post.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">shared an event on {{ post.event.created }}</span></p>
+                                <p style="margin:0px 0px 0px 0px;">{{post.message|linebreaks}}</p>
+                          
+                                <div class="actionsfeed_event">
+                                <table width="100%;">
+                                    <tr>
+                                        <td style="width:87px; vertical-align:top;">
+                                            <img src="{% static "img/eventicon.png" %}" style="margin:5px;" class="img-polaroid img-rounded"/>
+                                        </td>
+                                        <td>
+                                            <p style="margin-top:4px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><strong><a href="#">{{post.event.name}}</a></strong></p>
+                                            <p style="font-size:12px; margin-bottom:0px; width: 250px; word-wrap: break-word;">{{post.event.start_date|date:"l, F jS"}} at {{post.event.start_time|time:"g:i a"}}</p>
+                                            <p style="font-size:12px; margin-bottom:5px; width: 250px; word-wrap: break-word;">{{post.event.location}}</p>
+                                           
+                                              {% if not user in post.event.members.all %}
+    												<p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;">
+    												<a type="joinLeaveEvent" class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ post.event.id }}"onclick="$(this).joinLeaveEvent(); joinEvent({{post.event.id}})"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+													 <a type="joinLeaveEvent" href="javascript:void(0)" id="leaveClick{{post.event.id}}" onclick="$(this).joinLeaveEvent(); leaveEvent({{post.event.id}})" class="btn btn-mini btn-success" style="display:none"><i class="icon-minus" style="color:#FFF; "></i> Leave Event</a>
+													 </p>
+												{% else %}
+													<p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;">
+													<a type="joinLeaveEvent" class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ post.event.id }}"onclick="$(this).joinLeaveEvent(); joinEvent({{post.event.id}})" style="display:none"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+													<a type="joinLeaveEvent" href="javascript:void(0)" id="leaveClick{{post.event.id}}" onclick="$(this).joinLeaveEvent(); leaveEvent({{post.event.id}})" class="btn btn-mini btn-success"><i class="icon-minus" style="color:#FFF;"></i> Leave Event</a>
+													</p>
+                                               {% endif %}
+                                            <p class="collapse" id="{{post.event.name.split|join:"_"}}"  style="margin-bottom: 5px; height: 20px; width: 250px; word-wrap: break-word;">{{ post.event.description }}</p>
+                                            <p><a class="btn btn-small" data-toggle="collapse" data-target="#{{post.event.name.split|join:"_"}}">View details &raquo;</a></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
+                           
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="height:22px;">
+                        <tr>
+                            <td>
+                                <div>
+                                <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="javascript:void(0)" id="cc{{post.id}}" onclick="clickComment({{post.id}},{{page_number}});">Comment</a></p>
+                                {% if post.event.creator.username == user.username %}
+                                <p style="margin:0px; display:inline-block; font-size:12.5px;">&middot;&nbsp;<a href="javascript:void(0)" id="deleteEvent{{post.event.id}}" onclick="deletePost({{post.id}})">Delete</a></p>
+                                {% endif %}
+                                <p style="margin:0px; display:inline-block; font-size:12.5px;">&middot;&nbsp;<a data-toggle="modal" id="goingCount{{post.event.id}}" href="#goingModal{{post.event.id}}">{{ post.event.members.all.count}} Attending</a></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                	</td>
+                </tr>
+            </table>
+            {% for comment in post.comments.all %}
+            {% if not comment.deleted %}
+                <div id="c{{comment.id}}">
+                    <table style="margin-left:80px; margin-top:2.5px;">
+                        <tr>
+                            <td style="min-width:50px; margin:0; padding:0; vertical-align:top;">
+                                <img src="{{ comment.creator.get_profile.getImage }}" style="margin-right:5px; max-width:50px; float:left;" class="img-rounded"/>
+                            </td>
+                            <td style="margin:0; padding:0; vertical-align:top; width:100%;">
+                                <p style="margin: 1px 0 0px; font-size:13.5px;"><a href="/{{ comment.creator.username }}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">on {{comment.created}}</span></p>
+                                <p style="margin:0px 0px 0px 0px; font-size:13.5px;">{{comment.message|linebreaks}}</p>
+                                <div>
+
+                                    {% if comment.creator == user or comment.post.creator == user or comment.post.wall.getParent.user == user %}
+                                    <p style="margin:0px 11px 0px 0px; font-size:12.5px;"><a id="c{{comment.id}} "href="javascript:void(0)" onclick="deleteComment({{comment.id}})">Delete</a></p>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            {% endif %}
+            {% endfor %}
+            <div class="commentReplace{{post.id}}"></div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin-top:9px; margin-bottom:9px;" />
+		<div class="modal hide fade" id="goingModal{{post.event.id}}">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Going to Event</h3>
+            </div>
+            <div class="modal-body">
+                <div style="height:200px; overflow:auto;">
+                    {% for member in post.event.members.all %}
+                    <div class="media" style="padding-top:3px; padding-bottom:3px; margin-top:0px;">
+                        <a class="pull-left" href="#">
+                                <img src="{{ member.get_profile.getImage }}" class="media-object img-rounded" style="width:40px;" />
+                        </a>
+                        <div class="media-body">
+                            <p class="media-heading"><a href="#">{{member.first_name}} {{member.last_name}}</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+            </div>
+        </div>
+        <!--end event element-->
+        
+        <!--document element-->
+        {% elif post.post_type == 'D'%}
+        <div class="row">
+          <div class="span9">
+            <div id="post{{post.id}}">
+              <table>
+                    <tr>
+                        <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                                <img src="{{ post.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                            <table style="min-height:55px; width:100%;">
+                                <tr>
+                                    <td style="vertical-align:top;">
+                                        <p style="margin: 1px 0 0px;"><a href="/{{ post.creator.username }}">{{post.creator.first_name}} {{post.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">shared a doc on {{post.created}}</span></p>
+                                        <p style="margin:0px 0px 0px 0px;">{{post.message|linebreaks}}</p>
+                                        <table width="100%;">
+                                            <tr>
+                                                <td style="width:62px; vertical-align:top;">
+                                                    <img src="{% static "img/file.png" %}" style="margin:5px;" class="img-polaroid img-rounded"/>
+                                                   
+                                                </td>
+                                                <td>
+                                                    <p style="margin-bottom:0px;"><strong><a href="#">{{post.document.filename}}</a></strong></p>
+                                                    <p style="font-size:12px;">{{post.document}}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="height:22px;">
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="javascript:void(0)" id="cc{{post.id}}" onclick="clickComment({{post.id}},{{page_number}});">Comment</a>&nbsp;&middot;</p>
+                                            {% if post.creator.username == user.username %}
+                                            <p style="margin:0px; display:inline-block; font-size:12.5px;"><a id="d{{post.id}}" onclick="deletePost({{post.id}})" href="javascript:void(0)">Delete</a>&nbsp;&middot;</p>
+                                            {% endif %}
+                                            <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="/documents/{{post.document.id}}">Download</a></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+              {% for comment in post.comments.all %}
+              {% if not comment.deleted %}
+                <div id="c{{comment.id}}">
+                    <table style="margin-left:80px; margin-top:2.5px;">
+                        <tr>
+                            <td style="min-width:50px; margin:0; padding:0; vertical-align:top;">
+                                <img src="{{ comment.creator.get_profile.getImage}}" style="margin-right:5px; max-width:50px; float:left;" class="img-rounded"/>
+                            </td>
+                            <td style="margin:0; padding:0; vertical-align:top; width:100%;">
+                                <p style="margin: 1px 0 0px; font-size:13.5px;"><a href="/{{ comment.creator.username }}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;"> on {{comment.created}}</span></p>
+                                <p style="margin:0px 0px 0px 0px; font-size:13.5px;">{{comment.message|linebreaks}}</p>
+                                <div>
+                                    {% if comment.creator == user or comment.post.creator == user or comment.post.wall.getParent.user == user %}
+                                    <p style="float:left; margin:0px; font-size:12.5px;"><a id="c{{comment.id}} "href="javascript:void(0)" onclick="deleteComment({{comment.id}})">Delete</a></p>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+              {% endif %}
+              {% endfor %}
+              <div class="commentReplace{{post.id}}"></div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin-top:9px; margin-bottom:9px;" />
+        <!--end document element-->
+        
+        <!-- plain conversation post -->
+        {% elif post.post_type == 'P'%}
+        <div class="row">
+        	<div class="span9">
+            	<div id="post{{post.id}}">
+            	<table>
+                	<tr>
+                    	<td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                                <img src="{{ post.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>                       
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                        	<table style="min-height:55px; width:100%;">
+                            	<tr>
+                                	<td style="vertical-align:top;">
+                                    	<p style="margin: 1px 0 0px;"><a href="/{{ post.creator.username }}">{{post.creator.first_name}} {{post.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">on {{post.created}}</span></p>
+                            			<p style="margin:0px 0px 0px 0px;">{{post.message|linebreaks}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="height:22px;">
+                            	<tr>
+                                	<td>
+                                    	<div>
+                                        <p style="display:inline-block; margin:0px; font-size:12.5px;"><a href="javascript:void(0)" id="cc{{post.id}}" onclick="clickComment({{post.id}},{{page_number}});">Comment</a></p>
+                                        {% if post.creator.username == user.username %}
+                                        <p style="display:inline-block; margin:0px; font-size:12.5px;">&middot;&nbsp;<a id="d{{post.id}}" onclick="deletePost({{post.id}})" href="javascript:void(0)">Delete</a></p>
+                                        {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                {% for comment in post.comments.all %}
+                {% if not comment.deleted %}
+                <div id="c{{comment.id}}">
+                    <table style="margin-left:80px; margin-top:2.5px;">
+                    	<tr>
+                        	<td style="min-width:50px; margin:0; padding:0; vertical-align:top;">
+                            	<img src="{{ comment.creator.get_profile.getImage }}" style="margin-right:5px; max-width:50px; float:left;" class="img-rounded"/>
+                            </td>
+                            <td style="margin:0; padding:0; vertical-align:top; width:100%;">
+                            	<p style="margin: 1px 0 0px; font-size:13.5px;"><a href="/{{ comment.creator.username }}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">on {{comment.created}}</span></p>
+                                <p style="margin: 0px; font-size:13.5px;">{{comment.message|linebreaks}}</p>
+                                <div>
+                                    {% if comment.creator == user or comment.post.creator == user or comment.post.wall.getParent.user == user %}
+                                    <p style="float:left; margin:0px; font-size:12.5px;"><a id="c{{comment.id}} "href="javascript:void(0)" onclick="deleteComment({{comment.id}})">Delete</a></p>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="commentReplace{{post.id}}"></div>
+                <hr style="margin-top:9px; margin-bottom:9px;" />
+                </div>
+            </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+        </div>
+        {% show_more %}

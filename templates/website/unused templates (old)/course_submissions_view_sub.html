@@ -1,0 +1,281 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+      body { padding-top:45px;}
+  </style>
+{% endblock style %}
+{% block script %}
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+  sfHover = function() {
+    var sfEls = document.getElementById("nav1").getElementsByTagName("LI");
+    for (var i=0; i<sfEls.length; i++) {
+      sfEls[i].onmouseover=function() {
+        this.className+=" sfhover";
+      }
+      sfEls[i].onmouseout=function() {
+        this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+      }
+    }
+  }
+  if (window.attachEvent) window.attachEvent("onload", sfHover);
+  
+  //--><!]]></script> 
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#removeModal').modal(options)
+  </script>
+  <script type="text/javascript">
+    $('.tooltip-win').tooltip()
+  </script>
+  <script type="text/javascript">
+    $('#myTab').tab('show')
+  </script>
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>
+      /* Update datepicker plugin so that MM/DD/YYYY format is used. */
+      $.extend($.fn.datepicker.defaults, {
+        parse: function (string) {
+          var matches;
+          if ((matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/))) {
+            return new Date(matches[3], matches[1] - 1, matches[2]);
+          } else {
+            return null;
+          }
+        },
+        format: function (date) {
+          var
+            month = (date.getMonth() + 1).toString(),
+            dom = date.getDate().toString();
+          if (month.length === 1) {
+            month = "0" + month;
+          }
+          if (dom.length === 1) {
+            dom = "0" + dom;
+          }
+          return month + "/" + dom + "/" + date.getFullYear();
+        }
+      });  
+    </script>
+    
+    
+    <script>
+  $(function () {
+    $('.tabs a:last').tab('show')
+  })
+</script>
+{% endblock script %}
+{% block content %}
+  <div class="container">  
+    <div class="row">
+      <div class="span3">
+        <div class="row" style="margin-top:18px;">
+          <div class="span3">
+                <a href="#"><img src="{% static "img/prof.png" %}" style="float:left; margin-left:5px;"  /></a>
+                <h4 style=" margin-left:5px; float:left;"><a href="#">Instructor Name</a></h4>
+            </div>
+        </div>
+      <hr />
+      <h4>About Course</h4>
+          <p>Ad sanctus nusquam ius, his prompta alterum ullamcorper cu, ad eros homero vix. His ex unum definitiones. Vix te quem oportere, graeco sensibus hendrerit ius id, id munere accusam eligendi nam.</p>
+      <hr />
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href="#">Course Home</a></li>
+          <li><a href="#">Download Syllabus</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li  class="active"><a href="#">Submissions</a></li>
+          <li><a href="#">Documents</a></li>
+          <li><a href="#">Gradebook</a></li>
+        </ul>
+        <h4>Enrolled</h4>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p></div>
+          </div>
+          <button class="btn" style="margin-top:5px;">View All</button>
+      </div>
+      <div class="span6">
+        
+        <div class="row">
+                <div class="span6"><hr /><h3 style="float:left;">Psychology 101  </h3><i class="icon-chevron-right" style="float:left; margin-top:6px;"></i><h3 style="float:left;">  Submissions</h3><i class="icon-chevron-right" style="float:left; margin-top:6px;"></i><h3 style="color:#da4f49;">  View Submission</h3><hr /></div>
+                  
+        </div>
+        <div class="row">
+                <div class="span6 ">
+                  <div class="actions_cal">
+                <a class="btn" style="float:left; margin-left:17px;"><i class="icon-arrow-left"></i> Back</a>
+                <a class="btn btn-danger" style="float:left; margin-left:17px;"><i class="icon-upload"></i> Upload</a>
+                        <div class="btn-group" style="margin-left:17px; float:left;">
+                          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                            Options
+                            <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Edit</a></li>
+                            <li><a data-toggle="modal" href="#removeModal">Remove</a></li>
+                          </ul>
+                        </div>
+                  </div>
+                </div>
+        </div> 
+        
+        <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#1" data-toggle="tab">Info</a></li>
+                      <li><a href="#2" data-toggle="tab">Submitted</a></li>
+                      <li><a href="#3" data-toggle="tab">Awaiting</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="1">
+                            <div class="row">
+                                <div class="span1">
+                                    <p>Name:</p>
+                                </div>
+                                <div class="span5">
+                                    <p>Homework #2</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span1">
+                                    <p>Due Date:</p>
+                                </div>
+                                <div class="span5">
+                                    <p>December 31st at 6:00PM</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span1">
+                                    <p>Notes:</p>
+                                </div>
+                                <div class="span5">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tortor erat, molestie non mattis quis, fermentum vitae urna. Cras scelerisque, nibh vel vulputate rutrum, arcu tortor commodo lacus, vel euismod mauris augue vel neque. Mauris suscipit nunc at enim vestibulum porta. Praesent in lorem a urna dapibus dapibus a sit amet metus. Nulla a molestie turpis. Ut libero dui, dictum eget rhoncus ac, mattis sed leo. Nulla at nulla at nisl dapibus bibendum sit amet ac purus. Nam tellus mauris, tincidunt id lacinia a, vestibulum et lorem. Phasellus ullamcorper, sem et dignissim fringilla, enim metus molestie augue, quis porta mi tortor et dui.</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                      <div class="tab-pane" id="2">
+                        
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                                
+                            </div> 
+                            
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                               
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="3">
+                        
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                                
+                            </div> 
+                            
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                                
+                            </div> 
+                            <div class="row" style="margin-top:5px;">
+                                <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                                <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>                        
+      </div>
+      <div class="span3" style="margin-top:15px;">
+      
+      <h4>Course Tasks</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Urgent</p></div>
+            </div>
+            <p>1/4 -<a href="#"> Lecture G001</a></p>
+            <p>1/6 -<a href="#"> Test G001</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Not So Urgent</p></div>
+            </div>
+            <p>1/9 -<a href="#"> In class homework assignment</a></p>
+            <p>1/11 -<a href="#"> Lecture G001</a></p>
+      <p>1/13 -<a href="#"> Lecture G001</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends to Coursetab</h4><p>Enter their email addresses to send invites.</p>
+          <form>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  <!--BEGIN SECOND MODAL-->
+    <div class="modal hide fade" id="removeModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Remove Submission?</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span4">
+                <p>Are you sure you want to remove this submission?</p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Yes</a>
+        <a href="#" class="btn">No</a>
+      </div>
+    </div>
+    <!--END SECOND MODAL-->
+  {% endblock content %}

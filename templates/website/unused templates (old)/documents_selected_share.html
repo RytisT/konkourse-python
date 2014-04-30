@@ -1,0 +1,152 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+  </style>
+{% endblock style %}
+{% block script %}
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    $('.tabs').button()
+  </script>
+{% endblock script %}
+{% block content %}
+ <div class="container">  
+    <div class="row">
+      <div class="span9">
+        <div class="row">
+          <div class="span9">
+               <hr />
+                 <h3 style="float:left; margin-bottom:20px;" >  <span style="color:#da4f49;">Docs / Economics /</span>&nbsp;Share</h3>
+                
+                 
+               <hr style="clear:both;" />
+            </div>
+        </div>
+        <div class="row">
+          <div class="span2">
+              
+              <h4>Recently Contacted</h4>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+              </div>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+              </div>
+              <div class="row" style="margin-top:5px;">
+              <div class="span2"><a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p></div>
+              </div>
+              <p><a href="#">View All Connections</a></p>
+          </div>
+          <div class="span7">
+            <div style="height:400px; overflow:auto;">
+                <div class="row" style="margin-top:5px;">
+                    
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">PSYC 101 - 0002</h5><p style="margin-bottom:0;">James Madison University</p></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+                    </div>
+                </div> 
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                    <div class="span1" >
+                          <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+                    </div>
+                </div> 
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+    
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+    
+                    </div>
+                </div> 
+                <div class="row" style="margin-top:5px;">
+                    
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">PSYC 101 - 0002</h5><p style="margin-bottom:0;">James Madison University</p></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+                    </div>
+                </div> 
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">Andrew Elgert</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-info" style="line-height:normal;">Friends</span></div>
+                    <div class="span1" >
+                          <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+                    </div>
+                </div> 
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">William C. Wood</h5><p style="margin-bottom:0;">James Madison University</p><span class="label label-success" style="line-height:normal;">Teachers</span></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+    
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5px;">
+                    <div class="span1"><img src="http://placehold.it/50x50&text=Icon"/></div>
+                    <div class="span4"><h5 style="line-height:normal;">Henry David Thoreau</h5><p style="margin-bottom:0;">Harvard University</p><span class="label" style="line-height:normal;">Authors</span></div>
+                    <div class="span1" >
+                        <button class="btn btn-info" data-toggle="button" style="margin-top:10px; float:right;">Select</button>
+    
+                    </div>
+                </div> 
+            
+          </div>
+          <div class="row" style="margin-top:5px;">
+              <div class="span7"><button class="btn btn-primary" style="float:right;">Share</button></div>
+            
+            </div>  
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+      <h4>Mini Calendar</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">This Week</p></div>
+            </div>
+            <p>1/4 -<a href="#"> Lecture G001</a></p>
+            <p>1/6 -<a href="#"> Test G001</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Next Week</p></div>
+            </div>
+            <p>1/9 -<a href="#"> In class homework assignment</a></p>
+            <p>1/11 -<a href="#"> Lecture G001</a></p>
+      <p>1/13 -<a href="#"> Lecture G001</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form class="form-inline">
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span><input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+    
+    
+  </div>
+{% endblock content %}

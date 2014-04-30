@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+<style type="text/css">
+table p { 
+		  margin-bottom: 0px;
+		  margin-top: 2px; 
+}
+</style>
+{% endblock style %}
+{% block script %}
+    <script type="text/javascript">
+        $('#menu1').dropdown();
+		$(function(){
+			$("#id_file").change(function(){
+				$(".fileUploadForm").submit();
+			});
+		});
+    </script>
+{% endblock script %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span12">
+                        <h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-folder-open"></i> Docs</h4>
+                        <hr style="margin-bottom:40px;" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span3">
+                        <div class="well">
+                        <ul class="nav nav-list">
+                            {% if course_id == -1%}
+                        	   <li class="active"><a href="/documents/">All Docs</a></li>
+                            {% else %}
+                                <li><a href="/documents/">All Docs</a></li>
+                            {% endif %}
+                        	<li class="divider"></li>
+                            <li class="nav-header">Course Docs</li>
+                            {% for course in courses %}
+                            {% if course.id == course_id|add:0 %}
+                            <li class="active"><a href="/documents/filter/{{course.id}}">{{ course.number }}</a></li>
+                            {% else %}
+                            <li><a href="/documents/filter/{{course.id}}" style="text-transform:uppercase;">{{ course.number }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="span9">
+                        <div class="row">
+                        	<div class="span9">
+                                <table class="table table-condensed" style="background-color: #f5f5f5;">
+                                    <tr>
+                                        <td class="span5"><p>Name</p></td>
+                                        <td class="span3"><p>Owner</p></td>
+                                        <td class="span1"></td>
+                                    </tr>
+                                </table>
+                        	</div>
+                        </div>
+                        <div id = "docslist" class="row">
+                        <div class="span9">
+                        <table class="table table-hover table-condensed">
+                            {% if documents|length != 0 %}
+                        	{% for document in documents %}
+                            {% if not document.deleted %}
+                            	<tr>
+                                	<td class="span5" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;"><p><a href="{{document.id}}">{{document.filename}}</a></p></td>
+                                    <td class="span3" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;"><p><a href="/{{ document.owner.username }}">{{document.owner.first_name}} {{document.owner.last_name}}</a></td>
+                                    <td class="span1" style="border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    	<!--<li class="dropdown iconSelector" id="menu5" style="list-style:none; float:right; margin-top:7px; margin-right:10px;">
+                                            <a class="dropdown-toggle " data-toggle="dropdown" href="#menu1"><i class="icon-briefcase"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="{{document.id}}"><i class="icon-download"></i> Download</a></li>
+                                                <li><a data-toggle="modal" href="#share{{document.id}}"><i class="icon-share"></i> Share</a></li>
+                                                <li><a data-toggle="modal" href="#delete{{document.id}}"><i class="icon-trash"></i> Delete</a></li>
+                                                <li><a data-toggle="modal" href="#rename{{document.id}}"><i class="icon-edit"></i> Rename</a></li>
+                                                <li class="divider"></li>
+                                                <li><a data-toggle="modal" href="#doc{{document.id}}"><i class="icon-info-sign"></i> Document Info</a></li>
+                                            </ul>
+                                        </li>-->
+                                        <div class="btn-group">
+                                          <a class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown" href="#menu1">
+                                            More&nbsp; 
+                                            <span class="caret"></span>
+                                          </a>
+                                          <ul class="dropdown-menu">
+                                            <li><a href="{{document.id}}"><i class="icon-download"></i> Download</a></li>
+                                            <li><a data-toggle="modal" href="#share{{document.id}}"><i class="icon-share"></i> Share</a></li>
+                                            {% if document.owner == user %}
+                                            <li><a data-toggle="modal" href="#delete{{document.id}}"><i class="icon-trash"></i> Delete</a></li>
+                                            <li><a data-toggle="modal" href="#rename{{document.id}}"><i class="icon-edit"></i> Rename</a></li>
+                                            {% endif %}
+                                            <li class="divider"></li>
+                                            <li><a data-toggle="modal" href="#doc{{document.id}}"><i class="icon-info-sign"></i> Document Info</a></li>
+                                          </ul>
+                                        </div>
+                                   </td>
+                                </tr>
+                          
+                            <!-- share document modal-->
+                            
+                            <div class="modal hide fade" id="share{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Select a course to share with</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div style="height:200px; overflow:auto;">
+                                    	<h5>Active courses</h5>
+                                        <div class="media" style="background-color:#f5f5f5; padding-top:3px; padding-bottom:3px; margin-top:0px; border-top:1px solid #DDD;">
+                                            <input type="checkbox" style="float:left; margin-top:5px; margin-right:5px; margin-left:5px;">
+                                            <a class="pull-left" href="#"><img class="media-object" src="{% static "img/molsk_red.png" %}" style="width:32px;"/></a>
+                                            <div class="media-body">
+                                                <p class="media-heading"><a href="#">Course Name (Code)</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="media" style="background-color:#f5f5f5; padding-top:3px; padding-bottom:3px; margin-top:0px; border-top:1px solid #DDD;">
+                                            <input type="checkbox" style="float:left; margin-top:5px; margin-right:5px; margin-left:5px;">
+                                            <a class="pull-left" href="#"><img class="media-object" src="{% static "img/molsk_red.png" %}" style="width:32px;"/></a>
+                                            <div class="media-body">
+                                                <p class="media-heading"><a href="#">Course Name (Code)</a></p>
+                                            </div>
+                                        </div>
+                                        <h5>Past courses</h5>
+                                        <div class="media" style="background-color:#f5f5f5; padding-top:3px; padding-bottom:3px; margin-top:0px; border-top:1px solid #DDD;">
+                                            <input type="checkbox" style="float:left; margin-top:5px; margin-right:5px; margin-left:5px;">
+                                            <a class="pull-left" href="#"><img class="media-object" src="{% static "img/molsk_red.png" %}" style="width:32px;"/></a>
+                                            <div class="media-body">
+                                                <p class="media-heading"><a href="#">Course Name (Code)</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="media" style="background-color:#f5f5f5; padding-top:3px; padding-bottom:3px; margin-top:0px; border-top:1px solid #DDD;">
+                                            <input type="checkbox" style="float:left; margin-top:5px; margin-right:5px; margin-left:5px;">
+                                            <a class="pull-left" href="#"><img class="media-object" src="{% static "img/molsk_red.png" %}" style="width:32px;"/></a>
+                                            <div class="media-body">
+                                                <p class="media-heading"><a href="#">Course Name (Code)</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save</a>
+                                </div>
+                            </div>
+                            
+                            {% if document.owner == user %}
+
+                            <!-- delete document modal-->
+                            
+                            <div class="modal hide fade" id="delete{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Delete Document</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to delete the Document: {{document.filename}}?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" data-dismiss="modal" onclick="deleteDocument({{document.id}})">Delete</a>
+                                </div>
+                            </div>
+                            
+                            <!--rename document modal-->
+                            
+                            <div class="modal hide fade" id="rename{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Rename Document</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Current Name: {{document.filename}}</p>
+                                    <div class="input-prepend">
+                                        <span class="add-on">New Name</span><input type="text" class="span3" id="renameInput" size="16">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="javascript:void(0)" class="btn btn-primary" data-dismiss="modal" onclick="renameDocument({{document.id}})">Okay</a>
+                                </div>
+                            </div>
+
+                            {% endif %}
+
+                            <!--Document Info modal-->
+                            
+                            <div class="modal hide fade" id="doc{{document.id}}">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>Document Info</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p><span style="font-weight:bold;">Name:</span>{{document.filename}}</p>
+                                    <p><span style="font-weight:bold;">Size:</span> [{{document.getFileSize}}]</p>
+                                    <p><span style="font-weight:bold;">Owner:</span> {{document.owner}}</p>
+                                    <p><span style="font-weight:bold;">Upload Date:</span> {{document.created}}</p>
+                                    <p><span style="font-weight:bold;">Last Modified:</span> {{document.modified}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn" data-dismiss="modal">Nevermind</a>
+                                    <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+                                </div>
+                            </div>
+                            
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                                        <h5 style="margin-top:10px; text-align:center;">You currently have no documents.</h5>
+                            {% endif %}
+                            </table>
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}

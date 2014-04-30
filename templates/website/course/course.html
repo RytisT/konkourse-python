@@ -1,0 +1,134 @@
+{% extends "website/base_course.html" %}
+{% load static%}
+{% load widget_tweaks %}
+{% block course_content %}
+    <div class="span9">
+    	<div class="tabbable tabbable-bordered"> <!-- Element to take input from the user -->
+          <ul class="nav nav-tabs"> <!-- Selection tabs -->
+            <li class="active"><a href="#tab1" data-toggle="tab" style="padding:5px 8px;"><i style="color:#007dbc;" class="icon-comments-alt"></i> Write Post</a></li>
+            <li><a href="#tab2" data-toggle="tab" style="padding:5px 8px;"><i style="color:#007dbc;" class="icon-file-text"></i> Upload Doc</a></li>
+            <li><a href="#tab3" data-toggle="tab" style="padding:5px 8px;"><i style="color:#007dbc;" class="icon-calendar"></i> New Event</a></li>
+          </ul>
+          <div class="tab-content"> <!-- Corresponding tab content -->
+            <div class="tab-pane active" id="tab1">
+              <form class="form-horizontal">
+                <textarea class="inputConvo view-port" id="postMessage" rows="2" placeholder="Add to the conversation"></textarea>
+                <font id="tooLongPostError" size="3" color="red" style="float:left; margin-top:5px;display:none;">Post length is greater then 5000 characters :(</font>
+                <a href="javascript:void(0)" class="btn btn-inverse btnConvo" id="shareClick" style="float:right; margin-top:5px;" onclick="share({{wall.id}},'P')">Share</a>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/course/{{course_id}}/upload/">
+                {{doc_form.message_post}}
+                {% csrf_token %}
+                <!--jasny file upload element-->
+                <!--<div class="fileupload fileupload-new" data-provides="fileupload" style="display:inline-block;">
+                	<div class="input-append">
+                    	<div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">Select doc</span><span class="fileupload-exists">Change</span>{{doc_form.file}}</span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                    </div>
+                  	</div>-->
+                <div class="fileupload fileupload-new" data-provides="fileupload" style="display:inline-block; float:left; margin-top:5px;">
+                  <span class="btn btn-primary btn-file"><span class="fileupload-new">Select doc</span><span class="fileupload-exists">Change</span>{{doc_form.file}}</span>
+                  <span class="fileupload-preview"></span>
+                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                  </div>
+                <input class="btn btn-inverse btnConvo" type="submit" value="Share" id="Save" style="float:right; margin-top:5px; font-weight:400;"/>
+              </form>
+            </div>
+            <div class="tab-pane" id="tab3">
+              <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/course/{{course_id}}/create_event/" style="margin-bottom:0px">
+              {% csrf_token %}
+           	  <div class="row" style="padding-top:0px;">
+              	<div class="span2">
+                  <p style="float:right; margin-top:4px;">Event Name</p>
+                </div>
+                <div class="span5">
+                {{event_form.name}}
+                {{event_form.name.errors}}
+                </div>
+              </div>
+              <div class="row" style="padding-top:4px;">
+              	<div class="span2">
+               	  <p style="float:right; margin-top:4px;">When?<p>
+                </div>
+                <div class="span3" style="width:185px;">
+                  {{event_form.start_date|add_class:"eventDatepicker span3Timepicker"}}
+                  <i class="icon-calendar" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+                  {{event_form.start_date.errors}}
+                </div>
+                <div class="span3" style="margin-left:15px;">
+                  <div class="bootstrap-timepicker">
+                  {{event_form.start_time|add_class:"selectTimepicker time-pick span3Timepicker"}}
+                  <i class="icon-time" style="margin: -2px 0 0 -22.5px; pointer-events: none; position: relative;"></i>
+                  {{event_form.start_time.errors}}
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding-top:4px;">
+                <div class="span2">
+                  <p style="float:right; margin-top:4px;">Where?</p>
+                </div>
+                <div class="span5">
+                  {{event_form.location}}
+                  {{event_form.location.errors}}
+                </div>
+              </div>
+              <div class="row" style="padding-top:4px;">
+                <div class="span2">
+                  <p style="float:right; margin-top:4px;">Why?</p>
+                </div>
+                <div class="span5">
+                  {{event_form.description}}
+                  {{event_form.description.errors}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="span7">
+                  <button type="submit" class="btn btn-inverse" style="float:right; margin-top:5px;">Share</button>
+                </div>
+              </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>          
+        <div id="paginate" class="endless_page_template" style="margin-top:15px;">
+         {% include page_template %}
+         {% block js %}
+         {{ block.super }}
+            <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
+            <script>
+             $.endlessPaginate({
+                paginateOnScroll: true,
+                paginateOnScrollChunkSize: 15
+              });
+            </script>
+         </div>
+	</div>
+{% endblock %}
+<script type="text/javascript">
+$.ajaxSetup({ 
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                     break;
+                 }
+             }
+         }
+         return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     } 
+});
+</script>
+{% endblock %}

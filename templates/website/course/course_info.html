@@ -1,0 +1,66 @@
+{% extends "website/base_course.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+<script>
+$(document).ready(function(){
+	$('#info').addClass('active');
+});
+</script>
+{% endblock script %}
+{# marker #}
+{% block course_content %}
+<div class="span9" style="margin-top:5px;">
+    <div class="row">
+    	<div class="span5">
+        	<div class="courseWell courseWellLeft well-small">
+            	<button type="button" class="close" onclick="location.href='edit'"><i class="icon-edit"></i></button>
+            	<p class="aboutLead">Picture</p>
+                {% if image %}
+                <img src="{{image.url}}" style="width:100px;" class="img-polaroid img-rounded"/>
+                {% else %}
+                <img src="{% static "http://placehold.it/100x100" %}" class="img-polaroid img-rounded"/>
+                {% endif %}
+                <hr style="margin-top:15px; margin-bottom:15px;" />
+            	<p class="aboutLead">Name</p>
+                <p style="text-transform:uppercase;">{{ course_number }} - {{ section_number }}</p>
+                <p>{{ course_name }}</p>
+                <hr style="margin-top:15px; margin-bottom:15px;" />
+                <p class="aboutLead">About</p>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+        <div class="span4 ">
+        	<div class="row">
+                <div class="courseWell courseWellRight well-small">
+                	<button type="button" class="close" onclick="location.href='edit'"><i class="icon-edit"></i></button>
+                	<p class="aboutLead">School</p>
+                    <p style="margin-top:5px;">{{ institution.title }}</p>
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Instructor</p>
+                    <p style="margin-top:5px;">{{ professor }}</p>
+                </div>
+            </div>
+        	<div class="row">
+            	<div class="courseWell courseWellRight well-small">
+                	<button type="button" class="close" onclick="location.href='edit'"><i class="icon-edit"></i></button>
+                	<p class="aboutLead">Semester</p>
+                	<p style="margin-top:5px;">{{ semester }}</p>
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Credit Hours</p>
+                    <p style="margin-top:5px;">{{ credits }}</p>
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Start Time</p>
+                    <p style="margin-top:5px;">{{ timeValue|time:"g:i a"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endblock course_content %}
+{% block right_side %}{% endblock right_side %}
+{% comment %}
+  {% endblock content %}
+  {% endcomment %}

@@ -1,0 +1,302 @@
+{% extends "website/base_course.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+<script>
+jQuery(function($){
+
+	$(document).ready(function(){
+    	$('#events').addClass('active');
+	});
+});
+</script>
+{% endblock script %}
+{% block course_content %}
+<div id="event_wall" class="span9">
+    <div class="row">
+        <div class="span9">
+            <div class="actionsfeed_cal"><p style="margin:0px 0px 0px 10px; font-size:12px; font-weight:bold;">This Week</p></div>
+        </div>
+    </div>
+    <div id="thisWeek">
+    {% if thisWeek|length != 0%}
+    {%for event in thisWeek %}
+    {% if not event.deleted %}
+        <div class="row">
+            <div id="event{{event.id}}" class="span9">
+                <table>
+                    <tr>
+                        <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                                <img src="{{ event.creator.get_profile.getImage}}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                            <table style="min-height:55px; width:100%;">
+                                <tr>
+                                    <td style="vertical-align:top;">
+                                        <p style="margin: 1px 0 0px;"><a href="/{{ event.creator.username }}">{{event.creator.first_name}} {{event.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">shared an event on {{ event.created }}</span></p>
+                                        <p style="margin:0px 0px 0px 0px;">{{event.message}}</p>
+                                        <div class="actionsfeed_event">
+                                        <table width="100%;">
+                                            <tr>
+                                                <td style="width:87px; vertical-align:top;">
+                                                    <img src="{% static "img/eventicon.png" %}" style="margin:5px;" class="img-polaroid img-rounded"/>
+                                                </td>
+                                                <td>
+                                                    <p style="margin-top:4px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><strong><a href="#">{{event.name}}</a></strong></p>
+                                                    <p style="font-size:12px; margin-bottom:0px; width: 250px; word-wrap: break-word;">{{event.start_date|date:"l, F jS"}} at {{event.start_time|time:"g:i a"}}</p>
+                                                    <p style="font-size:12px; margin-bottom:5px; width: 250px; word-wrap: break-word;">{{event.location}}</p>
+                                                    
+		                                               {% if not user in event.members.all %}
+		    												<p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;">
+		    												<a type="joinLeaveEvent" class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ event.id }}"onclick="$(this).joinLeaveEvent(); joinEvent({{event.id}})"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+															 <a type="joinLeaveEvent" href="javascript:void(0)" id="leaveClick{{event.id}}" onclick="$(this).joinLeaveEvent(); leaveEvent({{event.id}})" class="btn btn-mini btn-success" style="display:none"><i class="icon-minus" style="color:#FFF; "></i> Leave Event</a>
+															 </p>
+														{% else %}
+															<p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;">
+															<a type="joinLeaveEvent" class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ event.id }}"onclick="$(this).joinLeaveEvent(); joinEvent({{event.id}})" style="display:none"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+															<a type="joinLeaveEvent" href="javascript:void(0)" id="leaveClick{{event.id}}" onclick="$(this).joinLeaveEvent(); leaveEvent({{event.id}})" class="btn btn-mini btn-success"><i class="icon-minus" style="color:#FFF;"></i> Leave Event</a>
+															</p>
+		                                               {% endif %}
+		                                           {% if user in event.members.all %}
+                                                    <p class="collapse" id="{{event.name.split|join:"_"}}"  style="margin-bottom: 5px; height: 20px; width: 250px; word-wrap: break-word;">{{ event.description }}</p>
+                                                	<p><a class="btn btn-mini" data-toggle="collapse" data-target="#{{event.name.split|join:"_"}}">View details &raquo;</a></p>
+                                                  {% else %}
+                                                  
+                                                  {% endif %}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="height:22px;">
+                                <tr>
+                                    <td>
+                                        <div>
+                                        {% if event.creator.username == user.username %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="javascript:void(0)" id="deleteEvent{{event.id}}" onclick="deleteEvent({{event.id}})">Delete</a></p>
+                                        {% endif %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;">&middot;&nbsp;<a data-toggle="modal" id="goingCount{{event.id}}" href="#goingModal{{event.id}}">{{ event.members.all.count}} Attending</a></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                </table>
+            </div>
+        </div>
+        <!--modal-->
+        <div class="modal hide fade" id="goingModal{{event.id}}">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Going to Event</h3>
+            </div>
+            <div class="modal-body">
+                <div style="height:200px; overflow:auto;">
+                    {% for member in event.members.all %}
+                    <div class="media" style="padding-top:3px; padding-bottom:3px; margin-top:0px;">
+                        <a class="pull-left" href="#"><img src="{{ member.get_profile.getImage }}" class="media-object img-rounded" style="width:40px;" /></a>
+                        <div class="media-body">
+                            <p class="media-heading"><a href="#">{{member.first_name}} {{member.last_name}}</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+            </div>
+        </div>
+        <!--end modal-->
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <h5 style="margin-top:10px; text-align:center;">Nothing scheduled.</h5>
+    {% endif %}
+    </div>
+    <div class="row">
+        <div class="span9">
+            <div class="actionsfeed_cal"><p style="margin:0px 0px 0px 10px; font-size:12px; font-weight:bold;">Next Week</p></div>
+        </div>
+    </div>
+    <div id="nextWeek">
+    {% if nextWeek|length != 0%}
+    {%for event in nextWeek %}
+    {% if not event.deleted %}
+        <div class="row">
+            <div class="span9">
+                <table>
+                    <tr>
+                        <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                            <img src="{{ event.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                            <table style="min-height:55px; width:100%;">
+                                <tr>
+                                    <td style="vertical-align:top;">
+                                        <p style="margin: 1px 0 0px;"><a href="/{{ event.creator.username }}">{{event.creator.first_name}} {{event.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">shared an event on {{ event.created }}</span></p>
+                                        <p style="margin:0px 0px 0px 0px;">{{event.message}}</p>
+                                        <div class="actionsfeed_event">
+                                        <table width="100%;">
+                                            <tr>
+                                                <td style="width:87px; vertical-align:top;">
+                                                    <img src="{% static "img/eventicon.png" %}" style="margin:5px;" class="img-polaroid img-rounded"/>
+                                                </td>
+                                                <td>
+                                                    <p style="margin-top:4px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><strong><a href="#">{{event.name}}</a></strong></p>
+                                                    <p style="font-size:12px; margin-bottom:0px; width: 250px; word-wrap: break-word;">{{event.start_date|date:"l, F jS"}} at {{event.start_time|time:"g:i a"}}</p>
+                                                    <p style="font-size:12px; margin-bottom:5px; width: 250px; word-wrap: break-word;">{{event.location}}</p>
+                                                    {% if not user in event.members.all %}
+    													 <p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><a class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ event.id }}"onclick="joinEvent({{event.id}})"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+													{% else %}
+														<a href="javascript:void(0)" id="leaveClick{{event.id}}" onclick="leaveEvent({{event.id}})" class="btn btn-mini btn-success"><i class="icon-minus" style="color:#FFF;"></i> Leave Event</a></p>
+                                                    {% endif %}
+                                                    <p class="collapse" id="{{event.name.split|join:"_"}}"  style="margin-bottom: 5px; height: 20px; width: 250px; word-wrap: break-word;">{{ event.description }}</p>
+                                                	<p><a class="btn btn-mini" data-toggle="collapse" data-target="#{{event.name.split|join:"_"}}">View details &raquo;</a></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="height:22px;">
+                                <tr>
+                                    <td>
+                                        <div>
+                                        {% if event.creator.username == user.username %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="javascript:void(0)" id="deleteEvent{{event.id}}" onclick="deletePost({{event.id}})">Delete</a></p>
+                                        {% endif %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;">&middot;&nbsp;<a data-toggle="modal" id="goingCount{{event.id}}" href="#goingModal{{event.id}}">{{ event.members.all.count}} Attending</a></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                </table>
+            </div>
+        </div>
+        <!--modal-->
+        <div class="modal hide fade" id="goingModal{{event.id}}">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Going to Event</h3>
+            </div>
+            <div class="modal-body">
+                <div style="height:200px; overflow:auto;">
+                    {% for member in event.members.all %}
+                    <div class="media" style="padding-top:3px; padding-bottom:3px; margin-top:0px;">
+                        <a class="pull-left" href="#"><img src="{{ event.creator.get_profile.getImage }}" class="media-object img-rounded" style="width:40px;" /></a>
+                        <div class="media-body">
+                            <p class="media-heading"><a href="#">{{member.first_name}} {{member.last_name}}</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+            </div>
+        </div>
+        <!--end modal-->
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <h5 style="margin-top:10px; text-align:center;">Nothing scheduled.</h5>
+    {% endif %}
+    </div>
+    <div class="row">
+        <div class="span9">
+            <div class="actionsfeed_cal"><p style="margin:0px 0px 0px 10px; font-size:12px; font-weight:bold;">Future</p></div>
+        </div>
+    </div>
+    <div id="future">
+    {% if future|length != 0%}
+    {%for event in future%}
+    {% if not event.deleted %}
+        <div class="row">
+            <div class="span9">
+                <table>
+                    <tr>
+                        <td style="min-width:80px; margin:0; padding:0; vertical-align:top;">
+                            <img src="{{ event.creator.get_profile.getImage }}" style="margin-right:5px; max-width:75px; float:left;" class="img-rounded"/>
+                        </td>
+                        <td style="margin:0; padding:0; width:100%; height:100%;">
+                            <table style="min-height:55px; width:100%;">
+                                <tr>
+                                    <td style="vertical-align:top;">
+                                        <p style="margin: 1px 0 0px;"><a href="/{{ event.creator.username }}">{{event.creator.first_name}} {{event.creator.last_name}}</a> <span style="color:#999; font-size:12.5px;">shared an event on {{ event.created }}</span></p>
+                                        <p style="margin:0px 0px 0px 0px;">{{event.message}}</p>
+                                        <div class="actionsfeed_event">
+                                        <table width="100%;">
+                                            <tr>
+                                                <td style="width:87px; vertical-align:top;">
+                                                    <img src="{% static "img/eventicon.png" %}" style="margin:5px;" class="img-polaroid img-rounded"/>
+                                                </td>
+                                                <td>
+                                                    <p style="margin-top:4px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><strong><a href="#">{{event.name}}</a></strong></p>
+                                                    <p style="font-size:12px; margin-bottom:0px; width: 250px; word-wrap: break-word;">{{event.start_date|date:"l, F jS"}} at {{event.start_time|time:"g:i a"}}</p>
+                                                    <p style="font-size:12px; margin-bottom:5px; width: 250px; word-wrap: break-word;">{{event.location}}</p>
+                                                    {% if not user in event.members.all %}
+    													 <p style="font-size:12.5px; margin-bottom:5px; width: 250px; word-wrap: break-word;"><a class="btn btn-primary btn-mini" href="javascript:void(0)" id="joinClick{{ event.id }}"onclick="joinEvent({{event.id}})"><i class="icon-plus" style="color:#FFF;"></i> Join Event</a>
+													{% else %}
+														<a href="javascript:void(0)" id="leaveClick{{event.id}}" onclick="leaveEvent({{event.id}})" class="btn btn-mini btn-success"><i class="icon-minus" style="color:#FFF;"></i> Leave Event</a></p>
+                                                    {% endif %}
+                                                    <p class="collapse" id="{{event.name.split|join:"_"}}"  style="margin-bottom: 5px; height: 20px; width: 250px; word-wrap: break-word;">{{ event.description }}</p>
+                                                	<p><a class="btn btn-mini" data-toggle="collapse" data-target="#{{event.name.split|join:"_"}}">View details &raquo;</a></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="height:22px;">
+                                <tr>
+                                    <td>
+                                        <div>
+                                        {% if event.creator.username == user.username %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;"><a href="javascript:void(0)" id="deleteEvent{{event.id}}" onclick="deletePost({{event.id}})">Delete</a></p>
+                                        {% endif %}
+                                        <p style="margin:0px; display:inline-block; font-size:12.5px;">&middot;&nbsp;<a data-toggle="modal" id="goingCount{{event.id}}" href="#goingModal{{event.id}}">{{ event.members.all.count}} Attending</a></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                </table>
+            </div>
+        </div>
+        <!--modal-->
+        <div class="modal hide fade" id="goingModal{{event.id}}">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Going to Event</h3>
+            </div>
+            <div class="modal-body">
+                <div style="height:200px; overflow:auto;">
+                    {% for member in event.members.all %}
+                    <div class="media" style="padding-top:3px; padding-bottom:3px; margin-top:0px;">
+                        <a class="pull-left" href="#"><img src="{{ event.creator.get_profile.getImage }}" class="media-object img-rounded" style="width:40px;" /></a>
+                        <div class="media-body">
+                            <p class="media-heading"><a href="#">{{member.first_name}} {{member.last_name}}</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Okay</a>
+            </div>
+        </div>
+        <!--end modal-->
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <h5 style="margin-top:10px; text-align:center;">Nothing scheduled.</h5>
+    {% endif %}
+    </div>
+</div>
+{% endblock course_content %}{% block right_side %}{% endblock right_side %}
+{% block modal %}
+
+{% endblock modal %}

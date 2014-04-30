@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}Konkourse - Join your courses{% endblock title %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+{% block includes %}
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="{% static "img/favicon.png" %}">
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static "js/csrf.js" %}"></script>
+<script src="{% static "js/bootstrap.js" %}"></script>
+<script src="{% static "js/placeholder.js" %}"></script>
+<script src="{% static "js/modernizr.js" %}"></script>
+<script src="{% static "js/conversations.js" %}"></script>
+<script src="{% static "js/coursedash.js" %}"></script>
+<script src="{% static "js/datepicker/bootstrap-datepicker.js" %}"></script>
+<script src="{% static "js/jasny/bootstrap-button.js" %}"></script>
+<script src="{% static "js/jasny/bootstrap-fileupload.js" %}"></script>
+<script src="{% static "js/jasny/jasny-bootstrap.js" %}"></script>
+<script src="{% static "js/timepicker/bootstrap-timepicker.min.js" %}"></script>
+
+
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/datepicker/datepicker.css" %}"> 
+<link rel="stylesheet" href="{% static "css/jasny/jasny-bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+<link rel="stylesheet" href="{% static "css/font-awesome-ie7.min.css" %}">
+<!-- <link rel="stylesheet" href="{% static "css/fileupload/jquery.fileupload-ui.css" %}"> -->
+<link rel="stylesheet" href="{% static "css/app.css" %}">
+<link rel="stylesheet" href="{% static "css/timepicker/bootstrap-timepicker.min.css" %}">
+  {% endblock includes %}
+  {% block script %}
+  {% endblock script %}
+  {% block style %}
+<style type="text/css">
+	html, body {
+    height: 100%;
+    overflow:auto;
+	background: #282A2B;
+	}
+	body .skipLink {
+    position:fixed !important;
+    position: absolute; /*ie6 */
+    bottom: 0;
+	right:0;
+	}
+</style>
+  {% endblock style %}
+  {% load widget_tweaks %}
+</head>
+<body>
+<div class="container">
+ 	<div class="row">
+    	<div class="span12">
+        	<p class="lead" style="text-align:center; color:#FFF; font-size:36px; margin-bottom:25px;">Welcome to konkourse {{ first_name }}! First things first.</p>
+        </div>
+    </div>
+    <div class="row">
+      <div class="span6 offset3">
+        <div id="profileButton">
+          {% if course_length > 2 %}
+          <a href="/{{username}}" class="btn btn-large btn-block btn-success" style="margin-bottom:25px;">Go to profile <i class="icon-double-angle-right" style="color:#FFF;"></i></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    	<div class="span3 offset2">
+        	<img src="{% static "img/logo-wizard.png" %}" />
+        </div>
+        <div class="span1" style="text-align:center; height:200px; padding-top:100px;">
+        	<i class="icon-plus icon-2x" style="color:#FFF;"></i>
+        </div>
+        <div class="span4">
+        	<div class="row">
+            	<div class="span4" style="margin-bottom:25px;">
+                  <h4 style="color:#FFF; margin-top:0px;">Join at <em>least</em> three of your courses.</h4>
+                      {% csrf_token %}
+                      <!--<div class="control-group">
+                        <input id="course_number" type="text" class="span2" placeholder="Course Number">
+                        <span class="help-block" style="color:#DDD; margin-top:4px;">Example: BIO201</span>
+                      </div>
+                      <div class="control-group">
+                        <input id="course_id" type="text" class="span2" placeholder="Section Number">
+                        <span class="help-block" style="color:#DDD; margin-top:4px;">Example: 0002</span>
+                      </div>             
+                      <button type="submit" class="btn" onclick="addCourse()"><i class="icon-plus"></i> Join</button>-->
+                      <div class="form-inline">
+                        <input id="course_number" class="input-small" type="text" placeholder="Course #">
+                        <input id="course_id" class="input-small" type="text" placeholder="Section #">
+                        <button type="submit" class="btn" onclick="addCourse()"><i class="icon-plus"></i> Join</button>
+                      </div>
+                      <p style="color:#BBB; margin-left:3px; display:inline; font-size:12.5px;">e.g. BIO201</p> <p style="color:#BBB; margin-left:35px; display:inline; font-size:12.5px;">e.g. 0010</p>                            
+                      <div class="nav pull-right alert alert-error" id="tooManyCoursesError" style="margin-bottom:10px;margin-top:10px;display:none;">  
+                          <a class="close" data-dismiss="alert">×</a>  
+                          <strong>Woops!</strong> Can't add more the 10 courses on this page.
+                      </div>
+                </div>
+                
+            </div>
+            <!-- THIS LINE REPEATS -->
+          <div id="courses">
+              {% for c1, c2 in courses %}
+              <div class="row" style="margin-bottom:10px;">
+              {% if c1|yesno:"yes,no,maybe"  != "maybe" %}
+                     <div class="span2">
+                       {% if not c1.image %}
+                          <img src="{% static "img/course.png" %}" style="width:45px; float:left; margin-right:5px;" class="img-rounded" />
+                       {% else %}
+                          <img src="{{c1.image.url}}" style="width:45px; float:left; margin-right:5px;" class="img-rounded" />
+                       {% endif %}
+                        <p style="color:#FFF; text-transform:uppercase;">{{c1.number}}</p>
+                    </div>
+              {% endif %}
+              {% if c2|yesno:"yes,no,maybe"  != "maybe" %}
+                     <div class="span2">
+                       {% if not c2.image %}
+                          <img src="{% static "img/course.png" %}" style="width:45px; float:left; margin-right:5px;" class="img-rounded" />
+                       {% else %}
+                          <img src="{{c2.image.url}}" style="width:45px; float:left; margin-right:5px;" class="img-rounded" />
+                       {% endif %}
+                        <p style="color:#FFF; text-transform:uppercase;">{{c2.number}}</p>
+                    </div>
+              {% endif %}
+              </div>
+              {% endfor %}
+          </div>
+        </div>
+    </div>
+</div>
+<p><a class="skipLink" href="/{{username}}" style="margin-right:10px;">Skip this step <i class="icon-double-angle-right" style="color:#0088cc;"></i></a></p>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+//code to omit spaces in course number field.
+function typedSpace(e)
+{
+    var e = e || event;
+    
+    if (e.keyCode == 32) return false;
+        
+}
+function pastedSpace(e)
+{
+    var e = e || event;
+    
+    this.value = this.value.replace(/\s/g,'');
+        
+}
+window.onload = function(){
+    var inp = document.getElementById("course_number");
+    if(inp) {
+    	inp.onkeydown = typedSpace;
+    	inp.oninput = pastedSpace;
+    }
+    var wtf = document.getElementById("course_id");
+    if(wtf){
+    	wtf.onkeydown = typedSpace;
+    	wtf.oninput = pastedSpace;
+    }
+};</script>
+

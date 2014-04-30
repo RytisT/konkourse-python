@@ -1,0 +1,48 @@
+from django.conf.urls import patterns, include, url
+from django.conf import settings
+
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+urlpatterns = patterns('',
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'website.views.index'),
+    url(r'^privacy/$', 'website.views.privacy'),
+    #url(r'^about/$', 'website.views.about'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'^', include('account.urls')),
+    url(r'^accept/$', 'connections.views.accept'),
+    url(r'^hide/$', 'connections.views.hide'),
+    url(r'^course/$', 'django.views.defaults.page_not_found'),
+    url(r'^course/', include('courses.urls')),
+    url(r'^account/reset/$', 'account.views.reset'),
+    #url(r'^messages/$', 'messages.views.messages'),
+    #url(r'^messages/view/$', 'messages.views.messages_view'),
+    url(r'^', include('documents.urls')),
+    url(r'^updates/$', 'notification.views.updates'),
+    #url(r'^groups/$', 'website.views.groups'),
+    url(r'^main/$', 'website.views.main'),
+    #url(r'^calendar/$', 'website.views.calendar'),
+    #url(r'^calendar/event/$', 'website.views.calendar_view_event'),
+    #url(r'^calendar/event/invite/$', 'website.views.calendar_new_event_invite'),
+    #url(r'^calendar/task/$', 'website.views.calendar_view_task'),
+    #url(r'^calendar/new_event/$', 'website.views.calendar_new_event'),
+    #url(r'^calendar/new_task/$', 'website.views.calendar_new_task'),
+    #url(r'^calendar/new_course_event/$', 'website.views.calendar_new_courseevent'),
+    url(r'^settings/$', 'website.views.accountsettings_profile'),
+    url(r'^settings/login/$', 'django.views.defaults.page_not_found'),
+    url(r'^settings/logout/$', 'django.views.defaults.page_not_found'),
+    url(r'^settings/reset/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm'),
+    url(r'^settings/', include('django.contrib.auth.urls')),
+    url(r'^settings/email/', include('change_email.urls')),
+    url(r'^settings/privacy/$', 'website.views.accountsettings_privacy'),
+    url(r'^settings/verify/$', 'website.views.accountsettings_verify'),
+    url(r'^settings/security/$', 'website.views.accountsettings_security'),
+    #url(r'^settings/course/$', 'website.views.accountsettings_courses'),
+    #url(r'^settings/group/$', 'website.views.accountsettings_groups'),
+    #url(r'^settings/course/specific/$', 'website.views.accountsettings_courses_specific'),
+    #url(r'^settings/group/specific/$', 'website.views.accountsettings_groups_specific'),
+    url(r'^search/', include('haystack.urls')),
+    url(r'^search/autocomplete/$', 'search.views.autocomplete'),
+)

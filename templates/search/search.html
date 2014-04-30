@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row">
+    	<div class="span12">
+        	<h4 style="margin-top:30px; margin-left:20px; color:#da4f49;"><i class="icon-search"></i> Search Results</h4>
+        	<hr style="margin-bottom:20px;" />
+        </div>
+    </div>
+    <div class="row">
+    	<div class="span12">
+        {% if query %}
+        {% for result in page.object_list %}
+        <div class="row">
+        	<div class="span2">
+        		<a href="/{{ result.object.user }}"><img src="{{ result.object.user.get_profile.getImage}}" style="width:100px; float:right; margin-right:10px; margin-bottom:5px;" class="img-rounded" /></a>
+            </div>
+            <div class="span10">
+            	<p style="font-weight:700;"><a href="/{{ result.object.user }}">{{ result.object.user.get_full_name }}</a></p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No results found.</p>
+        {% endfor %}
+    
+        {% if page.has_previous or page.has_next %}
+        <div>
+            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+            |
+            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+        </div>
+        {% endif %}
+        {% else %}
+        {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+        <hr />
+    	</div><!--END RESULTS SPAN12-->
+    </div><!--END RESULTS ROW-->
+</div><!--END CONTAINER-->
+{% endblock %}

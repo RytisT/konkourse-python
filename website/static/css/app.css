@@ -1,0 +1,497 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* styles for layout */
+
+.popover {
+	width:auto;
+}
+
+.form-horizontal .control-group {
+	margin-bottom:7px;
+}
+.upcomingEvents {
+  margin-bottom: 0px;
+  /*margin-left: 15px*/;
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 30px;
+}
+.coursesHeader {
+  margin-left:15px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom:0px;
+}
+.placeholderAlt {
+	color:#999;
+	font-size:11px;
+	font-weight: 700;
+	line-height: 20px;
+	margin-bottom:0px;
+}
+/*Two footer styles*/
+@media (min-width: 980px) {
+    .pull-center {
+        text-align: center;
+    }
+    .pull-center > .nav {
+        float:none;
+        display:inline-block;
+        *display: inline; *zoom: 1;
+        height: 32px;
+    }
+}
+
+/*Document Upload Styles*/
+.file-upload-container {
+	margin-top:12px;
+}
+
+.nav-pills > .filteractive > a,
+.nav-pills > .filteractive > a:hover {
+  color: #ffffff;
+  background-color: #414141;
+}
+
+i {
+	color:#000;
+	text-decoration:none;
+}
+
+.iconSelector i {
+	color:#000; 
+	text-decoration:none;
+}
+
+.masthead-splash {
+  -webkit-top-left-border-radius: 10px;
+ -webkit-top-right-border-radius: 10px;
+     -moz-top-left-border-radius: 10px;
+	-moz-top-right-border-radius: 10px;
+           border-top-left-radius:10px;
+          border-top-right-radius:10px;
+}
+.body-splash-info {
+	border: 1px solid #eee;
+	border-top:none;
+}
+.body-teach-info {
+	border: 1px solid #CCC;
+	background-color:#FFF;
+}
+
+
+/*this is an edit to previously existing class to make the nav bar in courses show active links as greyed*/
+.nav-stacked > .active > a,
+.nav-stacked > .active > a:hover {
+  color: #555555;
+  cursor: default;
+  background-color: #EEE;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+
+p comSmall {
+  font-size: 12px;
+  color: #999999;
+}
+
+con_opt {
+  padding: 0 3px 2px;
+  color: #333333;
+  display: block;
+  padding: 5px;
+  margin: 0 0 9px;
+  /*
+  font-size: 12.025px;
+  */
+  line-height: 18px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  /*
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  */
+}
+
+.conversation-link {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  *margin-right: .3em;
+  vertical-align: text-top;
+  background-image: url("../img/glyphicons_050_link.png");
+  background-repeat: no-repeat;
+}
+/*General Styles*/
+
+.badge_edit {
+  padding: 1px 5px 1px;
+  font-size: 12.025px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #ffffff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.actionsfeed {
+  /*background: #f5f5f5;*/
+  margin-top: 0px;
+  margin-bottom: 3px;
+  /*
+  margin-top: 18px;
+  margin-bottom: 18px; */
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+}
+.actionsfeed_more {
+  background: #f5f5f5;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  
+  -webkit-border-radius: 1px 1px 1px 1px;
+  -moz-border-radius: 1px 1px 1px 1px;
+  border-radius: 1px 1px 1px 1px;
+}
+.actionsfeed_cal {
+  background: #EEE;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  padding-top:7px;
+  padding-bottom:7px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+}
+.actionsfeed_com {
+  background: #f5f5f5;
+  margin-top: 0px;
+  padding-bottom:3px;
+  padding-left:5px;
+  padding-right:5px;
+  height:17px;
+  /*
+  margin-top: 5px;
+  margin-bottom: 18px;
+  border: 1px solid #E3E3E3;
+  width:99%;*/
+   -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.searchResult {
+  background: ;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  padding-top:1px;
+  padding-bottom:1px;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+.actionsfeed_reply {
+  background: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+}
+.actionsfeeddoc {
+  border-top: 1px solid #ddd;
+  background: #E9F4FF;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  }
+.list-doc-upload {
+  border-top: 1px solid #ddd;
+  background: #F9F9F9;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top:5px;
+  }
+.list-doc-upload-icon {
+	padding-left:5px;
+}
+.list-doc-upload-name {
+	padding-left:5px;
+}
+.actionsfeedmsg {
+  border-bottom: 1px solid #DDD;
+  }
+.actionsfeedmsg-unread {
+  background: #E9F4FF;
+  border-bottom: 1px solid #DDD;
+  }
+.actions_cal {
+  background: #E9F4FF;
+  height:33px;
+  margin-top: 18px;
+  
+  margin-bottom: 18px;
+  padding: 17px 20px 18px 0px;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 3px 3px;
+  -moz-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+
+}
+/*Dropdown*/
+
+#nav1, #nav1 ul { /* all lists */
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	line-height: 1;
+	}
+	
+	#nav1 a {
+		display: block;
+		width: 73px;
+	}
+	
+	#nav1 li { /* all list items */
+		float: right;
+		width: 70px; /* width needed or else Opera goes nuts */
+	}
+	
+	#nav1 li ul { /* second-level lists */
+		padding-top:7px;
+		position: absolute;
+		background: white;
+		width: 73px;
+		left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+		z-index:7;
+		border-bottom-width:1px;
+		border-bottom-style: solid;
+		border-bottom-color:#CCC;
+		border-right-width:1px;
+		border-right-style: solid;
+		border-right-color:#CCC;
+		border-left-width:1px;
+		border-left-style: solid;
+		border-left-color:#CCC;
+		-webkit-border-radius: 0px 0px 2px 2px;
+		-moz-border-radius: 0px 0px 2px 2px;
+		border-radius: 0px 0px 2px 2px;
+		-moz-max-content: 70px;
+		
+	}
+	
+	#nav1 li:hover ul, #nav1 li.sfhover ul { /* lists nested under hovered list items */
+		left: auto;
+	}
+	
+	#content {
+		clear: left;
+		color: #ccc;
+	}
+	
+/*profile stuff*/
+.well_profile {
+  margin-top:6px;
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #FFF;
+  /*border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);*/
+  border: 1px solid #D9D9D9;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+  -webkit-box-shadow: 1px 0 0 rgba(0, 0, 0, .05), -1px 0 0 rgba(0, 0, 0, .05), 0 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 1px 0 0 rgba(0,0,0,.05), -1px 0 0 rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 1px 0 0 rgba(0, 0, 0, .05), -1px 0 0 rgba(0, 0, 0, .05), 0 1px 2px rgba(0, 0, 0, .05);
+}
+.well_profile_sec {
+  min-height: 20px;
+  padding: 9.5px;
+  margin-bottom: 20px;
+  margin-right:-2px;
+  background-color: #FFF;
+  /*border: 1px solid #eee;
+  border: 1px solid rgba(0, 0, 0, 0.05);*/
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);*/
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 1px 0 0 rgba(0, 0, 0, .05), -1px 0 0 rgba(0, 0, 0, .05), 0 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 1px 0 0 rgba(0,0,0,.05), -1px 0 0 rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 1px 0 0 rgba(0, 0, 0, .05), -1px 0 0 rgba(0, 0, 0, .05), 0 1px 2px rgba(0, 0, 0, .05);
+}
+.well_profile blockquote {
+  border-color: #ddd;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+.well-large_profile {
+  padding: 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.well-small_profile {
+  padding: 9px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+
+
+/*styles that i stole from the bootstrap css file and would like to override.*/
+.img-rounded {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/*end override.*/
+
+/*Some styles that apply to courses.*/
+.actionsfeed_event {
+ 	background: #ECECF0;
+ 	margin-top: 0px;
+ 	margin-bottom: 5px;
+ 	padding-bottom:3px;
+ 	/*height:17px;*/
+ 	/*border: 1px solid #E3E3E3;*/
+ 	border:1px solid #E3E3E3;
+ 	width:350px;
+	-webkit-border-radius: 3px;
+	 -moz-border-radius: 3px; 
+	 border-radius: 3px;
+}
+
+.inputConvo {
+	width:644px; 
+	max-width:644px; 
+	min-width:644px; 
+	max-height:150px;
+}
+.convoContain {
+	background-color:#EDEFF4; 
+	-webkit-border-radius: 3px;
+	 -moz-border-radius: 3px; 
+	 border-radius: 3px;
+}
+.span3Timepicker {
+  width: 166px;
+}
+/* course info page styles */
+
+.aboutLead {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 30px;	
+}
+.courseWell {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.courseWellRight {
+	margin-left:5px;
+}
+.courseWellLeft {
+	margin-right:5px;
+}
+
+/* COURSE CREATION */
+.addCourseAttr {
+	text-transform:uppercase;
+}
+
+.navbar-search .search-query {
+  width:265px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* random styles */
+body {
+-webkit-font-smoothing: antialiased;
+font-smoothing: antialiased;
+}
+
+
+/*   PROFILE BADGE   */
+
+.profileBadge {
+  overflow: visible;
+  *z-index: 2;
+  float:right;
+}
+.profileBadge-inner {
+  width:134px;
+  padding: 6px;
+  background-color: #fafafa;
+  background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  *zoom: 1;
+}
+.profileBadge-inner hr {
+  border-top: 1px solid #DDD;
+  margin: 4px 0px 4px 0px;
+}
+.profileBadge-inner p {
+  text-align:center;
+  margin-bottom:0px;
+}
+.profileBadge-inner a {
+  text-decoration:none;
+  color:#333;
+}
+.badgeLabel {
+  font-size:13px;
+  line-height:16px;
+  font-weight:700;
+  color:#999;
+}
+.badgeNumber {
+  font-size:20px;
+  font-weight:700;
+  color:#333;
+}
+/*   END PROFILE BADGE   */

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block script %}
+{% load staticfiles %}
+{% endblock script %}
+{% block style %}
+<link rel="stylesheet" href="{% static "css/bootstrap-responsive.min.css" %}">
+<style type="text/css">
+	body {
+		background: #3399CC;
+		background: -moz-radial-gradient(center, ellipse cover, #3399CC 0%, #2e5673 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#3399CC), color-stop(100%,#2e5673));
+		background: -webkit-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -o-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399CC', endColorstr='#2e5673',GradientType=1 );
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	.form-horizontal {
+		margin-bottom:0px;
+	}
+	.form-horizontal .control-group {
+		margin-bottom:0px;
+	}
+</style>
+{% endblock style %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    	<div class="span5 offset1" style="margin-top:60px;">
+        	<h1 style="color:#FFF; margin-bottom: 0; font-size: 56px; line-height: 1; letter-spacing: -1px;">Free Ideas Spread Faster.</h1>
+            <p class="lead" style="color:#FFF; font-weight:400; margin-bottom:10px; margin-top:10px;">Konkourse is a social network for your school.</p>
+            <ul style="color:#FFF;">
+  				<li style="font-weight:400; font-size:21px; padding-top:5px; padding-bottom:5px;">Simple course collaboration</li>
+                <li style="font-weight:400; font-size:21px; padding-top:5px; padding-bottom:5px;">Find and connect with friends</li>
+                <li style="font-weight:400; font-size:21px; padding-top:5px; padding-bottom:5px;">Share ideas with others</li>
+			</ul>
+            <p class="lead" style="font-weight:400; margin-top:18px;">Now open for popular consumption to students at select universities.</p>
+        </div>
+    	<div class="span4">
+        	<div class="well" style="margin-top:60px;">
+            	<p class="lead" style="text-align:center; margin-bottom:10px;">Join the konkourse <span class="text-success">club.</span></p>
+                <hr style="margin-top:4px; border-top:1px solid #999;" />
+                <form enctype="multipart/form-data" class="form-horizontal" method="post" action="/register/" autocomplete="off">
+                	{% csrf_token %}
+                    <div class="control-group">
+                        {{form.first_name}}
+                        {{form.first_name.errors}}
+                    </div>
+                    <div class="control-group">
+                        {{form.last_name}}
+                        {{form.last_name.errors}}
+                    </div>
+                    <div class="control-group">
+                        {{form.email}}
+                        <p style="font-size:12px; margin-left:2px; margin-bottom:0px; margin-top:0px;">Enter a <strong>JMU</strong> or <strong>VT</strong> email address</p>
+                        {{form.email.errors}}
+                    </div>
+                    <div class="control-group">
+                    	{{form.username}}
+                    	{{form.username.errors}}
+                    </div>
+                    <div class="control-group">
+                    	{{form.password}}
+                    	{{form.password.errors}}
+                    </div>
+                    <div class="control-group">
+                    	{{form.password_repeat}}
+                    	{{form.password_repeat.errors}}
+                    </div>
+                	<div class="control-group">
+                   		<button type="submit" class="btn btn-primary" style="float:right; margin-top:4px; margin-bottom:4px; margin-right:2px; width:99%; text-align:center;">Get Started</button>
+                	</div>
+                </form>
+                <!--
+                    <div class="alert alert-error" style="margin-bottom:-5px;">  
+                        <a class="close" data-dismiss="alert">×</a>  
+                        <strong>Error!</strong>This is a fatal error.  
+                    </div>
+                !-->
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="navbar navbar-fixed-bottom hidden-phone" style="z-index:5;">
+    <div class="navbar-inner pull-center">
+      <ul class="nav">
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li class="divider-vertical"></li>
+        <li><a href="mailto:staff@konkourse.com">General Inquiries</a></li>
+        <li class="divider-vertical"></li>
+        <li><a href="/settings/password_reset/">Forgot Password?</a></li>
+      </ul>
+    </div><!-- /navbar-inner -->
+  </div><!-- /bottom nav bar -->
+{% endblock content %}

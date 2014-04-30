@@ -1,0 +1,82 @@
+{% extends "website/base_course.html" %}
+{% load static%}
+{% block style%}
+{% endblock style %}
+{% block script %}
+<script>
+$(document).ready(function(){
+	$('#info').addClass('active');
+	$('.selectTimepicker').timepicker({
+                minuteStep: 5,
+	});
+});
+</script>
+{% endblock script %}
+{% load widget_tweaks %}
+{# marker #}
+{% block course_content %}
+<div class="span9" style="margin-top:5px;">
+	<form enctype="multipart/form-data" method="post" action="/course/{{course_id}}/update/">
+    {% csrf_token %}
+    <div class="row">
+    	<div class="span5">
+        	<div class="courseWell courseWellLeft well-small">
+            	<p class="aboutLead">Picture</p>
+                {{form.image}}
+                {{ form.image.errors }}
+                <hr style="margin-top:15px; margin-bottom:15px;" />
+            	<p class="aboutLead">Name</p>
+                {{form.name}}
+                {{ form.name.errors }}
+                <hr style="margin-top:15px; margin-bottom:15px;" />
+                <p class="aboutLead">About</p>
+                {{form.about}}
+                {{form.about.errors}}
+            </div>
+        </div>
+        <div class="span4 ">
+        	<div class="row">
+                <div class="courseWell courseWellRight well-small">
+                	<p class="aboutLead">School</p>
+                    <p style="margin-top:5px;">{{ institution.title }}</p>
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Instructor</p>
+                    {{form.professor|add_class:"span3"}}
+                	{{form.professor.errors}}
+                </div>
+            </div>
+        	<div class="row">
+            	<div class="courseWell courseWellRight well-small">
+                	<p class="aboutLead">Semester</p>
+                	{{form.semester|add_class:"span3"}}
+                	{{form.semester.errors}}
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Credit Hours</p>
+                    {{form.credits|add_class:"span3"}}
+               		{{form.credits.errors}}
+                    <hr style="margin-top:15px; margin-bottom:15px;" />
+                    <p class="aboutLead">Start Time</p>
+                      <div class="bootstrap-timepicker">
+                        {{form.time|add_class:"span3 selectTimepicker time-pick"}}
+                        {{form.time.errors}}
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="span9">
+          {{form.errors}}
+          {{form.non_field_errors}}
+          <div class="form-actions">
+          <button class="btn btn-primary" type="submit" style="float:right;"/>Save Changes</button>
+          </div>
+        </div>
+    </div>
+    </form>
+</div>
+{% endblock course_content %}
+{% block right_side %}{% endblock right_side %}
+{% comment %}
+  {% endblock content %}
+  {% endcomment %}

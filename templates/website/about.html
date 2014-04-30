@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block script %}
+{% load static %}
+{% endblock script %}
+{% block style %}
+<style type="text/css">
+	body {
+		background: #3399CC;
+		background: -moz-radial-gradient(center, ellipse cover, #3399CC 0%, #2e5673 100%);
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#3399CC), color-stop(100%,#2e5673));
+		background: -webkit-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -o-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		background: radial-gradient(center, ellipse cover, #3399CC 0%,#2e5673 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399CC', endColorstr='#2e5673',GradientType=1 );
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+</style>
+{% endblock style %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+	<div class="row">
+    	<div class="span12" style="margin-top:15px; margin-bottom:40px;">
+        	<div class="hero-unit">
+              <h2>About Konkourse</h2>
+
+                <p class="lead">Below we outline our core principles.</p>
+                
+                <h3>Design for People</h3> 
+                <p class="lead">One thing that drives us crazy is software that forgets that its users are human beings.  People do not want to feel like they are navigating a user manual.  We believe that software should be organic and simple to navigate while providing powerful and fast solutions for colleagues to collaborate online.  The more intuitive, the better.</p>
+                
+                <h3>Continual Progress</h3>
+                <p class="lead">The learning process is never finished. With this understanding, we know that Konkourse will never be finished. It is an ever-evolving education solution for the world, and as such will change constantly to respond to the demands of an ideal that includes helping educators and students collaborate on the future. Konkourse stands for lifelong learning and curiosity, and thus is never complete.</p>
+                
+                <h3>Privacy</h3>
+                <p class="lead">Privacy is of utmost importance to every online community, and Konkourse is no different.  Konkourse will never sell or share user information to any third party without user permission.  Users will always be informed of their privacy options and will always have the opportunity to modify them.</p>
+                
+                <h3>Equality for All</h3> 
+                <p class="lead">Many issues in educating the next generation stem from students not having the right amount of resources. While students from wealthy backgrounds have many resources at their disposal, others struggle to have two shoes. Konkourse is committed to being part of the solution, not exacerbating the problem.</p>
+                
+                <h3>Innovate, Perfect, Rinse, Repeat</h3>
+                <p class="lead">We know that great products come from businesses that aim for goals that seem unattainable, maybe even a little crazy (like educating the world).  We will strive to produce the best possible product, and we won't be afraid to take some risks along the way.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

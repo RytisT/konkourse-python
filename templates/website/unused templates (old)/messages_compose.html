@@ -1,0 +1,185 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+    body { padding-top:45px;}
+  </style>
+{% endblock style %}
+{% block script %}
+ <script type="text/javascript"><!--//--><![CDATA[//><!--
+
+  sfHover = function() {
+    var sfEls = document.getElementById("nav1").getElementsByTagName("LI");
+    for (var i=0; i<sfEls.length; i++) {
+      sfEls[i].onmouseover=function() {
+        this.className+=" sfhover";
+      }
+      sfEls[i].onmouseout=function() {
+        this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+      }
+    }
+  }
+  if (window.attachEvent) window.attachEvent("onload", sfHover);
+  
+  //--><!]]></script>
+    
+    <!--might want to add something to this script ^ to delay mouse over activity by one or two seconds-->
+    
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    $('#menu1').dropdown()
+    $('#menu2').dropdown()
+    $('#menu3').dropdown()
+    $('#menu4').dropdown()
+    $('#menu5').dropdown()
+  </script>
+{% endblock script %}
+{% block content %}
+   <div class="container">  
+    <div class="row">
+      <div class="span2">
+            <ul class="nav nav-list">
+              <li class="nav-header">Message Options</li>
+              <li class="active"><a href="#">Inbox</a></li>
+                <ul>
+                  <li><a href="#">All</a></li>
+                    <li><a href="#">Unread</a></li>
+                </ul>
+              <li><a href="#">Sent</a></li>
+              <li><a href="#">Drafts</a></li>
+              <li><a href="#">Trash Bin</a></li>
+            </ul>
+            <hr />
+          <h4>Recently Contacted</h4>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}"style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}"style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+          </div>
+            <div class="row" style="margin-top:5px;"><div class="span2">
+              <a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p>
+            </div>
+          </div>
+            <br />
+          <p><a href="#">View All Connections</a></p>
+      </div>
+      <div class="span7"><hr />
+        <div class="row">
+        
+                
+                <div class="span7"><h3 style="float:left;">Messages  </h3><i class="icon-chevron-right" style="float:left; margin-top:6px;"></i><h3 style="color:#da4f49;">  Compose</h3></div>
+                
+        </div>
+        <hr />
+        <div style="background-color:#E4E4E4;">
+          
+            <a class="btn btn-primary" href="" style="margin-left:10px; margin-top:10px;">Send</a>
+            <a class="btn btn-success" style="margin-top:10px;" href="">Save Changes</a>
+            <a class="btn" style="float:right; margin-right:10px; margin-top:10px;" href="">Discard</a>
+
+    <hr />
+        <div class="row">
+          <div class="span7">
+            <div class="row" style="margin-top:10px; margin-left:10px; margin-bottom:10px;">
+              <div class="span1">
+                <p style=" margin-top:5px; text-align:left;">To:</p>
+              </div>
+              <div class="span5">
+                <input class="" id="xlInput3" name="xlInput3" size="30" type="text" style="width:80%;" placeholder="Type the Name of a Connection">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span7" >
+            <div class="row" style="margin-top:10px; margin-left:10px; margin-bottom:10px;">
+              <div class="span1">
+                <p style=" margin-top:5px; text-align:left;">Subject:</p>
+              </div>
+              <div class="span5">
+                <input class="" id="xlInput3" name="xlInput3" size="30" type="text" style="width:80%;" placeholder="Message Subject">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span7" >
+            <div class="row" style="margin-top:10px; margin-left:10px; margin-bottom:10px;">
+              <div class="span1">
+                <p style=" margin-top:5px; text-align:left;">Message:</p>
+              </div>
+              <div class="span5">
+                 <textarea class="" id="textarea2" name="textarea2" rows="7" style="width:80%; max-width:80%; min-width:80%" placeholder="Enter Message Body"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+      </div>
+      <div class="span3" style="margin-top:17px;">
+      
+      <h4>Invite Friends</h4><p>Enter their email addresses to send invites.</p>
+          <form>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+    <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Rename File</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="span1">
+                <div class="row">
+                <p style=" margin-top:5px; text-align:right; margin-right:4px;">Name:</p>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="row" style="">
+                    <input class="" id="xlInput3" name="xlInput3" size="30" type="text" style="width:80%;" placeholder="Type new name">
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Save changes</a>
+        <a href="#" class="btn">Cancel</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+    <!--BEGIN SECOND MODAL-->
+    <div class="modal hide fade" id="myModal2">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>File Information</h3>
+      </div>
+      <div class="modal-body">
+        <p>Output file information here.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Okay</a>
+      </div>
+    </div>
+    <!--END SECOND MODAL-->
+    
+    </div>
+{% endblock content %}

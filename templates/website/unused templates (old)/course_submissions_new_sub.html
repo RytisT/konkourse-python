@@ -1,0 +1,224 @@
+
+{% extends "base.html" %}
+{% load static%}
+{% block style%}
+  <style type="text/css">
+    body { padding-top:45px;}
+  </style>
+{% endblock style %}
+{% block script %}
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+  sfHover = function() {
+    var sfEls = document.getElementById("nav1").getElementsByTagName("LI");
+    for (var i=0; i<sfEls.length; i++) {
+      sfEls[i].onmouseover=function() {
+        this.className+=" sfhover";
+      }
+      sfEls[i].onmouseout=function() {
+        this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+      }
+    }
+  }
+  if (window.attachEvent) window.attachEvent("onload", sfHover);
+  
+  //--><!]]></script>
+    
+    <!--might want to add something to this script ^ to delay mouse over activity by one or two seconds-->
+    
+  <script type="text/javascript">
+    $('.dropdown-toggle').dropdown()
+  </script>
+  <script type="text/javascript">
+    $(".collapse").collapse()
+  </script>
+  <script type="text/javascript">
+    $('#myModal').modal(options)
+  </script>
+  <script type="text/javascript">
+    $('.tooltip-win').tooltip()
+  </script>
+  <script type="text/javascript">
+    $('#myTab').tab('show')
+  </script>
+  <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>
+      /* Update datepicker plugin so that MM/DD/YYYY format is used. */
+      $.extend($.fn.datepicker.defaults, {
+        parse: function (string) {
+          var matches;
+          if ((matches = string.match(/^(\d{2,2})\/(\d{2,2})\/(\d{4,4})$/))) {
+            return new Date(matches[3], matches[1] - 1, matches[2]);
+          } else {
+            return null;
+          }
+        },
+        format: function (date) {
+          var
+            month = (date.getMonth() + 1).toString(),
+            dom = date.getDate().toString();
+          if (month.length === 1) {
+            month = "0" + month;
+          }
+          if (dom.length === 1) {
+            dom = "0" + dom;
+          }
+          return month + "/" + dom + "/" + date.getFullYear();
+        }
+      });  
+    </script>
+    
+    
+    <script>
+  $(function () {
+    $('.tabs a:last').tab('show')
+  })
+</script>
+{% endblock script %}
+{% block content %}
+   <div class="container">  
+    <div class="row">
+      <div class="span3">
+        <div class="row" style="margin-top:18px;">
+          <div class="span3">
+                <a href="#"><img src="img/prof.png" style="float:left; margin-left:5px;"  /></a>
+                <h4 style=" margin-left:5px; float:left;"><a href="#">Instructor Name</a></h4>
+            </div>
+        </div>
+      <hr />
+      <h4>About Course</h4>
+          <p>Ad sanctus nusquam ius, his prompta alterum ullamcorper cu, ad eros homero vix. His ex unum definitiones. Vix te quem oportere, graeco sensibus hendrerit ius id, id munere accusam eligendi nam.</p>
+      <hr />
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href="#">Course Home</a></li>
+          <li><a href="#">Download Syllabus</a></li>
+          <li><a href="#">Calendar</a></li>
+          <li  class="active"><a href="#">Submissions</a></li>
+          <li><a href="#">Documents</a></li>
+          <li><a href="#">Gradebook</a></li>
+        </ul>
+        <h4>Enrolled</h4>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/andrew.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Andrew Elgert</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/emily.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Emily Ramser</a></p></div>
+          </div>
+          <div class="row" style="margin-top:5px;">
+          <div class="span2"><a href="#"><img src="{% static "img/twain.png" %}" style="float:left; margin-right:5px;" /></a><p><a href="#">Mark Twain</a></p></div>
+          </div>
+          <button class="btn" style="margin-top:5px;">View All</button>
+      </div>
+      <div class="span6">
+        
+        <div class="row">
+                <div class="span6"><hr /><h3 style="float:left;">Psychology 101  </h3><i class="icon-chevron-right" style="float:left; margin-top:6px;"></i><h3 style="float:left;">  Submissions</h3><i class="icon-chevron-right" style="float:left; margin-top:6px;"></i><h3 style="color:#da4f49;">  New Submission</h3><hr /></div>
+                  
+        </div>
+                  <div class="row">
+                     <div class="span2">
+                           <p style=" margin-top:5px; text-align:right;">Submission Name:</p>
+                     </div>
+                     <div class="span4">
+                           <input class="" id="xlInput3" name="xlInput3" size="30" type="text" style="width:80%;" placeholder="e.g. Homework, Exam">
+                     </div>
+                  </div>
+                  <div class="row">
+                            <div class="span2">
+                                <p style="text-align:right; margin-top:5px;">Due Date:</p>
+                            </div>
+                            <div class="span4">
+                                <div class="inline-inputs">
+                                    <input data-datepicker="datepicker" class="small" type="text" value="" placeholder="Select Date" />
+                                    <select class="span1" id="mediumSelect">
+                                        <option>Time</option>
+                                        <option>1:00 AM</option>
+                                        <option>2:00 AM</option>
+                                        <option>3:00 AM</option>
+                                        <option>4:00 AM</option>
+                                        <option>5:00 AM</option>
+                                        <option>12:00 PM</option>
+                                        <option>1:00 PM</option>
+                                        <option>2:00 PM</option>
+                                        <option>3:00 PM</option>
+                                        <option>4:00 PM</option>
+                                    </select>
+                                    </div>
+                            </div>
+                  </div>
+                  <div class="row" style="margin-bottom:4px;">
+                            <div class="span2">
+                                <p style="text-align:right; margin-top:5px;">Notes:</p>
+                            </div>
+                            <div class="span4">
+                            <textarea class="" id="textarea2" name="textarea2" rows="3" style="width:80%; max-width:80%; min-width:80%" placeholder="Enter Submission Description"></textarea>
+                            </div>
+                  </div>
+                  <div class="row">
+                            <div class="span2">
+                                <p style="text-align:right; margin-top:5px;">Info:</p>
+                            </div>
+                            <div class="span4">
+                                    <p>Upon creation of this submission, users will be able to upload a file until the due date.</p>
+                            </div>
+                  </div>
+                     
+                  <div class="row">
+                          <div class="span6"><button class="btn primary" style="float:right;">Complete</button><button class="btn " style="float:right; margin-right:5px;">Cancel</button></div>
+                        
+                        </div>                     
+        </div>
+      <div class="span3" style="margin-top:15px;">
+      
+      <h4>Course Tasks</h4>
+            <div class="row">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Urgent</p></div>
+            </div>
+            <p>1/4 -<a href="#"> Lecture G001</a></p>
+            <p>1/6 -<a href="#"> Test G001</a></p>
+            <div class="row ">
+              <div class="span3 actionsfeed"><p style="padding-top:6px; padding-left:6px;">Not So Urgent</p></div>
+            </div>
+            <p>1/9 -<a href="#"> In class homework assignment</a></p>
+            <p>1/11 -<a href="#"> Lecture G001</a></p>
+      <p>1/13 -<a href="#"> Lecture G001</a></p>
+            <hr />
+            <button class="btn">Go To Calendar</button>
+      <hr />
+      <h4>Invite Friends to Coursetab</h4><p>Enter their email addresses to send invites.</p>
+          <form>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="span2" id="iconInput" type="text" />
+                </div>
+            </div>
+          </form>
+          <p>You have five invites left.</p>
+      </div>
+    </div>
+  </div>
+  <!--BEGIN FIRST MODAL-->
+    <div class="modal hide fade" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>People Who Are Attending</h3>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <div class="span2">
+                <p><a href="#">Name 1</a></p>
+                <p><a href="#">Name 2</a></p>
+                <p><a href="#">Name 3</a></p>
+            </div>
+        </div><p>Note: names are links to profiles</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary">Okay</a>
+      </div>
+    </div>
+    <!--END FIRST MODAL-->
+
+  {% endblock content %}
