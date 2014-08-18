@@ -44,4 +44,3 @@ class Event(models.Model):
 
     def getParent(self):
         return self.course_set.all()[0]
-

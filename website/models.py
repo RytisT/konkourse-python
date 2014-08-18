@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
-#models
+# models
+
 
 class Event(models.Model):
     name = models.CharField(max_length=200)
@@ -8,7 +9,6 @@ class Event(models.Model):
     time = models.DateTimeField()
     creator = models.ForeignKey(auth_models.User, related_name='event_creator_user')
     attendees = models.ManyToManyField(auth_models.User, related_name='event_attendees_user')
-
 
 
 class File(models.Model):

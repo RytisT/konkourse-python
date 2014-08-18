@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 class EmailChangeConfirmView(TemplateView):
+
     """
 A view to confirm an email address change request.
 """
@@ -55,7 +56,7 @@ redirected to :view:`EmailChangeCreateView`.
                                  msg,
                                  fail_silently=True)
             logger.error('No email address change request found.')
-            #return HttpResponseRedirect(reverse_lazy('change_email_create'))
+            # return HttpResponseRedirect(reverse_lazy('change_email_create'))
             object = None
         self.object = object
         return super(EmailChangeConfirmView, self).dispatch(request,
@@ -109,6 +110,7 @@ send a :signal:`email_change_confirmed` signal.
 
 
 class EmailChangeCreateView(CreateView):
+
     """
 A view to create an :model:`EmailChange` object.
 """
@@ -158,6 +160,7 @@ request, adds a success message for the user and redirects to
 
 
 class EmailChangeDeleteView(DeleteView):
+
     """
 A view to delete an :model:`EmailChange` object.
 """
@@ -199,6 +202,7 @@ been deleted by an user. The URL to redirect to can be customized by setting
 
 
 class EmailChangeDetailView(DetailView):
+
     """
 A view to display an :model:`EmailChange` object.
 """
@@ -225,6 +229,7 @@ found, the user will be redirected to :view:`EmailChangeCreateView`.
 
 
 class EmailChangeIndexView(RedirectView):
+
     """
 A view to redirect users to other views.
 """

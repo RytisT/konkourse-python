@@ -7,6 +7,7 @@ from django.utils import simplejson
 from models import Event
 from conversation.models import ConversationPost
 
+
 def join_event(request):
     results = {'success': False}
     if request.user.is_authenticated() and request.user.is_active:
@@ -18,6 +19,7 @@ def join_event(request):
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
 
+
 def leave_event(request):
     results = {'success': False}
     if request.user.is_authenticated() and request.user.is_active:
@@ -28,6 +30,7 @@ def leave_event(request):
             results = {'success': True}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
+
 
 def delete_event(request):
     results = {'success': False}

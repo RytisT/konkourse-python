@@ -5,10 +5,14 @@ from account.models import UserProfile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import extras
 
+
 class AccountInitialForm(forms.ModelForm):
-    password_repeat = forms.CharField(widget=forms.PasswordInput(render_value=False,
-        attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;",
-        'placeholder':"Re-enter Password"}))
+    password_repeat = forms.CharField(
+        widget=forms.PasswordInput(
+            render_value=False,
+            attrs={
+                'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                'placeholder': "Re-enter Password"}))
 
     def save(self, commit=True):
         user = super(AccountInitialForm, self).save(commit=False)
@@ -17,17 +21,32 @@ class AccountInitialForm(forms.ModelForm):
             user.save()
         return user
 
-
     class Meta:
         model = User
         fields = ('username', 'password', 'email', 'first_name', 'last_name')
         widgets = {
-            'first_name': forms.TextInput(attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;",'class':"", 'placeholder':"First Name"}),
-            'last_name': forms.TextInput(attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;", 'placeholder':"Last Name"}),
-            'email': forms.TextInput(attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;", 'placeholder':"Email"}),
-            'username': forms.TextInput(attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;", 'placeholder':"Username"}),
-            'password': forms.PasswordInput(render_value=False, attrs={'style':"width:94%; margin-top:4px; margin-bottom:4px;", 'placeholder':"Password"})
-        }
+            'first_name': forms.TextInput(
+                attrs={
+                    'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                    'class': "",
+                    'placeholder': "First Name"}),
+            'last_name': forms.TextInput(
+                attrs={
+                    'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                    'placeholder': "Last Name"}),
+            'email': forms.TextInput(
+                attrs={
+                    'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                    'placeholder': "Email"}),
+            'username': forms.TextInput(
+                attrs={
+                    'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                    'placeholder': "Username"}),
+            'password': forms.PasswordInput(
+                render_value=False,
+                attrs={
+                    'style': "width:94%; margin-top:4px; margin-bottom:4px;",
+                    'placeholder': "Password"})}
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -63,7 +82,7 @@ class AccountInitialForm(forms.ModelForm):
 
     def clean_first_name(self):
         first_name = self.cleaned_data['first_name']
-        if first_name =='':
+        if first_name == '':
             raise forms.ValidationError('Please input a first name.')
         return first_name
 
@@ -75,21 +94,42 @@ class AccountInitialForm(forms.ModelForm):
 
 
 class AccountForm(forms.ModelForm):
+
     class Meta:
         model = UserProfile
         fields = ('image', 'major', 'tagline', 'phone_number', 'about', 'interests', 'sex', 'birthday')
         widgets = {
-            'major': forms.TextInput(attrs={'class':"input-xlarge span5", 'placeholder':"Type your Major"}),
-            'tagline': forms.TextInput(attrs={'class':"input-xlarge span5", 'placeholder':"Type your tagline"}),
-            'phone_number': forms.TextInput(attrs={'placeholder':"Optional"}),
-            'about': forms.Textarea(attrs={'class':"input-xlarge span5", 'rows':"5", 'placeholder':"Type something about yourself."}),
-            'interests': forms.Textarea(attrs={'class':"input-xlarge span5", 'rows':"5", 'placeholder':"What interests you?"}),
-            'birthday': forms.TextInput(attrs={'class':"span3", 'date-date-format':"yyyy-mm-dd", 'style':"float:left",
-                "placeholder":"Date", "id":"id_birthday"}),
+            'major': forms.TextInput(
+                attrs={
+                    'class': "input-xlarge span5",
+                    'placeholder': "Type your Major"}),
+            'tagline': forms.TextInput(
+                attrs={
+                    'class': "input-xlarge span5",
+                    'placeholder': "Type your tagline"}),
+            'phone_number': forms.TextInput(
+                attrs={
+                    'placeholder': "Optional"}),
+            'about': forms.Textarea(
+                attrs={
+                    'class': "input-xlarge span5",
+                    'rows': "5",
+                    'placeholder': "Type something about yourself."}),
+            'interests': forms.Textarea(
+                attrs={
+                    'class': "input-xlarge span5",
+                    'rows': "5",
+                    'placeholder': "What interests you?"}),
+            'birthday': forms.TextInput(
+                attrs={
+                    'class': "span3",
+                    'date-date-format': "yyyy-mm-dd",
+                    'style': "float:left",
+                    "placeholder": "Date",
+                    "id": "id_birthday"}),
         }
 
-    image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'style':"vertical-align:top;"}))
-
+    image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'style': "vertical-align:top;"}))
 
     def clean_image(self):
         image = self.cleaned_data['image']
@@ -102,19 +142,28 @@ class AccountForm(forms.ModelForm):
         # not.
         return image
 
+
 class AccountNameForm(forms.ModelForm):
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
 
     first_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(
-        attrs={'placeholder':"Type Your First Name"}))
+        attrs={'placeholder': "Type Your First Name"}))
     last_name = forms.CharField(max_length=30, required=True, widget=forms.TextInput(
-        attrs={'placeholder':"Type Your Last Name"}))
+        attrs={'placeholder': "Type Your Last Name"}))
 
 # model form for email preferences on settings page
+
+
 class EmailPreferencesForm(forms.ModelForm):
+
     class Meta:
         model = UserProfile
-        fields = ('connection_request_email', 'endorsement_email', 'profile_post_email', 'course_post_email', 'new_course_member_email')
-
+        fields = (
+            'connection_request_email',
+            'endorsement_email',
+            'profile_post_email',
+            'course_post_email',
+            'new_course_member_email')

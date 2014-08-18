@@ -16,6 +16,7 @@ resend_confirmation.short_description = _("Resend confirmation email"
 
 
 class EmailChangeAdmin(admin.ModelAdmin):
+
     """
 A ModelAdmin class to represent an :model:`EmailChange` model in the
 admin interface.

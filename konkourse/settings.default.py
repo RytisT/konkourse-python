@@ -4,8 +4,8 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-        # ('Your Name', 'your_email@example.com'),
-        )
+    # ('Your Name', 'your_email@example.com'),
+)
 
 MANAGERS = ADMINS
 
@@ -29,7 +29,7 @@ EMAIL_CHANGE_FROM_EMAIL = DEFAULT_FROM_EMAIL
 EMAIL_CHANGE_HTML_EMAIL = False
 EMAIL_CHANGE_HTML_EMAIL_TEMPLATE = 'change_email/mail/body.html'
 EMAIL_CHANGE_SUBJECT_EMAIL_TEMPLATE = 'change_email/mail/subject.txt'
-EMAIL_CHANGE_TIMEOUT = 60*60*24*7
+EMAIL_CHANGE_TIMEOUT = 60 * 60 * 24 * 7
 EMAIL_CHANGE_TXT_EMAIL_TEMPLATE = 'change_email/mail/body.txt'
 EMAIL_CHANGE_USE_HTTPS = False
 EMAIL_CHANGE_VALIDATE_SITE = False
@@ -38,18 +38,16 @@ DOMAIN_NAME = '127.0.0.1:8000'
 SITE_NAME = 'KonKourse - Developement V1'
 
 
-
-
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': '/home/mohammed/Projects/konkourse/website.db',                      # Or path to database file if using sqlite3.
-            'USER': '',                      # Not used with sqlite3.
-            'PASSWORD': '',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '/home/mohammed/Projects/konkourse/website.db',   # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -100,38 +98,38 @@ DEFAULT_PATH = '/home/mohammed/Projects/konkourse/website'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-        # Put strings here, like "/home/html/static" or "C:/www/django/static".
-        # Always use forward slashes, even on Windows.
-        # Don't forget to use absolute paths, not relative paths.
-        )
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-        )
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '0)+b@p0)2!_srfb+%+eh(1u28x5t33ps3mafnc+izn-fyp)461'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-        #     'django.template.loaders.eggs.Loader',
-        )
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    #     'django.template.loaders.eggs.Loader',
+)
 
 MIDDLEWARE_CLASSES = (
-        'django.middleware.common.CommonMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        # Uncomment the next line for simple clickjacking protection:
-        # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        )
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    # Uncomment the next line for simple clickjacking protection:
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
 
 ROOT_URLCONF = 'konkourse.urls'
 
@@ -141,52 +139,52 @@ WSGI_APPLICATION = 'konkourse.wsgi.application'
 TEMPLATE_DIRS = ('/home/mohammed/Projects/konkourse/templates',)
 
 INSTALLED_APPS = (
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.sites',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
-        'django.contrib.humanize',
-        'django.contrib.admin',
-        # Uncomment the next line to enable admin documentation:
-        # 'django.contrib.admindocs',
-        'website',
-        'messages',
-        'account',
-        'courses',
-        'connections',
-        'notification',
-        'documents',
-        'conversation',
-        'events',
-        'page',
-        'widget_tweaks',
-        'endorsements',
-        'endless_pagination',
-        'activation',
-        'change_email',
-        'south',
-        'data',
-        'notifications',
-        'notification',
-        'haystack',
-        'search',
-        )
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+    'website',
+    'messages',
+    'account',
+    'courses',
+    'connections',
+    'notification',
+    'documents',
+    'conversation',
+    'events',
+    'page',
+    'widget_tweaks',
+    'endorsements',
+    'endless_pagination',
+    'activation',
+    'change_email',
+    'south',
+    'data',
+    'notifications',
+    'notification',
+    'haystack',
+    'search',
+)
 
 # Number of days until the activation link for the account goes bad.
 ACCOUNT_ACTIVATION_DAYS = 7
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-        "django.contrib.auth.context_processors.auth",
-        "django.core.context_processors.debug",
-        "django.core.context_processors.i18n",
-        "django.core.context_processors.media",
-        "django.core.context_processors.static",
-        "django.contrib.messages.context_processors.messages",
-        "django.core.context_processors.request",
-        )
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+)
 
 
 # A sample logging configuration. The only tangible logging
@@ -195,38 +193,38 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'filters': {
-            'require_debug_false': {
-                '()': 'django.utils.log.RequireDebugFalse'
-                }
-            },
-        'handlers': {
-            'mail_admins': {
-                'level': 'ERROR',
-                'filters': ['require_debug_false'],
-                'class': 'django.utils.log.AdminEmailHandler'
-                }
-            },
-        'loggers': {
-            'django.request': {
-                'handlers': ['mail_admins'],
-                'level': 'ERROR',
-                'propagate': True,
-                },
-            }
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
         }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
 
 AUTHENTICATION_BACKENDS = (
-        'account.backends.EmailOrUsernameModelBackend',
-        'django.contrib.auth.backends.ModelBackend'
-        )
+    'account.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
 
 HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            'URL': 'http://127.0.0.1:9200/',
-            'INDEX_NAME': 'haystack',
-            },
-        }
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}

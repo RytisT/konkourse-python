@@ -5,9 +5,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 class CourseInitialForm(forms.Form):
     course_number = forms.CharField(max_length='10',
-                    widget=forms.TextInput(attrs={'placeholder': ''}))
+                                    widget=forms.TextInput(attrs={'placeholder': ''}))
     course_id = forms.CharField(max_length='10',
-                    widget=forms.TextInput(attrs={'placeholder': ''}))
+                                widget=forms.TextInput(attrs={'placeholder': ''}))
 
 
 class CourseForm(forms.ModelForm):

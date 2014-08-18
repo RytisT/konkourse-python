@@ -21,8 +21,9 @@ def download(request, file_id):
         mimetype = "application/octet-stream"
 
     response = HttpResponse(file.read(), mimetype=mimetype)
-    response["Content-Disposition"]= "attachment; filename=%s" % doc.filename
+    response["Content-Disposition"] = "attachment; filename=%s" % doc.filename
     return response
+
 
 def documents(request, course_id=-1):
     if (request.user.is_authenticated() and request.user.is_active):
@@ -42,9 +43,10 @@ def documents(request, course_id=-1):
         }
         variables_for_template.update(csrf(request))
         return render(request, 'website/documents.html', variables_for_template,
-            context_instance=RequestContext(request))
+                      context_instance=RequestContext(request))
     else:
         return redirect("/")
+
 
 def upload(request):
     if request.method == 'POST':
@@ -66,26 +68,25 @@ def upload(request):
 
 
 def __upload_core(request):
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            u = request.user
-            doc = Document(owner=u)
-            file = request.FILES['file']
-            doc.filename = request.FILES['file'].name
-            doc.save()
-            doc.file.save('file_' + str(doc.id), file)
-            return doc
-        else:
-            return Exception()
+    form = DocumentForm(request.POST, request.FILES)
+    if form.is_valid():
+        u = request.user
+        doc = Document(owner=u)
+        file = request.FILES['file']
+        doc.filename = request.FILES['file'].name
+        doc.save()
+        doc.file.save('file_' + str(doc.id), file)
+        return doc
+    else:
+        return Exception()
 
 
 def _uploadDocument(doc, file):
-    with open(settings.MEDIA_ROOT + '/' + doc.owner.username + '/file_' + str(doc.id) , 'wb+') as destination:
+    with open(settings.MEDIA_ROOT + '/' + doc.owner.username + '/file_' + str(doc.id), 'wb+') as destination:
         for chunk in file.chunks():
             destination.write(chunk)
     destination = File(destination)
     return destination
-
 
 
 def delete_document(request):

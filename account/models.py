@@ -10,13 +10,14 @@ def getPath(instance, filename):
     path = 'user_' + str(instance.id) + '/' + filename
     return path
 
+
 class UserProfile(models.Model):
-    GENDER_CHOICES=(
-    ('M', 'Male'),
-    ('F', 'Female'),
-    ('T', 'Transgender'),
-    ('E', 'Extraterrestrial'),
-    ('O', 'Other'),
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('T', 'Transgender'),
+        ('E', 'Extraterrestrial'),
+        ('O', 'Other'),
     )
     user = models.ForeignKey(User, unique=True)
     wall = models.ForeignKey(ConvoWall, unique=True, related_name='Wall')
@@ -39,7 +40,6 @@ class UserProfile(models.Model):
     course_post_email = models.BooleanField(default=True)
     new_course_member_email = models.BooleanField(default=True)
 
-
     def getImage(self):
         if self.image:
             return self.image.url
@@ -50,6 +50,7 @@ class UserProfile(models.Model):
                 num = '0' + num
             return '%simg/cats/00' % settings.STATIC_URL + num + '.jpg'
 
+
 def getSchool(self):
     virginia_tech = Page.objects.get(title='Virginia Tech')
     jmu = Page.objects.get(title='James Madison University')
@@ -57,7 +58,7 @@ def getSchool(self):
     konkourse = Page.objects.get(title='Konkourse')
     emailLookup = {
         'vt.edu': virginia_tech,
-       'jmu.edu': jmu,
+        'jmu.edu': jmu,
         'dukes.jmu.edu': jmu,
         'virginia.edu': uva,
         'konkourse.com': konkourse,
@@ -66,6 +67,7 @@ def getSchool(self):
     school = emailLookup[parts[1]]
     return school
 
+
 def send_endorsement_email(endorser_name, endorsee_name, endorsee_email):
     from templated_email import send_templated_mail
     send_templated_mail(
@@ -73,8 +75,8 @@ def send_endorsement_email(endorser_name, endorsee_name, endorsee_email):
         from_email='admin@konkourse.com',
         recipient_list=[endorsee_email],
         context={
-            'endorser_name':endorser_name,
-            'endorsee_name':endorsee_name,
+            'endorser_name': endorser_name,
+            'endorsee_name': endorsee_name,
         },
         # Optional:
         # cc=['cc@example.com'],

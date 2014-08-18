@@ -43,7 +43,6 @@ class EmailChangeModelTestCase(BaseTest):
         self.failUnless(request1.has_expired(seconds=1))
         self.failIf(request1.has_expired(seconds=1000))
 
-
     def test_email_address_change_management_command(self):
         """
         Testing the management command.

@@ -12,7 +12,6 @@ class RestrictedFileField(forms.FileField):
         self.content_types = kwargs.pop("content_types")
         super(RestrictedFileField, self).__init__(*args, **kwargs)
 
-
     def clean(self, *args, **kwargs):
         file = super(RestrictedFileField, self).clean(*args, **kwargs)
         content_type = file.content_type

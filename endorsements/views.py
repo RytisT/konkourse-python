@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from endorsements.models import Endorsement
 from notification.views import notifyEndorsement
 
+
 def endorse(request):
     results = {'success': False}
     if request.user.is_authenticated() and request.user.is_active:
@@ -19,7 +20,7 @@ def endorse(request):
             if not Endorsement.objects.has_endorsed(owner=owner, endorser=request.user):
                 e = Endorsement(owner=owner, endorser=request.user)
                 e.save()
-		notifyEndorsement(endorsee=owner, endorser=request.user, endorsement=e)
+                notifyEndorsement(endorsee=owner, endorser=request.user, endorsement=e)
                 results = {'success': True}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')

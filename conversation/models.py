@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 
 
 class ConversationManager(models.Manager):
+
     def getWallPosts(self, user):
-        posts= []
+        posts = []
         relations = self.filter(reciever=user).select_related(depth=1)
         for post in relations:
-            posts.append({"creator": post.creator, "post": post })
+            posts.append({"creator": post.creator, "post": post})
 
         return posts
+
 
 class ConvoWall(models.Model):
     TYPE = (
@@ -33,15 +35,14 @@ class ConvoWall(models.Model):
             return Course.objects.get(wall=self)
 
 
-
 class ConversationComment(models.Model):
-    CONVERSATION_TYPES=(
-    ('P', 'Post'),
-    ('I', 'Image'),
-    ('L', 'Link'),
-    ('O', 'Other'),
-    ('E', 'Event'),
-    ('D', 'Document'),
+    CONVERSATION_TYPES = (
+        ('P', 'Post'),
+        ('I', 'Image'),
+        ('L', 'Link'),
+        ('O', 'Other'),
+        ('E', 'Event'),
+        ('D', 'Document'),
     )
     type = models.CharField(max_length=1, choices=CONVERSATION_TYPES)
     created = models.DateTimeField('created', auto_now_add=True)
@@ -56,14 +57,15 @@ class ConversationComment(models.Model):
 from documents.models import Document
 from events.models import Event
 
+
 class ConversationPost(models.Model):
-    CONVERSATION_TYPES=(
-    ('P', 'Post'),
-    ('I', 'Image'),
-    ('L', 'Link'),
-    ('O', 'Other'),
-    ('E', 'Event'),
-    ('D', 'Document'),
+    CONVERSATION_TYPES = (
+        ('P', 'Post'),
+        ('I', 'Image'),
+        ('L', 'Link'),
+        ('O', 'Other'),
+        ('E', 'Event'),
+        ('D', 'Document'),
     )
     post_type = models.CharField(max_length=1, choices=CONVERSATION_TYPES)
     document = models.ForeignKey(Document, null=True, related_name='posted_document')
@@ -83,5 +85,3 @@ class ConversationPost(models.Model):
         from account.models import UserProfile
         wallOwner = UserProfile.objects.get(wall=self.wall).user
         return self.creator == wallOwner
-
-

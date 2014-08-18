@@ -15,7 +15,6 @@ class Migration(DataMigration):
         site.name = settings.SITE_NAME
         site.save()
 
-    
     models = {
         u'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},

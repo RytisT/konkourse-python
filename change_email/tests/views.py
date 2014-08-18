@@ -79,7 +79,7 @@ class EmailChangeViewsTestCase(BaseTest):
 
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
-                                                          user=self.bob)
+                                             user=self.bob)
         response = self.client.post(reverse('change_email_create'),
                                     data={'new_email': 'bob2@example.com'})
         self.assertRedirects(response,
@@ -92,9 +92,9 @@ class EmailChangeViewsTestCase(BaseTest):
         A ``GET`` to the ``change_email_confirm`` view with the valid signature works.
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
-                                                          user=self.bob)
+                                             user=self.bob)
         signature = request.make_signature()
-        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
+        response = self.client.get(reverse('change_email_confirm', args=[signature, ]))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['confirmed'])
         bob = User.objects.filter(username='bob').get()
@@ -106,9 +106,9 @@ class EmailChangeViewsTestCase(BaseTest):
         A ``GET`` to the ``change_email_confirm`` view with an invalid signature does not work.
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
-                                                          user=self.bob)
+                                             user=self.bob)
         signature = 'foo'
-        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
+        response = self.client.get(reverse('change_email_confirm', args=[signature, ]))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context['confirmed'])
         self.assertEqual(EmailChange.objects.filter(new_email='bob2@example.com').count(), 1)
@@ -121,7 +121,7 @@ class EmailChangeViewsTestCase(BaseTest):
 
         """
         signature = 'foo'
-        response = self.client.get(reverse('change_email_confirm', args=[signature,]))
+        response = self.client.get(reverse('change_email_confirm', args=[signature, ]))
         self.assertEqual(response.status_code, 200)
         self.assertFalse(response.context['confirmed'])
 
@@ -131,9 +131,9 @@ class EmailChangeViewsTestCase(BaseTest):
 
         """
         request = EmailChange.objects.create(new_email='bob2@example.com',
-                                                          user=self.bob)
+                                             user=self.bob)
         response = self.client.get(reverse('change_email_delete',
-                                           args=[request.id,]))
+                                           args=[request.id, ]))
         self.assertEqual(response.status_code, 200)
         request.delete()
 
@@ -143,7 +143,7 @@ class EmailChangeViewsTestCase(BaseTest):
         exist issues a redirect to the ``change_email_create`` view.
 
         """
-        response = self.client.get(reverse('change_email_delete', args=[1,]))
+        response = self.client.get(reverse('change_email_delete', args=[1, ]))
         self.assertRedirects(response,
                              'http://testserver%s' % reverse('change_email_create'))
 
@@ -154,7 +154,7 @@ class EmailChangeViewsTestCase(BaseTest):
         """
         request = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
         response = self.client.post(reverse('change_email_delete',
-                                            args=[request.id,]))
+                                            args=[request.id, ]))
         self.assertEqual(EmailChange.objects.filter(new_email='bob2@example.com').count(), 0)
         request.delete()
 
@@ -164,7 +164,7 @@ class EmailChangeViewsTestCase(BaseTest):
 
         """
         request = EmailChange.objects.create(new_email='bob2@example.com', user=self.bob)
-        response = self.client.get(reverse('change_email_detail', args=[request.id,]))
+        response = self.client.get(reverse('change_email_detail', args=[request.id, ]))
         self.assertEqual(response.status_code, 200)
         request.delete()
 

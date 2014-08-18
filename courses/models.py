@@ -3,9 +3,11 @@ from django.contrib.auth.models import User
 from events.models import Event
 from conversation.models import ConvoWall
 
+
 def getPath(instance, filename):
     path = 'course_' + str(instance.id) + '/' + filename
     return path
+
 
 class Course(models.Model):
     course_users = models.ManyToManyField(User, through='CourseUser')
@@ -34,11 +36,11 @@ class Course(models.Model):
 
     def get_semester(self):
         SEMESTER_OPTIONS = (
-            ('S013','Spring 2013'),
-            ('M113','Summer I 2013'),
-            ('M213','Summer II 2013'),
-            ('F013','Fall 2013'),
-            ('S014','Spring 2014'),
+            ('S013', 'Spring 2013'),
+            ('M113', 'Summer I 2013'),
+            ('M213', 'Summer II 2013'),
+            ('F013', 'Fall 2013'),
+            ('S014', 'Spring 2014'),
         )
         for sem in SEMESTER_OPTIONS:
             if sem[0] == self.semester:
@@ -46,7 +48,7 @@ class Course(models.Model):
         return "None"
 
     def add_student(self, user):
-        if(user not in self.course_users.filter(courseuser__user=user)): 
+        if(user not in self.course_users.filter(courseuser__user=user)):
             from notification.views import notifyCourseJoin
             notifyCourseJoin(course=self, newMember=user)
             s = CourseUser(user=user, course=self, role='S')
@@ -66,12 +68,11 @@ class Course(models.Model):
         return "Course"
 
 
-
 class CourseUser(models.Model):
-    COURSE_ROLE=(
-        ('I','instructor'),
-        ('A','assistant'),
-        ('S','student'),
+    COURSE_ROLE = (
+        ('I', 'instructor'),
+        ('A', 'assistant'),
+        ('S', 'student'),
     )
 
     user = models.ForeignKey(User)

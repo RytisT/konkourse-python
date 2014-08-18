@@ -3,7 +3,9 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 
+
 class EmailOrUsernameModelBackend(object):
+
     def authenticate(self, username=None, password=None):
         if '@' in username:
             kwargs = {'email': username}

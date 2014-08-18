@@ -22,6 +22,7 @@ from change_email.managers import PendingEmailChangeManager
 
 
 class EmailChange(models.Model):
+
     """
 A model to temporarily store an email adress change request.
 """
@@ -115,7 +116,7 @@ to confirm the email address change request.
 """
         signer = Signer()
         value = signer.sign(self.new_email)
-        email, signature = value.split(':',  1)
+        email, signature = value.split(':', 1)
         return signature
 
     def send_confirmation_mail(self):
@@ -166,12 +167,12 @@ These templates will receive the following context variables:
         body_htm = settings.EMAIL_CHANGE_HTML_EMAIL_TEMPLATE
         body_txt = settings.EMAIL_CHANGE_TXT_EMAIL_TEMPLATE
         context = {'current_site': current_site,
-                    'date': self.date,
-                    'timeout_date': self.get_expiration_date(),
-                    'new_email': self.new_email,
-                    'protocol': settings.EMAIL_CHANGE_USE_HTTPS and 'https' or 'http',
-                    'signature': self.make_signature(),
-                    'user': self.user}
+                   'date': self.date,
+                   'timeout_date': self.get_expiration_date(),
+                   'new_email': self.new_email,
+                   'protocol': settings.EMAIL_CHANGE_USE_HTTPS and 'https' or 'http',
+                   'signature': self.make_signature(),
+                   'user': self.user}
         subject = render_to_string(subject, context)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())

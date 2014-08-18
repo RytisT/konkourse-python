@@ -8,10 +8,8 @@ class UserProfileIndex(indexes.SearchIndex, indexes.Indexable):
     user_fullname = indexes.CharField(model_attr='user__get_full_name')
     content_auto = indexes.EdgeNgramField(model_attr='user__get_full_name')
 
-
     def get_model(self):
         return UserProfile
 
     def get_updated_field(self):
         return "modified"
-

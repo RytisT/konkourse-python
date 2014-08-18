@@ -18,12 +18,13 @@ from endless_pagination.decorators import page_template
 from notification.views import notifyCreateEvent, notifyDocShareCourse
 from page.models import Page
 
+
 def _course_context(request, course_id):
     course = Course.objects.get(id=course_id)
     institution = Page.objects.get(title=course.institution)
     variables_for_template = {
         'name': request.user.first_name + ' ' + request.user.last_name,
-        'image':  course.image,
+        'image': course.image,
         'course_name': course.name,
         'course_number': course.number,
         'institution': institution,
@@ -31,12 +32,13 @@ def _course_context(request, course_id):
         'professor': course.professor,
         'course_id': course_id,
         'course_form': CourseInitialForm(),
-        'courses':Course.objects.filter(course_users__username=request.user.username),
-        'current_course':course,
-        'section_number':course.course_id,
+        'courses': Course.objects.filter(course_users__username=request.user.username),
+        'current_course': course,
+        'section_number': course.course_id,
         'is_logged_in': True,
-        }
+    }
     return variables_for_template
+
 
 def _course_exists(request):
     form = CourseInitialForm(request.POST, request.FILES)
@@ -47,19 +49,27 @@ def _course_exists(request):
         else:
             section_number = request.POST['course_id']
         try:
-            course = Course.objects.get(number__iexact=request.POST['course_number'], course_id__iexact=section_number, institution__iexact=request.user.get_profile().school.title)
+            course = Course.objects.get(
+                number__iexact=request.POST['course_number'],
+                course_id__iexact=section_number,
+                institution__iexact=request.user.get_profile().school.title)
             return (True, course)
         except Course.DoesNotExist:
             wall = ConvoWall(wall_type=3)
             wall.save()
-            course = Course(wall= wall ,number=request.POST['course_number'], course_id=section_number, institution=request.user.get_profile().school.title)
+            course = Course(
+                wall=wall,
+                number=request.POST['course_number'],
+                course_id=section_number,
+                institution=request.user.get_profile().school.title)
             course.save()
         return (False, course)
     return (False, None)
 
+
 @page_template('website/course/course_page.html')
 def course(request, course_id,
-        error_message= '', template = 'website/course/course.html', extra_context=None):
+           error_message='', template='website/course/course.html', extra_context=None):
     if not request.user.is_authenticated() or not request.user.is_active:
         return redirect(index)
     else:
@@ -78,6 +88,7 @@ def course(request, course_id,
         return render_to_response(
             template, variables, context_instance=RequestContext(request))
 
+
 def create(request):
     if not request.user.is_authenticated():
         return login(request)
@@ -91,6 +102,7 @@ def create(request):
             return course(request, c.id)
     return redirect(index)
 
+
 def get_or_add_course(request):
     exists, c = _course_exists(request=request)
     if c is None:
@@ -98,6 +110,7 @@ def get_or_add_course(request):
     c = Course.objects.get(id=c.id)
     c.add_student(request.user)
     return (exists, c)
+
 
 def course_leave(request, course_id):
     c = Course.objects.get(id=course_id)
@@ -115,10 +128,11 @@ def course_info(request, course_id):
     variables['timeValue'] = course.time
     variables['semester'] = course.get_semester
     variables['credits'] = course.credits
-    return render(request,'website/course/course_info.html',
-    variables,
-    context_instance=RequestContext(request),
-)
+    return render(request, 'website/course/course_info.html',
+                  variables,
+                  context_instance=RequestContext(request),
+                  )
+
 
 def course_info_edit(request, course_id):
     if not request.user.is_authenticated():
@@ -126,10 +140,11 @@ def course_info_edit(request, course_id):
     variables = _course_context(request, course_id)
     variables['form'] = CourseForm(instance=Course.objects.get(id=course_id))
     variables.update(csrf(request))
-    return render(request,'website/course/course_info_edit.html',
-    variables,
-    context_instance=RequestContext(request),
-)
+    return render(request, 'website/course/course_info_edit.html',
+                  variables,
+                  context_instance=RequestContext(request),
+                  )
+
 
 def course_update(request, course_id):
     if request.method == 'POST':
@@ -148,14 +163,15 @@ def course_update(request, course_id):
                 'name': name,
                 'username': username,
             }
-            return redirect('/course/' + str(course_id) + '/' , variables_for_template)
+            return redirect('/course/' + str(course_id) + '/', variables_for_template)
         else:
             variables = _course_context(request, course_id)
             variables['form'] = form
             variables.update(csrf(request))
-            return render(request,'website/course/course_info_edit.html',
-                variables,
-                context_instance=RequestContext(request))
+            return render(request, 'website/course/course_info_edit.html',
+                          variables,
+                          context_instance=RequestContext(request))
+
 
 def create_event(request, course_id):
     if request.method == 'POST':
@@ -179,15 +195,16 @@ def create_event(request, course_id):
             return course(request, course_id, "Invalid event creation fields!!")
     return redirect(index)
 
+
 def course_documents(request, course_id):
     if not request.user.is_authenticated():
         return login(request)
     variables = _course_context(request, course_id)
     variables['documents'] = Document.objects.filter(course__id=course_id).order_by('modified')
-    return render(request,'website/course/course_documents.html',
-        variables,
-        context_instance=RequestContext(request),
-    )
+    return render(request, 'website/course/course_documents.html',
+                  variables,
+                  context_instance=RequestContext(request),
+                  )
 
 
 def course_upload(request, course_id):
@@ -204,21 +221,23 @@ def course_upload(request, course_id):
         notifyDocShareCourse(document=doc, course=c)
     return redirect(course_documents, course_id)
 
+
 def course_events(request, course_id):
     if not request.user.is_authenticated():
         return login(request)
     variables = _course_context(request, course_id)
     today = datetime.date.today()
-    week1_end = today + timedelta(days=6-today.weekday())
+    week1_end = today + timedelta(days=6 - today.weekday())
     week2_end = week1_end + timedelta(days=7)
     c = Course.objects.get(id=course_id)
     variables['thisWeek'] = c.events.filter(start_date__range=[today, week1_end], deleted=False)
     variables['nextWeek'] = c.events.filter(start_date__gt=week1_end, start_date__lte=week2_end, deleted=False)
     variables['future'] = c.events.filter(start_date__gt=week2_end, deleted=False)
-    return render(request,'website/course/course_events.html',
-        variables,
-        context_instance=RequestContext(request),
-    )
+    return render(request, 'website/course/course_events.html',
+                  variables,
+                  context_instance=RequestContext(request),
+                  )
+
 
 def course_members(request, course_id):
     if not request.user.is_authenticated():
@@ -229,32 +248,35 @@ def course_members(request, course_id):
     new_list = (chunks(_list, 3))
     template_variables['course_members'] = new_list
     template_variables['user'] = request.user
-    return render(request,'website/course/course_members.html',
-        template_variables,
-        context_instance=RequestContext(request),
-    )
+    return render(request, 'website/course/course_members.html',
+                  template_variables,
+                  context_instance=RequestContext(request),
+                  )
+
 
 def course_gradebook(request, course_id):
     if not request.user.is_authenticated():
         return login(request)
-    return render(request,'website/course/course_gradebook.html',
-        _course_context(request, course_id),
-        context_instance=RequestContext(request),
-    )
+    return render(request, 'website/course/course_gradebook.html',
+                  _course_context(request, course_id),
+                  context_instance=RequestContext(request),
+                  )
+
 
 def chunks(l, n):
     for i in xrange(0, len(l), n):
-        yield l[i:i+n]
+        yield l[i:i + n]
 
 from django.http import HttpResponse
 from django.utils import simplejson
+
 
 def add_course(request):
     results = {'success': False}
     if request.user.is_authenticated() and request.user.is_active:
         if request.method == 'POST':
             courses = Course.objects.filter(course_users__username=request.user.username)
-            if courses.count() >=10:
+            if courses.count() >= 10:
                 json = simplejson.dumps(results)
                 return HttpResponse(json, mimetype='application/json')
             exists, c = get_or_add_course(request)
@@ -264,5 +286,3 @@ def add_course(request):
                 results = {'success': False}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
-
-

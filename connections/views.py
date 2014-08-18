@@ -10,25 +10,27 @@ from django.utils import simplejson
 from django.contrib.auth.models import User
 from account import views
 
+
 def accept(request):
-	results = {'success': False}
-	if request.user.is_authenticated() and request.user.is_active:
-		if request.method == 'POST':
-			POST = request.POST
-			if POST.has_key(u'id'):
-				id = int(POST[u'id'])
-				conReq = ConnectionRequest.objects.get(id=id)
-				conReq.accept()
-				results = {'success': True}
-	json = simplejson.dumps(results)
-	return HttpResponse(json, mimetype='application/json')
+    results = {'success': False}
+    if request.user.is_authenticated() and request.user.is_active:
+        if request.method == 'POST':
+            POST = request.POST
+            if u'id' in POST:
+                id = int(POST[u'id'])
+                conReq = ConnectionRequest.objects.get(id=id)
+                conReq.accept()
+                results = {'success': True}
+    json = simplejson.dumps(results)
+    return HttpResponse(json, mimetype='application/json')
+
 
 def hide(request):
     results = {'success': False}
     if request.user.is_authenticated() and request.user.is_active:
         if request.method == 'POST':
             POST = request.POST
-            if POST.has_key(u'id'):
+            if u'id' in POST:
                 id = int(POST[u'id'])
                 conReq = ConnectionRequest.objects.get(id=id)
                 conReq.hidden = True
@@ -36,7 +38,6 @@ def hide(request):
                 results = {'success': True}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
-
 
 
 def connect(request, username):
@@ -50,5 +51,3 @@ def connect(request, username):
         return views.profile(request, username)
     else:
         return views.index(request)
-
-

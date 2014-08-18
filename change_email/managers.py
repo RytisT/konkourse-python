@@ -6,6 +6,7 @@ from konkourse import settings
 
 
 class ExpiredEmailChangeManager(models.Manager):
+
     def get_query_set(self):
         """
 Returns all instances that are older
@@ -19,6 +20,7 @@ than :setting:`EMAIL_CHANGE_TIMEOUT`.
 
 
 class PendingEmailChangeManager(models.Manager):
+
     def get_query_set(self):
         """
 Returns all instances that are newer

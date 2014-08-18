@@ -8,6 +8,7 @@ from change_email.models import EmailChange
 
 
 class EmailNotUsedValidator(object):
+
     """
 A validator to check if a given email address is already taken.
 """

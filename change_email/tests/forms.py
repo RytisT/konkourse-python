@@ -27,14 +27,14 @@ class EmailChangeFormTestCase(BaseTest):
         invalid_data_dicts = [
             # Invalid email.
             {'data': {'new_email': 'alice'},
-            'error': ('new_email', [u"Enter a valid email address."])},
+             'error': ('new_email', [u"Enter a valid email address."])},
             # Existing user.
             {'data': {'new_email': 'alice@example.com'},
-            'error': ('new_email', [msg])},
+             'error': ('new_email', [msg])},
             # Existing email address change request.
             {'data': {'new_email': 'bob2@example.com'},
-            'error': ('new_email', [msg])},
-            ]
+             'error': ('new_email', [msg])},
+        ]
 
         for invalid_dict in invalid_data_dicts:
             form = forms.EmailChangeForm(data=invalid_dict['data'])

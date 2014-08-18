@@ -21,14 +21,20 @@ from events.models import Event
 from django.db.models import Q
 from itertools import chain
 
+
 @page_template('website/main_page.html')
 def index(request,
-        template = 'website/main.html', extra_context=None):
+          template='website/main.html', extra_context=None):
     if not (request.user.is_authenticated() and request.user.is_active):
         return redirect(login)
     today = datetime.date.today()
     one_week = today + timedelta(days=today.weekday() + 7)
-    events = Event.objects.filter(start_date__range=[today, one_week], members__id__exact=request.user.id, deleted=False).order_by('start_date')
+    events = Event.objects.filter(
+        start_date__range=[
+            today,
+            one_week],
+        members__id__exact=request.user.id,
+        deleted=False).order_by('start_date')
     walls = []
     walls.append(request.user.get_profile().wall)
     connections = Connection.objects.getConnections(request.user)
@@ -37,7 +43,10 @@ def index(request,
     courses = Course.objects.filter(course_users__username=request.user.username)
     for course in courses:
         walls.append(course.wall)
-    posts = ConversationPost.objects.filter(Q(~Q(creator=request.user), wall__in=walls, deleted=False) | Q(creator__is_staff=True, deleted=False)).distinct().order_by('created')
+    posts = ConversationPost.objects.filter(Q(~Q(creator=request.user),
+                                              wall__in=walls,
+                                              deleted=False) | Q(creator__is_staff=True,
+                                                                 deleted=False)).distinct().order_by('created')
     variables_for_template = {
         'name': request.user.first_name + ' ' + request.user.last_name,
         'username': request.user.username,
@@ -51,6 +60,7 @@ def index(request,
         variables_for_template.update(extra_context)
     return render_to_response(template, variables_for_template, context_instance=RequestContext(request))
 
+
 def login(request):
     variables_for_template = {
         'form': AccountInitialForm(),
@@ -62,17 +72,26 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user is None:
             variables_for_template["error_message"] = "Inavlid username or password."
-            return render(request, 'website/login.html', variables_for_template, context_instance=RequestContext(request))
+            return render(
+                request,
+                'website/login.html',
+                variables_for_template,
+                context_instance=RequestContext(request))
         if user.is_active == False:
             variables_for_template["error_message"] = "Account hasn't been activated. Check your email!"
-            return render(request, 'website/login.html', variables_for_template, context_instance=RequestContext(request))
-        auth_login(request,user)
+            return render(
+                request,
+                'website/login.html',
+                variables_for_template,
+                context_instance=RequestContext(request))
+        auth_login(request, user)
     if request.user.is_authenticated() and request.user.is_active:
         if request.user.get_profile().first_time:
             from website.views import wizard
             return wizard(request)
         return redirect('/')
     return render(request, 'website/login.html', variables_for_template, context_instance=RequestContext(request))
+
 
 def logout(request):
     auth_logout(request)
@@ -82,6 +101,7 @@ def logout(request):
     variables_for_template.update(csrf(request))
     return render(request, 'website/login.html', variables_for_template)
 
+
 def register(request, template_name='templates/website/register.html'):
     if request.user.is_authenticated() and request.user.is_active:
         return redirect('/')
@@ -89,13 +109,13 @@ def register(request, template_name='templates/website/register.html'):
     form = AccountInitialForm(request.POST, request.FILES)
     if request.method == 'POST':
         variables_for_template = {
-            'form':form,
+            'form': form,
         }
         variables_for_template.update(csrf(request))
         if form.is_valid():
             user = form.save()
             user = RegistrationProfile.objects.create_inactive_user(new_user=user,
-                site=Site.objects.get_current())
+                                                                    site=Site.objects.get_current())
             return render(request, 'website/activate_email_sent.html', variables_for_template)
     return render(request, 'website/login.html', variables_for_template)
 
@@ -107,8 +127,8 @@ def activate(request, activation_key, template_name='activate.html'):
         wall.save()
         inbox = Inbox(owner=account)
         inbox.save()
-        profile, created = UserProfile.objects.get_or_create(user = account,
-            wall=wall, messages=inbox, school=getSchool(account.email))
+        profile, created = UserProfile.objects.get_or_create(user=account,
+                                                             wall=wall, messages=inbox, school=getSchool(account.email))
         profile.save()
         return render(request, 'website/activate.html')
     # TODO: Handle invalid activations i.e. clicking on the link more then once or expired links
@@ -116,10 +136,10 @@ def activate(request, activation_key, template_name='activate.html'):
         return render(request, 'website/activate.html')
 
 
-
-#TODO: Implement reset
+# TODO: Implement reset
 def reset(request):
     return render(request, 'website/reset.html')
+
 
 def _profile_context(request, username):
     u = User.objects.get(username=username)
@@ -131,7 +151,7 @@ def _profile_context(request, username):
     else:
         first_time = False
     variables_for_template = {
-        'name':  u.first_name + ' ' + u.last_name,
+        'name': u.first_name + ' ' + u.last_name,
         'username': u.username,
         'education': u.get_profile().school.title,
         'major': u.get_profile().major,
@@ -152,13 +172,13 @@ def _profile_context(request, username):
 
 @page_template('website/profile/base_profile_page.html')
 def profile(request, username,
-    template = 'website/base_profile.html', extra_context=None):
+            template='website/base_profile.html', extra_context=None):
     if request.user.is_authenticated() and request.user.is_active:
         u = get_object_or_404(User, username=username)
         connected = Connection.objects.connected(u, request.user)
         context = _profile_context(request, username)
         if not connected and not (u.username == request.user.username):
-            template= 'website/profile/profile_restricted.html'
+            template = 'website/profile/profile_restricted.html'
         else:
             posts = ConversationPost.objects.filter(wall=u.get_profile().wall, deleted=False).order_by('created')
             context['posts'] = posts.reverse()
@@ -168,6 +188,7 @@ def profile(request, username,
             template, context, context_instance=RequestContext(request))
     else:
         return redirect('/')
+
 
 def profile_info(request, username):
     if request.user.is_authenticated() and request.user.is_active:
@@ -185,9 +206,10 @@ def profile_info(request, username):
         }
         variables = dict(_profile_context(request, username).items() + variables.items())
         return render(request, 'website/profile/profile_info.html', variables,
-         context_instance=RequestContext(request))
+                      context_instance=RequestContext(request))
     else:
         return redirect('/')
+
 
 def profile_courses(request, username):
     if request.user.is_authenticated() and request.user.is_active:
@@ -196,9 +218,10 @@ def profile_courses(request, username):
         if not connected and not (u.username == request.user.username):
             return redirect(profile, username)
         return render(request, 'website/profile/profile_currentcourse.html', _profile_context(request, username),
-         context_instance=RequestContext(request))
+                      context_instance=RequestContext(request))
     else:
         return redirect('/')
+
 
 def profile_connections(request, username):
     if request.user.is_authenticated() and request.user.is_active:
@@ -208,8 +231,6 @@ def profile_connections(request, username):
             return redirect(profile, username)
         variables = _profile_context(request, username)
         return render(request, 'website/profile/profile_connections.html', variables,
-         context_instance=RequestContext(request))
+                      context_instance=RequestContext(request))
     else:
         return redirect('/')
-
-

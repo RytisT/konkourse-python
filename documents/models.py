@@ -5,7 +5,9 @@ from courses.models import Course
 from filesize import size
 import os
 
+
 class DocumentManager(models.Manager):
+
     def getDocuments(self, user):
         documents = []
         relations = self.filter(owner=user).select_related(depth=1)
@@ -14,25 +16,27 @@ class DocumentManager(models.Manager):
         relations = self.filter(recipients=user)
         for document in relations:
             documents.append(document)
-        return  documents
+        return documents
+
 
 def getPath(instance, filename):
     path = instance.owner.username + '/' + filename
     return path
 
+
 class Document(models.Model):
 
-    FILE_TYPES=(
-        ('W','ms-word'),
-        ('E','ms-excel'),
-        ('O','ms-powerpoint'),
-        ('P','pdf'),
-        ('Z','zip'),
+    FILE_TYPES = (
+        ('W', 'ms-word'),
+        ('E', 'ms-excel'),
+        ('O', 'ms-powerpoint'),
+        ('P', 'pdf'),
+        ('Z', 'zip'),
     )
 
     filename = models.CharField(max_length=200)
     owner = models.ForeignKey(User, related_name='owner')
-    recipients=models.ManyToManyField(User)
+    recipients = models.ManyToManyField(User)
     course = models.ManyToManyField(Course)
     file = models.FileField(upload_to=getPath)
     file_type = models.CharField(max_length=1, choices=FILE_TYPES)
@@ -48,7 +52,4 @@ class Document(models.Model):
         return "Document"
 
     def __unicode__(self):
-        return self.filename   
-
-
-
+        return self.filename
