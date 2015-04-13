@@ -42,4 +42,4 @@ python manage.py runserver
 
 Testing
 ===============
-Currently, none.
+Currently, none. Yeah we should get on that.
